@@ -1,21 +1,42 @@
 import React from "react";
 import classes from "./App.module.css";
 import TopNav from "./components/TopNav";
-import Button from "./components/Button";
-import UpcomingEvents from "./components/Upcoming/UpcomingEvents";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import MyEvents from "./pages/MyEvents";
+import NewEvent from "./pages/NewEvent";
+import PastEvents from "./pages/PastEvents";
+import EventPage from "./pages/EventPage";
+import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
       <TopNav />
       <main className={classes.main}>
-        <Route path='/'>
-          
-        </Route>
-        <Button>Create new event!</Button>
-        <UpcomingEvents />
+        <Switch>
+          <Route exact path="/">
+            <MainPage />
+          </Route>
+          <Route path="/my-events">
+            <MyEvents />
+          </Route>
+          <Route path="/new">
+            <NewEvent />
+          </Route>
+          <Route exact path="/events/past">
+            <PastEvents />
+          </Route>
+          <Route path="/events/:id">
+            <EventPage />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
       </main>
+      <Footer />
     </>
   );
 }

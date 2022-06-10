@@ -34,17 +34,29 @@ const TopNav = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink to="/welcome" activeClassName={classes.active} className={navitemClass}>
+              <NavLink
+                exact to="/"
+                activeClassName={classes.active}
+                className={navitemClass}
+              >
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/my-events" activeClassName={classes.active} className={navitemClass}>
+              <NavLink
+                to="/my-events"
+                activeClassName={classes.active}
+                className={navitemClass}
+              >
                 My Events
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/new" activeClassName={classes.active} className={navitemClass}>
+              <NavLink
+                to="/new"
+                activeClassName={classes.active}
+                className={navitemClass}
+              >
                 New Event
               </NavLink>
             </li>
@@ -59,7 +71,7 @@ const TopNav = (props) => {
           )}
           {isLoggedIn && (
             <>
-              <span className="nav-item">Logged in as Heron</span>
+              <span className="nav-item">Logged in as <b>Heron</b></span>
               <button onClick={logout} className={buttonClass}>
                 Log out
               </button>
