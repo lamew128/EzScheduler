@@ -1,9 +1,20 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: false }));
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+//import {getAllUsers} from "../db/db.js"
 
-module.exports = router;
+module.exports = (db) => {
+
+  /* GET users listing. */
+  router.get('/test', (req, res) => {
+    db.getAllUsers()
+      .then ((data) => {
+        console.log("dataaaaaaa" +data);
+        res.json(data);
+      });
+    }
+  );
+    return router;
+}
