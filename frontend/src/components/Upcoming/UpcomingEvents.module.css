@@ -1,0 +1,12 @@
+.upcoming-events {
+  width: 80%;
+  border-radius: 25px ;
+  margin: 2%;
+  padding: 10px;
+  border: 2px solid black;
+}
+
+.upcoming-events:hover {
+  box-shadow: 0px 5px 10px rgb(108, 123, 255);
+  transition: box-shadow 0.3s ease-in-out;
+}
