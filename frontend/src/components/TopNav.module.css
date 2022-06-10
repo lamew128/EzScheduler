@@ -1,0 +1,12 @@
+.btncls {
+  margin-left: 10px;
+  border: none;
+}
+
+.btncls:focus {
+  outline: 0;
+}
+
+.navbar {
+  background-color: cadetblue;
+}
