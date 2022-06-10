@@ -13,17 +13,18 @@ if (process.env.DATABASE_URL) {
 
 const { count, Console } = require("console");
 const { create } = require("domain");
-const { promiseImpl } = require("ejs");
 const { Pool } = require("pg");
 const { resourceLimits } = require("worker_threads");
 const pool = new Pool(dbParams);
 
 const getAllUsers = () => {
+  console.log("Env:", dbParams);
   return pool
   .query(
-    `SELECT * FROM users`)
-  .then((result) => {
-    return result.rows[0];
+    `SELECT * FROM users;`)
+  .then((data) => {
+    const users = data.rows;
+    return users;
   })
   .catch((err) => {
     console.log(err.message);
