@@ -9,7 +9,6 @@ module.exports = (db) => {
 
   /* GET users listing. */
   router.get('/test', (req, res) => {
-    console.log("hi");
     db.getAllUsers()
       .then ((data) => {
         console.log("dataaaaaaa" +data);

@@ -18,7 +18,6 @@ const { resourceLimits } = require("worker_threads");
 const pool = new Pool(dbParams);
 
 const getAllUsers = () => {
-  console.log("Env:", dbParams);
   return pool
   .query(
     `SELECT * FROM users;`)
