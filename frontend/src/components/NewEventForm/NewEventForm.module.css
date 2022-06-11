@@ -1,0 +1,18 @@
+.container {
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  margin: 20px;
+  width: 80%
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.invitees {
+  border: 2px solid black;
+  border-radius: 25px;
+  height: 200px;
+}

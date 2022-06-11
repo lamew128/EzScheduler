@@ -1,8 +1,9 @@
 import React from 'react'
+import NewEventForm from '../components/NewEventForm/NewEventForm'
 
 const NewEvent = () => {
   return (
-    <div>NewEvent</div>
+    <NewEventForm />
   )
 }
 
