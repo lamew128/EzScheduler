@@ -32,6 +32,12 @@ const NewEvent = () => {
           <div className={classes.map}></div>
         </div>
       </div>
+      <hr />
+      <div className={`${classes.center} row`}>
+        <button className={classes.btn} type="submit">
+          Create New Event
+        </button>
+      </div>
     </div>
   );
 };

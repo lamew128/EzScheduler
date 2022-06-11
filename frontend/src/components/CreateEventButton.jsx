@@ -1,6 +1,6 @@
 import React from 'react'
 
-import classes from './Button.module.css'
+import classes from './CreateEventButton.module.css'
 
 const CreateEventButton = (props) => {
   return (
