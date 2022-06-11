@@ -3,8 +3,6 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: false }));
 
-//import {getAllUsers} from "../db/db.js"
-
 module.exports = (db) => {
 
   /* GET users listing. */
@@ -14,7 +12,7 @@ module.exports = (db) => {
         console.log("dataaaaaaa" + data);
         res.json(data);
       });
-  }
+    }
   );
   return router;
 };
