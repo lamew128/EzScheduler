@@ -3,6 +3,7 @@ import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
 import axios from "axios";
 import EventItem from "../components/EventItem/EventItem";
+import { Link } from "react-router-dom";
 
 const MainPage = (props) => {
   // const [users, setUsers] = useState([]);
@@ -15,7 +16,9 @@ const MainPage = (props) => {
 
   return (
     <>
-      <Button>Create new event!</Button>
+      <Link to="/new">
+        <Button>Create new event!</Button>
+      </Link>
       <UpcomingEvents />
       <h3>My Events</h3>
       <EventItem />
