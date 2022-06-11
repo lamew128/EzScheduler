@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Button from "../components/Button";
+import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
 import User from "../components/User";
 import axios from "axios";
 
 const MainPage = () => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    axios.get("/users/test").then((data) => {
-      setUsers(data.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("/users/test").then((data) => {
+  //     setUsers(data.data);
+  //   });
+  // }, []);
 
   return (
     <>

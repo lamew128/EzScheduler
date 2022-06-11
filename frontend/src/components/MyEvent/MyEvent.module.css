@@ -1,0 +1,77 @@
+.container {
+  border: 2px solid black;
+  border-radius: 25px;
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+}
+
+.title {
+  align-self: center;
+}
+
+.btn {
+  max-width: fit-content;
+  align-self: center;
+  padding: 10px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn:hover {
+  background-color: #23acc4;
+  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.location {
+  text-align: right;
+  align-self: center;
+}
+
+.icon {
+  font-size: xx-large;
+  align-self: center;
+}
+
+.x {
+  color: white;
+  border: 2px solid red;
+  background-color: red;
+  height: fit-content;
+  max-width: fit-content;
+  border-radius: 30px;
+}
+
+.check {
+  color: white;
+  border: 2px solid green;
+  background-color: green;
+  height: fit-content;
+  max-width: fit-content;
+  border-radius: 30px;
+}
+
+.maybe {
+  color: white;
+  border: 2px solid orange;
+  background-color: orange;
+  height: fit-content;
+  max-width: fit-content;
+  border-radius: 30px;
+}

@@ -1,10 +1,10 @@
 import React from "react";
-import EventDate from "./EventDate";
+import EventDate from "../EventDate";
 
 import classes from "./UpcomingEvents.module.css";
 
 const UpcomingEvents = (props) => {
-  const date = new Date("11-24-2022");
+  const date = new Date("09-24-2022");
 
   return (
     <article className={classes["upcoming-events"]}>
