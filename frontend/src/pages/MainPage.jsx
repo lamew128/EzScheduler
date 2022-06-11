@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
-import User from "../components/User";
 import axios from "axios";
+import EventItem from '../components/EventItem/EventItem'
 
 const MainPage = () => {
   // const [users, setUsers] = useState([]);
@@ -18,6 +18,9 @@ const MainPage = () => {
       <Button>Create new event!</Button>
       <UpcomingEvents />
       <h3>My Events</h3>
+      <EventItem choice={'accepted'}/>
+      <EventItem choice={'maybe'}/>
+      <EventItem choice={'rejected'}/>
     </>
   );
 };
