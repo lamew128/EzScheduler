@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./NewEventForm.module.css";
+import Map from "../../pages/Map";
 
 const NewEvent = () => {
+  const [coords, setCoords] = useState({ lat: 0, lng: 0 });
+  let coordsLat;
+  let coordsLng;
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((e) => {
+      coordsLat = e.coords.latitude;
+      console.log(coordsLat)
+      coordsLng = e.coords.longitude;
+      console.log(coordsLng)
+      setCoords((prev) => {
+        return { ...prev, lat: coordsLat };
+      });
+      setCoords((prev) => {
+        return { ...prev, lat: coordsLng };
+      });
+    });
+  }, []);
+
   return (
     <div className={classes.container}>
       <h3 className="row">New Event</h3>
@@ -29,7 +49,9 @@ const NewEvent = () => {
         </div>
         <div className="col-8">
           MAP
-          <div className={classes.map}></div>
+          <div className={classes.map}>
+            <Map lat={coords.lat} lng={coords.lng} />
+          </div>
         </div>
       </div>
       <hr />
