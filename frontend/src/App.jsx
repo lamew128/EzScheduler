@@ -11,7 +11,6 @@ import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
 function App() {
-  console.log(process.env)
   return (
     <>
       <TopNav />

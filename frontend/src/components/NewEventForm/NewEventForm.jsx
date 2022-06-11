@@ -3,22 +3,15 @@ import classes from "./NewEventForm.module.css";
 import Map from "../../pages/Map";
 
 const NewEvent = () => {
-  const [coords, setCoords] = useState({ lat: 0, lng: 0 });
+  const [coords, setCoords] = useState({});
   let coordsLat;
   let coordsLng;
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
       coordsLat = e.coords.latitude;
-      console.log(coordsLat)
       coordsLng = e.coords.longitude;
-      console.log(coordsLng)
-      setCoords((prev) => {
-        return { ...prev, lat: coordsLat };
-      });
-      setCoords((prev) => {
-        return { ...prev, lat: coordsLng };
-      });
+      setCoords({ lng: coordsLng, lat: coordsLat });
     });
   }, []);
 
