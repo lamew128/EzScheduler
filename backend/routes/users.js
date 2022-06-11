@@ -10,11 +10,11 @@ module.exports = (db) => {
   /* GET users listing. */
   router.get('/test', (req, res) => {
     db.getAllUsers()
-      .then ((data) => {
-        console.log("dataaaaaaa" +data);
+      .then((data) => {
+        console.log("dataaaaaaa" + data);
         res.json(data);
       });
-    }
+  }
   );
-    return router;
-}
+  return router;
+};

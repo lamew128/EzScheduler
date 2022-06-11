@@ -1,12 +1,38 @@
 .upcoming-events {
   width: 80%;
-  border-radius: 25px ;
+  border-radius: 25px;
   margin: 2%;
   padding: 10px;
   border: 2px solid black;
 }
 
+.content {
+  justify-content: space-evenly;
+}
+
+.title {
+  text-decoration: underline;
+}
+
 .upcoming-events:hover {
   box-shadow: 0px 5px 10px rgb(108, 123, 255);
   transition: box-shadow 0.3s ease-in-out;
+}
+
+.title__event {
+  max-inline-size: fit-content;
+}
+
+.weather {
+  border: 2px solid black;
+  border-radius: 25px;
+  max-inline-size: fit-content;
+}
+
+.date__invitees {
+  text-align: -webkit-center;
+}
+
+.date__invitees p {
+  margin:0;
 }
