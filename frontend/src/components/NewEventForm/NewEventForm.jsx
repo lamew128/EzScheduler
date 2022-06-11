@@ -23,11 +23,13 @@ const NewEvent = () => {
       <div className="row">
         <div className="col-4">
           Invitees
-          <div className={classes.invitees}></div>
+          <div className={classes.invitees}>
+            <i className={`${classes.add} bi bi-plus-lg`}></i>
+          </div>
         </div>
         <div className="col-8">
           MAP
-          <div className={classes.invitees}></div>
+          <div className={classes.map}></div>
         </div>
       </div>
     </div>
