@@ -27,10 +27,13 @@
   border: 2px solid black;
   border-radius: 25px;
   max-inline-size: fit-content;
+  padding: 10px;
+  height: 100px;
 }
 
 .date__invitees {
   text-align: -webkit-center;
+  align-self: center;
 }
 
 .date__invitees p {
