@@ -1,19 +1,10 @@
 import React from "react";
 import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
-import axios from "axios";
 import EventItem from "../components/EventItem/EventItem";
 import { Link } from "react-router-dom";
 
 const MainPage = (props) => {
-  // const [users, setUsers] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get("/users/test").then((data) => {
-  //     setUsers(data.data);
-  //   });
-  // }, []);
-
   return (
     <>
       <Link to="/new">

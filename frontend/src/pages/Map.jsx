@@ -1,7 +1,7 @@
 import React from "react";
 import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 
-const API_KEY = process.env.REACT_APP_API_KEY
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const Map = (props) => {
   const center = { lat: props.lat, lng: props.lng };

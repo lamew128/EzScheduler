@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-import classes from './EventDate.module.css'
+import classes from "./EventDate.module.css";
 
 const EventDate = (props) => {
   const month = props.date.toLocaleString("en-CA", { month: "long" });
@@ -14,6 +14,6 @@ const EventDate = (props) => {
       <div className={classes.date__day}>{day}</div>
     </div>
   );
-}
+};
 
-export default EventDate
+export default EventDate;
