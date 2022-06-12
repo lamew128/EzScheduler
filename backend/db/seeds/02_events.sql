@@ -2,8 +2,8 @@ INSERT INTO events (name,description,start_time, end_time,latitude,longtitude,us
 VALUES(
   'e1',
   'e11',
-   1654897206,
-   1654907206,
+   1656108000,
+   1656118800,
    28.599171,
    -81.201653,
    1
