@@ -6,35 +6,73 @@ router.use(bodyParser.urlencoded({ extended: false }));
 module.exports = (db) => {
 
   /* GET event listing. */
-  router.get('/test', (req, res) => {
-    db.getEvents()
+  router.get('/', (req, res) => {
+    db.getAllEvents()
+      .then((data) => {
+        res.json(data);
+      });
+  });
+
+  //all event created by user with given id
+  router.get('/created/:user', (req, res) => {
+    const userId = req.params.user;
+    db.myCreatedEvents(userId)
+      .then((data) => {
+        res.json(data);
+      })
+  });
+
+  //all event related to the user with given id
+  router.get('/all/:user', (req, res) => {
+    const userId = req.params.user;
+    db.getUpcomingEvents(userId)
+      .then((data) => {
+        res.json(data);
+      })
+  });
+
+  //create a new event
+  //event should contain { title, description, startTime, endTime, lat, long, creator }
+  router.post('/new', (req, res) => {
+    const { event } = req.body.event;
+    db.createEvent(event)
       .then((data) => {
         console.log("dataaaaaaa" + data);
         res.json(data);
-      });
-    }
-  );
+      })
+  });
 
-  /**
-   * Check if a user exists with a given username and password
-   * @param {String} email
-   * @param {String} password
-   */
-  const login = function(email, password) {
-    return db.getUserWithEmail(email)
-      .then((email) => {
-        if (!email) {
-          return;//no email
-        }
-        if (password === email.password) {
-          return email;//wrong passwod
-        }
-        return null;
-      });
-  };
-  exports.login = login;
+  //edit an event
+  //event should contain { title, description, startTime, endTime, lat, long, creator, id } id = event id
+  router.put('/', (req, res) => {
+    const { event } = req.body.event;
+    db.editEvent(event)
+      .then((data) => {
+        console.log("dataaaaaaa" + data);
+        res.json(data);
+      })
+  });
 
-  
+  //delete an event
+  router.delete('/:id', (req, res) => {
+    const eventId = req.params.id;
+    db.deleteEvent(eventId)
+      .then((data) => {
+        console.log("dataaaaaaa" + data);
+        res.json(data);
+      })
+  });
+
+  //update a response
+  //invite should contain { id, response }
+  router.put('/response', (req, res) => {
+    const { invite } = req.body.invite;
+    db.responseInvite(invite)
+      .then((data) => {
+        console.log("dataaaaaaa" + data);
+        res.json(data);
+      })
+  });
 
   return router;
 };

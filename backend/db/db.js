@@ -129,7 +129,7 @@ const createEvent = (event) => {
     RETURNING *;
     `, eventParams)
     .then((data) => {
-
+      return data;
     })
     .catch((err) => {
       console.log(err.message);
