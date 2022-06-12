@@ -5,7 +5,6 @@ import classes from "./EventItem.module.css";
 const MyEvent = (props) => {
   const date = new Date("10-24-2022");
   const [invite, setInvite] = useState("");
-  const [value, setValue] = useState("");
 
   const myEventClasses = `${classes.container} row`;
 
@@ -17,14 +16,17 @@ const MyEvent = (props) => {
 
   const acceptInvite = () => {
     setInvite("accepted");
+    console.log({ id: props.id, response: "accepted" });
   };
 
   const maybeInvite = () => {
     setInvite("maybe");
+    console.log({ id: props.id, response: "maybe" });
   };
 
   const rejectInvite = () => {
     setInvite("rejected");
+    console.log({ id: props.id, response: "rejected" });
   };
 
   return (

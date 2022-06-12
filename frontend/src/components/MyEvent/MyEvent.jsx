@@ -3,7 +3,7 @@ import EventDate from "../EventDate";
 import classes from "./MyEvent.module.css";
 
 const MyEvent = (props) => {
-  const date = new Date("10-24-2022");
+  const date = new Date("2022-06-30");
 
   const myEventClasses = `${classes.container} row`;
 

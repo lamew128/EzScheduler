@@ -1,19 +1,10 @@
 import React from "react";
 import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
-import axios from "axios";
 import EventItem from "../components/EventItem/EventItem";
 import { Link } from "react-router-dom";
 
 const MainPage = (props) => {
-  // const [users, setUsers] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get("/users/test").then((data) => {
-  //     setUsers(data.data);
-  //   });
-  // }, []);
-
   return (
     <>
       <Link to="/new">
@@ -21,15 +12,15 @@ const MainPage = (props) => {
       </Link>
       <UpcomingEvents />
       <h3>My Events</h3>
-      <EventItem />
-      <EventItem />
-      <EventItem />
+      <EventItem id={1}/>
+      <EventItem id={2}/>
+      <EventItem id={3}/>
       <h2>Open Invites</h2>
-      <EventItem />
-      <EventItem />
+      <EventItem id={4}/>
+      <EventItem id={5}/>
       <h2>Rejected Invites</h2>
-      <EventItem />
-      <EventItem />
+      <EventItem id={6}/>
+      <EventItem id={7}/>
     </>
   );
 };
