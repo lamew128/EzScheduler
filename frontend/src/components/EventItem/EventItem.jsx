@@ -16,14 +16,17 @@ const MyEvent = (props) => {
 
   const acceptInvite = () => {
     setInvite("accepted");
+    console.log({ id: props.id, response: "accepted" });
   };
 
   const maybeInvite = () => {
     setInvite("maybe");
+    console.log({ id: props.id, response: "maybe" });
   };
 
   const rejectInvite = () => {
     setInvite("rejected");
+    console.log({ id: props.id, response: "rejected" });
   };
 
   return (

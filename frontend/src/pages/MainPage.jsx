@@ -12,15 +12,15 @@ const MainPage = (props) => {
       </Link>
       <UpcomingEvents />
       <h3>My Events</h3>
-      <EventItem />
-      <EventItem />
-      <EventItem />
+      <EventItem id={1}/>
+      <EventItem id={2}/>
+      <EventItem id={3}/>
       <h2>Open Invites</h2>
-      <EventItem />
-      <EventItem />
+      <EventItem id={4}/>
+      <EventItem id={5}/>
       <h2>Rejected Invites</h2>
-      <EventItem />
-      <EventItem />
+      <EventItem id={6}/>
+      <EventItem id={7}/>
     </>
   );
 };

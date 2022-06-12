@@ -74,7 +74,7 @@ const NewEvent = () => {
           <label>Date:</label>
           <input type="date" value={date} onChange={dateChange} />
         </div>
-        <hr className="mt-3"/>
+        <hr className="mt-3" />
         <div className="row mb-3">
           <div className="col-4">
             Invitees
