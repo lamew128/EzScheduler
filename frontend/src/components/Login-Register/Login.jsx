@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import classes from "./Login.module.css";
+import { useCookies } from "react-cookie";
 
 const Login = (props) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [cookies, setCookie] = useCookies([""]);
+
+  function cookieSetter(newName) {
+    setCookie("user", newName, { path: "/" });
+  }
 
   const userLogin = (e) => {
     setUser(e.target.value);
@@ -16,7 +22,9 @@ const Login = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const userData = { user, password };
-    console.log(userData);
+    cookieSetter(user);
+    props.setLogin(true);
+    props.close()
   };
 
   const formClass = `${classes.center} row`;

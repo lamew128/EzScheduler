@@ -5,8 +5,12 @@ import Register from "./Login-Register/Register";
 
 import classes from "./TopNav.module.css";
 
+import { useCookies } from "react-cookie";
+
 const TopNav = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies([""]);
+  const loggedIn = !!cookies.user;
+  const [isLoggedIn, setIsLoggedIn] = useState(loggedIn);
   const [loginWindow, setLoginWindow] = useState(false);
   const [registerWindow, setRegisterWindow] = useState(false);
 
@@ -20,8 +24,13 @@ const TopNav = (props) => {
     registerWindow ? setRegisterWindow(false) : setRegisterWindow(true);
   };
 
-  const logout = () => setIsLoggedIn(false);
+  // Logout function (Still have to implement clear cookies)
+  const logout = () => {
+    setIsLoggedIn(false);
+    removeCookie("user");
+  };
 
+  // Classes
   const navbarClass = `${classes.navbar} navbar navbar-expand-lg`;
   const navitemClass = `${classes.navitem} nav-link active`;
 
@@ -81,7 +90,9 @@ const TopNav = (props) => {
               <button className={buttonClass} onClick={openRegister}>
                 Register
               </button>
-              {loginWindow && <Login close={openLogin} />}
+              {loginWindow && (
+                <Login close={openLogin} setLogin={setIsLoggedIn} />
+              )}
               {registerWindow && <Register close={openRegister} />}
             </>
           )}

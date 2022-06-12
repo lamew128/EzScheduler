@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import classes from "./Register.module.css";
 
@@ -21,6 +22,7 @@ const Register = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const userData = { name, email, password };
+    axios.post('/')
     console.log(userData);
   };
 
