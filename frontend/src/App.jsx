@@ -9,7 +9,6 @@ import PastEvents from "./pages/PastEvents";
 import EventPage from "./pages/EventPage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
-import Map from "./pages/Map";
 
 function App() {
   return (
@@ -31,9 +30,6 @@ function App() {
           </Route>
           <Route path="/events/:id">
             <EventPage />
-          </Route>
-          <Route path="/map">
-            <Map />
           </Route>
           <Route path="*">
             <NotFound />

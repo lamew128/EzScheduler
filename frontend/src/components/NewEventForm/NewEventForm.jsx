@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from "react";
 import classes from "./NewEventForm.module.css";
 import Map from "../../pages/Map";
+import axios from "axios";
 
 const NewEvent = () => {
-  const [coords, setCoords] = useState({ lat: 0, lng: 0 });
-  let coordsLat;
-  let coordsLng;
+  const [coords, setCoords] = useState({});
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
-      coordsLat = e.coords.latitude;
-      console.log(coordsLat)
-      coordsLng = e.coords.longitude;
-      console.log(coordsLng)
-      setCoords((prev) => {
-        return { ...prev, lat: coordsLat };
-      });
-      setCoords((prev) => {
-        return { ...prev, lat: coordsLng };
-      });
+      setCoords({ lng: e.coords.longitude, lat: e.coords.latitude });
     });
   }, []);
+
+  const addressChange = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const getLocation = () => {
+    axios
+      .get("https://maps.googleapis.com/maps/api/geocode/json", {
+        params: {
+          address,
+          key: process.env.REACT_APP_API_KEY,
+        },
+      })
+      .then((data) => {
+        const dataCoords = data.data.results[0].geometry.location;
+        setCoords({lat: dataCoords.lat, lng: dataCoords.lng})
+      });
+  };
 
   return (
     <div className={classes.container}>
@@ -32,7 +41,12 @@ const NewEvent = () => {
           <label>Name of Location:</label>
           <input type="text" />
           <label>Address:</label>
-          <input type="text" />
+          <input
+            type="text"
+            value={address}
+            onChange={addressChange}
+            onBlur={getLocation}
+          />
         </div>
         <div className="col">
           <label>Date:</label>
