@@ -54,7 +54,7 @@ INSERT INTO event_invitees (event_id,user_id,response) VALUES (4,1,'yes');
 
 INSERT INTO event_invitees (event_id,user_id,response) VALUES (1,2,'yes');
 INSERT INTO event_invitees (event_id,user_id,response) VALUES (1,3,'no');
-INSERT INTO event_invitees (event_id,user_id,response) VALUES (2,1,'yes');
+INSERT INTO event_invitees (event_id,user_id,response) VALUES (2,1,'no');
 INSERT INTO event_invitees (event_id,user_id,response) VALUES (2,3,'no');
-INSERT INTO event_invitees (event_id,user_id,response) VALUES (3,1,'yes');
+INSERT INTO event_invitees (event_id,user_id,response) VALUES (3,1, NULL);
 INSERT INTO event_invitees (event_id,user_id,response) VALUES (3,2,'no');

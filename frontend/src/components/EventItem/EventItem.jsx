@@ -3,7 +3,7 @@ import EventDate from "../EventDate";
 import classes from "./EventItem.module.css";
 
 const MyEvent = (props) => {
-  const date = new Date("10-24-2022");
+  const date = new Date(Number(props.date)*1000);
   const [invite, setInvite] = useState("");
 
   const myEventClasses = `${classes.container} row`;
@@ -32,7 +32,7 @@ const MyEvent = (props) => {
   return (
     <div className={myEventClasses}>
       <EventDate className="col" date={date} />
-      <h3 className={`${classes.title} col`}>Event Title</h3>
+      <h3 className={`${classes.title} col`}>{props.title}</h3>
       {!invite && (
         <i
           onClick={rejectInvite}
@@ -60,7 +60,7 @@ const MyEvent = (props) => {
       {invite === "accepted" && (
         <i className={`${icon} ${check} bi bi-check-lg col`}></i>
       )}
-      <p className={`${classes.location} col`}>Location: XXXXXX</p>
+      <p className={`${classes.location} col`}>Location: {props.address}</p>
     </div>
   );
 };
