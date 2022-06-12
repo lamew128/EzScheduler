@@ -12,7 +12,7 @@ module.exports = (db) => {
         console.log("dataaaaaaa" + data);
         res.json(data);
       });
-    }
+  }
   );
   return router;
 };
