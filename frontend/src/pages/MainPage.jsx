@@ -6,19 +6,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const MainPage = (props) => {
-  const [events, setEvents] = useState([]);
-  axios.get("/event/created/1").then((data) => {
-    console.log(data.data);
-    const date = new Date(Number(data.data[0].start_time) * 1000);
-    console.log(date);
-  });
-
-  // const date1 = new Date(16548972061);
-  // const date2 = new Date(1655066724424);
-  // const date3 = new Date().getTime()
-  // console.log(date1);
-  // console.log(date2);
-
   return (
     <>
       <Link to="/new">
