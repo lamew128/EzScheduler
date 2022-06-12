@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login_overlay {
+  height: fit-content;
+  border: 2px solid black;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  background-color: white;
+  width: 50%;
+  text-align: center;
+}
+
+.w {
+  width: fit-content;
+}
+
+.btn {
+  margin: 20px;
+  width: fit-content;
+  align-self: center;
+  padding: 10px;
+}
+
+.center {
+  justify-content: center;
+}
+
+.close {
+  font-size: xx-large;
+  text-align: right;
+  margin-right: 30px;
+  cursor: pointer;
+}

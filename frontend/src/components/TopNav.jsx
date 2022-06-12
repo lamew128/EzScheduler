@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import Login from "./Login-Register/Login";
+import Register from "./Login-Register/Register";
 
 import classes from "./TopNav.module.css";
 
 const TopNav = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginWindow, setLoginWindow] = useState(false);
+  const [registerWindow, setRegisterWindow] = useState(false);
 
   const buttonClass = `${classes.btncls} btn btn-primary`;
 
-  const login = () => setIsLoggedIn(true);
+  const openLogin = () => {
+    loginWindow ? setLoginWindow(false) : setLoginWindow(true);
+  };
+
+  const openRegister = () => {
+    registerWindow ? setRegisterWindow(false) : setRegisterWindow(true);
+  };
+
   const logout = () => setIsLoggedIn(false);
 
   const navbarClass = `${classes.navbar} navbar navbar-expand-lg`;
@@ -35,7 +46,8 @@ const TopNav = (props) => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
-                exact to="/"
+                exact
+                to="/"
                 activeClassName={classes.active}
                 className={navitemClass}
               >
@@ -63,15 +75,21 @@ const TopNav = (props) => {
           </ul>
           {!isLoggedIn && (
             <>
-              <button className="btn btn-primary" onClick={login}>
+              <button className={buttonClass} onClick={openLogin}>
                 Login
               </button>
-              <button className={buttonClass}>Register</button>
+              <button className={buttonClass} onClick={openRegister}>
+                Register
+              </button>
+              {loginWindow && <Login close={openLogin} />}
+              {registerWindow && <Register close={openRegister} />}
             </>
           )}
           {isLoggedIn && (
             <>
-              <span className="nav-item">Logged in as <b>Heron</b></span>
+              <span className="nav-item">
+                Logged in as <b>Heron</b>
+              </span>
               <button onClick={logout} className={buttonClass}>
                 Log out
               </button>
