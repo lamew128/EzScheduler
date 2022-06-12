@@ -63,6 +63,16 @@ module.exports = (db) => {
       })
   });
 
+  //get all invitees given an event id
+  router.get('/invitees/:id', (req, res) => {
+    const eventId = req.params.id;
+    db.getInvitees(eventId)
+      .then((data) => {
+        console.log("dataaaaaaa" + data);
+        res.json(data);
+      })
+  });
+
   //update a response
   //invite should contain { id, response }
   router.put('/response', (req, res) => {

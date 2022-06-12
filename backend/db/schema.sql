@@ -17,6 +17,7 @@ CREATE TABLE events (
   picture text,
   start_time bigInt NOT NULL,
   end_time bigInt NOT NULL,
+  address VARCHAR(255) NOT NULL,
   latitude float NOT NULL,
   longtitude float NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
