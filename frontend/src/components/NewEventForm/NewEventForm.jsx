@@ -48,7 +48,7 @@ const NewEvent = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const formData = { title, location, address, date };
+    const formData = { title, location, address, date, coords};
     console.log(formData);
   };
 
