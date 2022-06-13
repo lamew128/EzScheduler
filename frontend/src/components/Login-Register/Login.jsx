@@ -27,7 +27,7 @@ const Login = (props) => {
     axios.post('/users/login', { email: user, password: password })
     .then((user) => {
       console.log("USER ID = ", user.data.id);
-      cookieSetter(user.data.id);
+      cookieSetter({id: user.data.id, name: user.data.name});
       props.setLogin(true);
       props.close();
     })

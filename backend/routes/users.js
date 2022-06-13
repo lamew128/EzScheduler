@@ -47,7 +47,7 @@ module.exports = (db) => {
           return null;
         }
         console.log("login success!");
-        return res.json({status: 200, id: user.id})
+        return res.json({status: 200, id: user.id, name: user.name})
       })
       .catch(e => {
         return e;

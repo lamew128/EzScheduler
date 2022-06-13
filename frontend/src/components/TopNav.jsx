@@ -99,7 +99,7 @@ const TopNav = (props) => {
           {isLoggedIn && (
             <>
               <span className="nav-item">
-                Logged in as <b>Heron</b>
+                Logged in as <b>{cookies.user.name}</b>
               </span>
               <button onClick={logout} className={buttonClass}>
                 Log out
