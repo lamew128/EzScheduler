@@ -104,7 +104,7 @@ const getUpcomingEvents = (user) => {
   return pool
     .query(
       `
-    SELECT distinct events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long
+    SELECT distinct events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long, event_invitees.response as response
     From EVENTS
     Join event_invitees ON events.id = event_invitees.event_id
     WHERE event_invitees.user_id = $1;
