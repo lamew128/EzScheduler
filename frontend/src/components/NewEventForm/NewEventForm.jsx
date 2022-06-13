@@ -46,11 +46,18 @@ const NewEvent = () => {
       });
   };
 
+//save the new event data to database
   const submitHandler = (e) => {
     e.preventDefault();
     const formData = { title, location, address, date, coords};
     console.log(formData);
+    return axios.post(`/event/new`, formData)
+    .then((response) => {
+      console.log(response);
+    });
   };
+
+
 
   return (
     <div className={classes.container}>
