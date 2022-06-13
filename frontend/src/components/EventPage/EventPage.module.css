@@ -39,3 +39,7 @@
   margin: 20px;
   width: 80%;
 }
+
+.btn {
+  width: fit-content;
+}

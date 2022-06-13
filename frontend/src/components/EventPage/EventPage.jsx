@@ -8,12 +8,16 @@ const EventPage = () => {
     <article className={classes.container}>
       <h3 className="row">Event Title</h3>
       <div className="row">
-        <EventDate date={date} />
+        <div className="col">
+          <button className={classes.btn}>Accept</button>
+          <button className={classes.btn}>Maybe</button>
+          <button className={classes.btn}>Decline</button>
+        </div>
+        <div className="col">
+          <EventDate date={date} />
+        </div>
       </div>
       {/* {user === creatorId} */}
-      <button>Accept</button>
-      <button>Maybe</button>
-      <button>Decline</button>
     </article>
   );
 };
