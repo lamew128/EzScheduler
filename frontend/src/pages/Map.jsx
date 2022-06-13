@@ -17,7 +17,7 @@ const Map = (props) => {
   return (
     <>
       {isLoaded ? (
-        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={18}>
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={props.zoom}>
           <Marker position={center} />
         </GoogleMap>
       ) : (

@@ -40,6 +40,73 @@
   width: 80%;
 }
 
+.title {
+  justify-content: center;
+}
+
 .btn {
   width: fit-content;
+  align-self: center;
+  padding: 0.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #000;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin: 5px;
+  font-weight: 500;
+}
+
+.accept {
+  background-color:green;
+}
+
+.decline {
+  background-color: red;
+}
+
+.maybe {
+  background-color: yellow;
+}
+
+.btn:hover {
+  background-color: #23acc4;
+  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.date {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.invitees {
+  border: 2px solid black;
+  border-radius: 25px;
+  height: 200px;
+  text-align: center;
+}
+
+.add {
+  font-size: xx-large;
+  color: blue;
+  background-color: rgba(0, 221, 255, 0.350);
+  cursor: pointer;
+  border: 2px solid white;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.weather {
+  border: 2px solid black;
+  border-radius: 25px;
+  height: 200px;
 }
