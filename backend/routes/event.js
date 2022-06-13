@@ -34,6 +34,7 @@ module.exports = (db) => {
   //create a new event
   //event should contain { title, description, startTime, endTime, lat, long, creator }
   router.post('/new', (req, res) => {
+    console.log("running post request");
     const { event } = req.body.event;
     db.createEvent(event)
       .then((data) => {
