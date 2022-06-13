@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import EventDate from "../EventDate";
 import classes from "./EventItem.module.css";
+import { useCookies } from "react-cookie";
 
 const MyEvent = (props) => {
   const date = new Date(Number(props.date) * 1000);
   const [invite, setInvite] = useState(false);
+  const [cookies] = useCookies([]);
 
   // CSS Classes
   const container = `${classes.container} row`;
@@ -21,8 +23,8 @@ const MyEvent = (props) => {
   const acceptInvite = () => {
     setInvite("accepted");
     // Axios request to send response YES
-    // axios.put();
-    console.log(`YES, EVENT: ${props.eventId}`)
+    axios.put();
+    console.log(`YES, EVENT: ${props.eventId}, ${cookies.user}`)
   };
 
   const maybeInvite = () => {
