@@ -99,12 +99,12 @@ const myCreatedEvents = (user) => {
 };
 
 //all event belongs to user or got invited
-//output: [event_id, creator, title, description, start_time, end_time, address, lat, long]
+//output: [event_id, creator, title, description, start_time, end_time, address, lat, long, response]
 const getUpcomingEvents = (user) => {
   return pool
     .query(
-      `
-    SELECT distinct events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long
+    `
+    SELECT distinct events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long, event_invitees.response as response
     From EVENTS
     Join event_invitees ON events.id = event_invitees.event_id
     WHERE event_invitees.user_id = $1;

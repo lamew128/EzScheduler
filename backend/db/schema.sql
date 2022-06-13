@@ -27,7 +27,7 @@ CREATE TABLE event_invitees (
   id SERIAL PRIMARY KEY NOT NULL,
   event_id INTEGER REFERENCES events(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  response TEXT NOT NULL 
+  response TEXT DEFAULT NULL
 );
 
 
