@@ -54,5 +54,29 @@ module.exports = (db) => {
       });
   });
 
+  //Create a new user
+  router.post('/register', (req, res) => {
+    const user = req.body;
+    db.getUserWithEmail(user.email)
+      .then((email) => {
+        if (email) {
+          console.log("EXIST");
+          return "EXIST";
+        }
+        db.addUser(user)
+          .then(user => {
+            if (!user) {
+              res.send({ error: "error" });
+              return;
+            }
+            console.log("REG SUCCESs")
+            return res.json({status: 200, id: user.id, name: user.name})
+          })
+          .catch(e => {
+            return e;
+          });
+      });
+  });
+
   return router;
 };
