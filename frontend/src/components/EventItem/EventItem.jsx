@@ -1,64 +1,78 @@
+import axios from "axios";
 import React, { useState } from "react";
 import EventDate from "../EventDate";
 import classes from "./EventItem.module.css";
 
 const MyEvent = (props) => {
-  const date = new Date(Number(props.date)*1000);
-  const [invite, setInvite] = useState("");
+  const date = new Date(Number(props.date) * 1000);
+  const [invite, setInvite] = useState(false);
 
-  const myEventClasses = `${classes.container} row`;
-
+  // CSS Classes
+  const container = `${classes.container} row`;
   const icon = classes.icon;
   const x = classes.x;
   const check = classes.check;
   const maybe = classes.maybe;
-  const click = classes.clickable;
+
+  const changeInvite = () => {
+    setInvite(false);
+  };
 
   const acceptInvite = () => {
     setInvite("accepted");
-    console.log({ id: props.id, response: "accepted" });
+    // Axios request to send response YES
+    // axios.put();
+    console.log(`YES, EVENT: ${props.eventId}`)
   };
 
   const maybeInvite = () => {
     setInvite("maybe");
-    console.log({ id: props.id, response: "maybe" });
+    // Axios request to send response MAYBE
+    // axios.put();
+    console.log(`MAYBE, EVENT: ${props.eventId}`)
   };
 
   const rejectInvite = () => {
     setInvite("rejected");
-    console.log({ id: props.id, response: "rejected" });
+    // Axios request to send response NO
+    // axios.put();
+    console.log(`NO, EVENT: ${props.eventId}`)
   };
 
   return (
-    <div className={myEventClasses}>
+    <div className={container}>
       <EventDate className="col" date={date} />
       <h3 className={`${classes.title} col`}>{props.title}</h3>
       {!invite && (
-        <i
-          onClick={rejectInvite}
-          className={`${icon} ${x} ${click} bi bi-x-lg col`}
-        ></i>
-      )}
-      {!invite && (
-        <i
-          onClick={maybeInvite}
-          className={`${icon} ${maybe} ${click} bi bi-question-lg col`}
-        ></i>
-      )}
-      {!invite && (
-        <i
-          onClick={acceptInvite}
-          className={`${icon} ${check} ${click} bi bi-check-lg col`}
-        ></i>
+        <>
+          <i
+            onClick={rejectInvite}
+            className={`${icon} ${x} bi bi-x-lg col`}
+          ></i>
+          <i
+            onClick={maybeInvite}
+            className={`${icon} ${maybe} bi bi-question-lg col`}
+          ></i>
+          <i
+            onClick={acceptInvite}
+            className={`${icon} ${check} bi bi-check-lg col`}
+          ></i>
+        </>
       )}
       {invite === "rejected" && (
-        <i className={`${icon} ${x} bi bi-x-lg col`}></i>
+        <i onClick={changeInvite} className={`${icon} ${x} bi bi-x-lg col`}></i>
       )}
       {invite === "maybe" && (
-        <i className={`${icon} ${maybe} bi bi-question-lg col`}></i>
+        <i
+          onClick={changeInvite}
+          className={`${icon} ${maybe} bi bi-question-lg col`}
+        ></i>
       )}
       {invite === "accepted" && (
-        <i className={`${icon} ${check} bi bi-check-lg col`}></i>
+        <i
+          onClick={changeInvite}
+          className={`${icon} ${check} bi bi-check-lg col`}
+        ></i>
       )}
       <p className={`${classes.location} col`}>Location: {props.address}</p>
     </div>

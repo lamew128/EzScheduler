@@ -85,7 +85,7 @@ const NewEvent = () => {
           <div className="col-8">
             MAP
             <div className={classes.map}>
-              <Map lat={coords.lat} lng={coords.lng} />
+              <Map lat={coords.lat} lng={coords.lng} height={'400px'}/>
             </div>
           </div>
         </div>

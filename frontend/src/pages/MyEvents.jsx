@@ -15,6 +15,7 @@ const MyEvents = () => {
   const eventsList = events.map((event) => (
     <MyEvent
       key={event.event_id}
+      eventId={event.event_id}
       title={event.title}
       address={event.address}
       date={event.start_time}

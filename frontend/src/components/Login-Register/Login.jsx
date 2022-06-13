@@ -20,11 +20,12 @@ const Login = (props) => {
   };
 
   const submitHandler = (e) => {
+    // Axios POST (Login) request. cookieSetter will be set with userID returned from request.
     e.preventDefault();
     const userData = { user, password };
     cookieSetter(user);
     props.setLogin(true);
-    props.close()
+    props.close();
   };
 
   const formClass = `${classes.center} row`;

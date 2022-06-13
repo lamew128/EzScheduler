@@ -14,6 +14,7 @@ const MainPage = (props) => {
     axios
       .get(`/event/all/${user}`)
       .then((event) => {
+        console.log(event.data);
         setEvents(event.data);
       })
       .then(
@@ -21,21 +22,20 @@ const MainPage = (props) => {
           axios
             .get(`/event/invitees/${event.event_id}`)
             .then((invitees) => {
-              console.log(invitees);
               const acceptedEvents = invitees.data.filter(
                 (e) => String(e.user_id) === user
               );
-              console.log(acceptedEvents[0]);
               setAccepted((prev) => [...prev, acceptedEvents[0].event_id]);
             })
             .then(console.log(accepted));
         })
       );
-  }, [user]);
+  }, []);
 
   const acceptedEventsList = events.map((event) => (
     <EventItem
       key={event.event_id}
+      eventId={event.event_id}
       title={event.title}
       date={event.start_time}
       address={event.address}

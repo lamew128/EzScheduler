@@ -48,6 +48,7 @@
   font-size: xx-large;
   align-self: center;
   margin: 10px;
+  cursor: pointer;
 }
 
 .x {
@@ -75,8 +76,4 @@
   height: fit-content;
   max-width: fit-content;
   border-radius: 30px;
-}
-
-.clickable {
-  cursor: pointer;
 }

@@ -1,0 +1,33 @@
+.icon {
+  font-size: xx-large;
+  align-self: center;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.x {
+  color: white;
+  border: 2px solid red;
+  background-color: red;
+  height: fit-content;
+  max-width: fit-content;
+  border-radius: 30px;
+}
+
+.check {
+  color: white;
+  border: 2px solid green;
+  background-color: green;
+  height: fit-content;
+  max-width: fit-content;
+  border-radius: 30px;
+}
+
+.maybe {
+  color: white;
+  border: 2px solid orange;
+  background-color: orange;
+  height: fit-content;
+  max-width: fit-content;
+  border-radius: 30px;
+}
