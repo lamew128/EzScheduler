@@ -6,7 +6,7 @@ import MainPage from "./pages/MainPage";
 import MyEvents from "./pages/MyEvents";
 import NewEvent from "./pages/NewEvent";
 import PastEvents from "./pages/PastEvents";
-import EventPage from "./pages/EventPage";
+import EventMainPage from "./pages/EventMainPage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
@@ -29,7 +29,7 @@ function App() {
             <PastEvents />
           </Route>
           <Route path="/events/:id">
-            <EventPage />
+            <EventMainPage />
           </Route>
           <Route path="*">
             <NotFound />

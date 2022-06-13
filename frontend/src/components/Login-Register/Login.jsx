@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import classes from "./Login.module.css";
 import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const Login = (props) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies([""]);
+  const [cookies, setCookie] = useCookies(["user"]);
 
   function cookieSetter(newName) {
     setCookie("user", newName, { path: "/" });
@@ -23,7 +24,7 @@ const Login = (props) => {
     // Axios POST (Login) request. cookieSetter will be set with userID returned from request.
     e.preventDefault();
     const userData = { user, password };
-    cookieSetter(user);
+    // axios.post().then(userId => cookieSetter(userId))
     props.setLogin(true);
     props.close();
   };

@@ -31,3 +31,15 @@
   max-width: fit-content;
   border-radius: 30px;
 }
+
+.container {
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  margin: 20px;
+  width: 80%;
+}
+
+.btn {
+  width: fit-content;
+}
