@@ -93,7 +93,7 @@ const TopNav = (props) => {
               {loginWindow && (
                 <Login close={openLogin} setLogin={setIsLoggedIn} />
               )}
-              {registerWindow && <Register close={openRegister} />}
+              {registerWindow && <Register close={openRegister} setLogin={setIsLoggedIn}/>}
             </>
           )}
           {isLoggedIn && (
