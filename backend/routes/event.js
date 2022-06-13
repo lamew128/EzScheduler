@@ -32,10 +32,11 @@ module.exports = (db) => {
   });
 
   //create a new event
-  //event should contain { title, description, startTime, endTime, lat, long, creator }
+  //event should contain { title, description, startTime, endTime, address, lat, long, creator }
   router.post('/new', (req, res) => {
     console.log("running post request");
-    const { event } = req.body.event;
+    const event = req.body;
+    console.log(event);
     db.createEvent(event)
       .then((data) => {
         console.log("dataaaaaaa" + data);
@@ -44,9 +45,9 @@ module.exports = (db) => {
   });
 
   //edit an event
-  //event should contain { title, description, startTime, endTime, lat, long, creator, id } id = event id
+  //event should contain { title, description, startTime, endTime, address, lat, long, creator, id } id = event id
   router.put('/', (req, res) => {
-    const { event } = req.body.event;
+    const event = req.body;
     db.editEvent(event)
       .then((data) => {
         console.log("dataaaaaaa" + data);
@@ -57,6 +58,7 @@ module.exports = (db) => {
   //delete an event
   router.delete('/:id', (req, res) => {
     const eventId = req.params.id;
+    console.log(eventId);
     db.deleteEvent(eventId)
       .then((data) => {
         console.log("dataaaaaaa" + data);
@@ -77,7 +79,7 @@ module.exports = (db) => {
   //update a response
   //invite should contain { id, response }
   router.put('/response', (req, res) => {
-    const { invite } = req.body.invite;
+    const invite = req.body;
     db.responseInvite(invite)
       .then((data) => {
         console.log("dataaaaaaa" + data);

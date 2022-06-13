@@ -129,7 +129,7 @@ const createEvent = (event) => {
     RETURNING *;
     `, eventParams)
     .then((data) => {
-      return data;
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -147,7 +147,7 @@ const invite = (invite) => {
     RETURNING *;
     `, inviteParams)
     .then((data) => {
-
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -167,7 +167,7 @@ const editEvent = (event) => {
     RETURNING *;
     `, eventParams)
     .then((data) => {
-
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -178,13 +178,13 @@ const editEvent = (event) => {
 const deleteEvent = (eventId) => {
   return pool
     .query(
-      `
+    `
     DELETE FROM events
     WHERE id = $1
     RETURNING *;  
-    `, eventId)
+    `, [eventId])
     .then((data) => {
-
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -213,14 +213,14 @@ const responseInvite = (invite) => {
   let inviteParams = [invite.id, invite.response];
   return pool
     .query(
-      `
+    `
     UPDATE event_invitees
     SET response = $2
     WHERE id = $1
     RETURNING *;
     `, inviteParams)
     .then((data) => {
-
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
