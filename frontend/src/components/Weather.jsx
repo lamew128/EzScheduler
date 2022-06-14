@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 //props require: lat, long, time
 const Weather = (props) => {
 
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState(null);
   
   const API_URL = 'https://api.openweathermap.org/data/2.5/forecast';
   const LAT = `${props.lat}`;
@@ -16,9 +16,11 @@ const Weather = (props) => {
   const weatherAvaiable = (props.time - now < 421200) ? true : false;
 
   useEffect(() => {
+    console.log("NOW = ", new Date(now*1000));
+    console.log("TIME = ", new Date(props.time*1000));
+    console.log("weatherAvaiable = ", weatherAvaiable);
     axios.get(FULL_API_URL)
     .then((res) => {
-      console.log("res.data : ", res.data);
       for (let i = 0; i < res.data.list.length; i++) {
         if (res.data.list[i].dt >= props.time) {
           console.log("res.data.list[i] : ",res.data.list[i]);
@@ -31,7 +33,7 @@ const Weather = (props) => {
 
   return (
     <div>
-      time = {weather.dt} temp = {weather.main.temp} <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}></img>
+      time = {weather && weather.dt} temp = {weather && weather.main.temp} <img src={weather && `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}></img>
     </div>
   );
 };
