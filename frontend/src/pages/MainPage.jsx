@@ -4,11 +4,18 @@ import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
 import EventItem from "../components/EventItem/EventItem";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+
 
 const MainPage = (props) => {
-  const [user, setUser] = useState("1");
+  const [cookies, setCookie] = useCookies(["user"]);
+  console.log(cookies)
+  let userId = cookies.user.id;
+  console.log(userId)
+  const [user, setUser] = useState(userId);
   const [events, setEvents] = useState([]);
   const [accepted, setAccepted] = useState([]);
+ 
 
   useEffect(() => {
     axios
@@ -31,6 +38,10 @@ const MainPage = (props) => {
         })
       );
   }, []);
+
+  useEffect(() => {
+    console.log(cookies)
+  }, [cookies])
 
   const upcomingEvents = events
   .filter(event => event.start_time - Date.now()/1000 <= 388800)         
