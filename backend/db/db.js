@@ -118,6 +118,24 @@ const getUpcomingEvents = (user) => {
     });
 };
 
+//show event details for the event page
+const showEventDetails = (eventId) => {
+  return pool
+    .query(
+      `
+      SELECT events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long, event_invitees.response as response
+      FROM events
+      Join event_invitees ON events.id = event_invitees.event_id
+      WHERE events.id = $1;
+      `, [eventId])
+      .then((data) => {
+        const event = data.rows;
+        return event;
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+}
 //create an event
 const createEvent = (event) => {
   let eventParams = [event.title, event.description, event.startTime, event.endTime, event.address, event.lat, event.long, event.creator];
@@ -191,6 +209,7 @@ const deleteEvent = (eventId) => {
     });
 };
 
+
 //get invitees of an event by given id
 const getInvitees = (eventId) => {
   return pool
@@ -245,6 +264,8 @@ const deleteInvite = (id) => {
     });
 };
 
+
+
 module.exports = {
   addUser,
   getUserWithEmail,
@@ -258,5 +279,6 @@ module.exports = {
   deleteEvent,
   getInvitees,
   responseInvite,
-  deleteInvite
+  deleteInvite,
+  showEventDetails
 };

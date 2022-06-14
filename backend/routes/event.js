@@ -43,7 +43,15 @@ module.exports = (db) => {
         res.json(data);
       })
   });
-
+ 
+  router.get('/:eventId', (req,res) => {
+    const eventId = req.params.eventId;
+    db.showEventDetails(eventId)
+      .then((data) => {
+        console.log("event data is" + data);
+        res.json(data);
+      })
+  })
   //edit an event
   //event should contain { title, description, startTime, endTime, address, lat, long, creator, id } id = event id
   router.put('/', (req, res) => {
