@@ -25,7 +25,7 @@ const TopNav = (props) => {
 
   // Logout function (Still have to implement clear cookies)
   const logout = () => {
-    setName('')
+    setName("");
     setIsLoggedIn(false);
     props.removeCookie("user");
   };
@@ -63,24 +63,37 @@ const TopNav = (props) => {
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                to="/my-events"
-                activeClassName={classes.active}
-                className={navitemClass}
-              >
-                My Events
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/new"
-                activeClassName={classes.active}
-                className={navitemClass}
-              >
-                New Event
-              </NavLink>
-            </li>
+            {isLoggedIn && (
+              <>
+                <li className="nav-item">
+                  <NavLink
+                    to="/my-events"
+                    activeClassName={classes.active}
+                    className={navitemClass}
+                  >
+                    My Events
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/events/past"
+                    activeClassName={classes.active}
+                    className={navitemClass}
+                  >
+                    Past Events
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/new"
+                    activeClassName={classes.active}
+                    className={navitemClass}
+                  >
+                    New Event
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
           {!isLoggedIn && (
             <>

@@ -12,8 +12,8 @@ const MyEvent = (props) => {
 
   const deleteEvent = () => {
     // Axios Delete request
-    axios.delete();
-    console.log(props.eventId);
+    props.setDeleted(true);
+    axios.delete(`/event/${props.eventId}`);
   };
 
   return (

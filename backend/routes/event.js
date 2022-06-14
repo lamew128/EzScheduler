@@ -43,8 +43,8 @@ module.exports = (db) => {
         res.json(data);
       })
   });
- 
-  router.get('/:eventId', (req,res) => {
+
+  router.get('/:eventId', (req, res) => {
     const eventId = req.params.eventId;
     db.showEventDetails(eventId)
       .then((data) => {

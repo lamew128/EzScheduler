@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./App.module.css";
 import TopNav from "./components/TopNav";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import MyEvents from "./pages/MyEvents";
 import NewEvent from "./pages/NewEvent";
@@ -31,16 +31,16 @@ function App() {
             />
           </Route>
           <Route path="/my-events">
-            <MyEvents />
+            {cookies.user ? <MyEvents /> : <Redirect to="/" />}
           </Route>
           <Route path="/new">
-            <NewEvent />
+            {cookies.user ? <NewEvent /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/events/past">
-            <PastEvents />
+            {cookies.user ? <PastEvents /> : <Redirect to="/" />}
           </Route>
           <Route path="/events/:id">
-            <EventMainPage />
+            {cookies.user ? <EventMainPage /> : <Redirect to="/" />}
           </Route>
           <Route path="*">
             <NotFound />

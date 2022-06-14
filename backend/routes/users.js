@@ -12,7 +12,7 @@ module.exports = (db) => {
         console.log("dataaaaaaa" + data);
         res.json(data);
       });
-    }
+  }
   );
 
   /**
@@ -20,7 +20,7 @@ module.exports = (db) => {
    * @param {String} email
    * @param {String} password
    */
-   const login = function(email, password) {
+  const login = function(email, password) {
     return db.getUserWithEmail(email)
       .then((user) => {
         if (!user) {
@@ -47,7 +47,7 @@ module.exports = (db) => {
           return null;
         }
         console.log("login success!");
-        return res.json({status: 200, id: user.id, name: user.name})
+        return res.json({ status: 200, id: user.id, name: user.name });
       })
       .catch(e => {
         return e;
@@ -69,8 +69,8 @@ module.exports = (db) => {
               res.send({ error: "error" });
               return;
             }
-            console.log("REG SUCCESs")
-            return res.json({status: 200, id: user.id, name: user.name})
+            console.log("REG SUCCESs");
+            return res.json({ status: 200, id: user.id, name: user.name });
           })
           .catch(e => {
             return e;
