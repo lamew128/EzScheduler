@@ -4,11 +4,8 @@ import Weather from "../Weather";
 
 import classes from "./UpcomingEvents.module.css";
 
-
-
 const UpcomingEvents = (props) => {
-  const date = new Date(props.date*1000);
-  //const date = new Date("09-24-2022");
+  const date = new Date(props.date * 1000);
 
   return (
     <article className={classes["upcoming-events"]}>
@@ -21,7 +18,10 @@ const UpcomingEvents = (props) => {
             <div className={`${classes.content} d-flex`}>
               <h3 className={classes.title__event}>Event Title</h3>
               {props.title}
-              <section className={classes.weather}>Weather section ⛈<Weather lat={1} long={1} time={1655661000}/></section>
+              <section className={classes.weather}>
+                Weather section
+                <Weather lat={props.lat} long={props.long} time={props.date} />
+              </section>
             </div>
           </div>
           <div className={`${classes.date__invitees} col-2`}>

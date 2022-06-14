@@ -10,7 +10,6 @@ const MyEvents = (props) => {
     axios
       .get(`/event/created/${props.user}`)
       .then((data) => {
-        console.log(data.data);
         setEvents(data.data);
       })
       .then(setDeleted(false));

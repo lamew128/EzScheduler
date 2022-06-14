@@ -103,7 +103,7 @@ const myCreatedEvents = (user) => {
 const getUpcomingEvents = (user) => {
   return pool
     .query(
-    `
+      `
     SELECT distinct events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long, event_invitees.response as response
     From EVENTS
     Join event_invitees ON events.id = event_invitees.event_id
@@ -128,13 +128,13 @@ const showEventDetails = (eventId) => {
       Join event_invitees ON events.id = event_invitees.event_id
       WHERE events.id = $1;
       `, [eventId])
-      .then((data) => {
-        const event = data.rows;
-        return event;
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    .then((data) => {
+      const event = data.rows;
+      return event;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 }
 //create an event
 const createEvent = (event) => {
@@ -196,7 +196,7 @@ const editEvent = (event) => {
 const deleteEvent = (eventId) => {
   return pool
     .query(
-    `
+      `
     DELETE FROM events
     WHERE id = $1
     RETURNING *;  
@@ -214,7 +214,7 @@ const deleteEvent = (eventId) => {
 const getInvitees = (eventId) => {
   return pool
     .query(
-    `
+      `
     SELECT * FROM event_invitees
     WHERE event_id = $1;
     `, [eventId])
@@ -232,7 +232,7 @@ const responseInvite = (invite) => {
   let inviteParams = [invite.response, invite.userId, invite.eventId];
   return pool
     .query(
-    `
+      `
     UPDATE event_invitees
     SET response = $1
     WHERE user_id = $2

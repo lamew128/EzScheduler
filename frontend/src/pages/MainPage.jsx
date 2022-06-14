@@ -34,6 +34,8 @@ const MainPage = (props) => {
         title={event.title}
         date={event.start_time}
         address={event.address}
+        lat={event.lat}
+        long={event.long}
       />
     ));
 

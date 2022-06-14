@@ -19,9 +19,7 @@ const Login = (props) => {
   };
 
   const submitHandler = (e) => {
-    // Axios POST (Login) request. cookieSetter will be set with userID returned from request.
     e.preventDefault();
-    //const userData = { user, password };
     axios
       .post("/users/login", { email: user, password: password })
       .then((user) => {
