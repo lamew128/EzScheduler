@@ -6,8 +6,7 @@ const EventMainPage = (props) => {
   const { id } = useParams();
   return (
     <>
-      {id}
-      <EventPage />
+      <EventPage eventId={id} />
     </>
   );
 };
