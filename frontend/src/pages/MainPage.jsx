@@ -47,7 +47,7 @@ const MainPage = (props) => {
 
 
   const acceptedEventsList = events
-  .filter(event => event.response == "yes")
+  .filter(event => event.response === "yes")
   .map((event) => (
     <EventItem
       key={event.event_id}
