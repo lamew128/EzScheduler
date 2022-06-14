@@ -32,7 +32,49 @@ const MainPage = (props) => {
       );
   }, []);
 
-  const acceptedEventsList = events.map((event) => (
+  // const upcomingEvents = events.filer((event) => {
+  //   return event.start_time - Date.now()/1000 <= 388800;             
+  // });
+
+  const acceptedEventsList = events
+  .filter(event => event.response == "yes")
+  .map((event) => (
+    <EventItem
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+    />
+  ));
+
+  const notRespondedEventsList = events
+  .filter(event => event.response === null)
+  .map((event) => (
+    <EventItem
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+    />
+  ));
+
+  const maybeEventsList =  events
+  .filter(event => event.response === "maybe")
+  .map((event) => (
+    <EventItem
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+    />
+  ));
+
+  const rejectedEventsList = events
+  .filter(event => event.response === "no")
+  .map((event) => (
     <EventItem
       key={event.event_id}
       eventId={event.event_id}
@@ -51,7 +93,10 @@ const MainPage = (props) => {
       <h3>My Events</h3>
       {acceptedEventsList}
       <h2>Open Invites</h2>
+      {notRespondedEventsList}
+      {maybeEventsList}
       <h2>Rejected Invites</h2>
+      {rejectedEventsList}
     </>
   );
 };
