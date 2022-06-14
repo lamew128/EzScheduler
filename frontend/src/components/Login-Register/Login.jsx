@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import classes from "./Login.module.css";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 
 const Login = (props) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies(["user"]);
 
   function cookieSetter(newName) {
-    setCookie("user", newName, { path: "/" });
+    props.setCookie("user", newName, { path: "/" });
   }
 
   const userLogin = (e) => {
@@ -24,14 +22,15 @@ const Login = (props) => {
     // Axios POST (Login) request. cookieSetter will be set with userID returned from request.
     e.preventDefault();
     //const userData = { user, password };
-    axios.post('/users/login', { email: user, password: password })
-    .then((user) => {
-      console.log("USER ID = ", user.data.id);
-      cookieSetter({id: user.data.id, name: user.data.name});
-      props.setLogin(true);
-      props.close();
-    })
-    
+    axios
+      .post("/users/login", { email: user, password: password })
+      .then((user) => {
+        console.log("USER ID = ", user.data.id);
+        cookieSetter({ id: user.data.id, name: user.data.name });
+        props.setName(user.data.name);
+        props.setIsLoggedIn(true);
+        props.close();
+      });
   };
 
   const formClass = `${classes.center} row`;

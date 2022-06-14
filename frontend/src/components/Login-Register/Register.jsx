@@ -1,13 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import classes from "./Register.module.css";
-import { useCookies } from "react-cookie";
 
 const Register = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies(["user"]);
 
   const nameRegister = (e) => {
     setName(e.target.value);
@@ -22,19 +20,21 @@ const Register = (props) => {
   };
 
   function cookieSetter(newName) {
-    setCookie("user", newName, { path: "/" });
+    props.setCookie("user", newName, { path: "/" });
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
     //const userData = { name, email, password };
-    axios.post('/users/register', { name: name, email: email, password: password })
-    .then((user) => {
-      console.log("USER ID = ", user.data.id);
-      cookieSetter({id: user.data.id, name: user.data.name});
-      props.setLogin(true);
-      props.close();
-    })
+    axios
+      .post("/users/register", { name: name, email: email, password: password })
+      .then((user) => {
+        console.log("USER ID = ", user.data.id);
+        cookieSetter({ id: user.data.id, name: user.data.name });
+        props.setLogin(true);
+        props.close();
+        props.setName(name)
+      });
     //console.log(userData);
   };
 

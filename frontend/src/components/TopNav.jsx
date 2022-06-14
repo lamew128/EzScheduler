@@ -5,14 +5,13 @@ import Register from "./Login-Register/Register";
 
 import classes from "./TopNav.module.css";
 
-import { useCookies } from "react-cookie";
-
 const TopNav = (props) => {
-  const [cookies, setCookie, removeCookie] = useCookies([""]);
-  const loggedIn = !!cookies.user;
+  const loggedIn = !!props.cookies.user;
   const [isLoggedIn, setIsLoggedIn] = useState(loggedIn);
   const [loginWindow, setLoginWindow] = useState(false);
   const [registerWindow, setRegisterWindow] = useState(false);
+  const user = props.cookies.user ? props.cookies.user.name : "";
+  const [name, setName] = useState(user);
 
   const buttonClass = `${classes.btncls} btn btn-primary`;
 
@@ -26,8 +25,9 @@ const TopNav = (props) => {
 
   // Logout function (Still have to implement clear cookies)
   const logout = () => {
+    setName('')
     setIsLoggedIn(false);
-    removeCookie("user");
+    props.removeCookie("user");
   };
 
   // Classes
@@ -91,15 +91,27 @@ const TopNav = (props) => {
                 Register
               </button>
               {loginWindow && (
-                <Login close={openLogin} setLogin={setIsLoggedIn} />
+                <Login
+                  setName={setName}
+                  setCookie={props.setCookie}
+                  close={openLogin}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
               )}
-              {registerWindow && <Register close={openRegister} setLogin={setIsLoggedIn}/>}
+              {registerWindow && (
+                <Register
+                  setName={setName}
+                  setCookie={props.setCookie}
+                  close={openRegister}
+                  setLogin={setIsLoggedIn}
+                />
+              )}
             </>
           )}
           {isLoggedIn && (
             <>
               <span className="nav-item">
-                Logged in as <b>{cookies.user.name}</b>
+                Logged in as <b>{name}</b>
               </span>
               <button onClick={logout} className={buttonClass}>
                 Log out

@@ -3,7 +3,7 @@ import Map from "../../pages/Map";
 import EventDate from "../EventDate";
 import classes from "./EventPage.module.css";
 
-const EventPage = () => {
+const EventPage = (props) => {
   const [response, setResponse] = useState("Accept");
   const date = new Date(1655147792 * 1000);
   return (

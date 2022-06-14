@@ -10,14 +10,25 @@ import EventMainPage from "./pages/EventMainPage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
+import { useCookies } from "react-cookie";
+
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   return (
     <>
-      <TopNav />
+      <TopNav
+        cookies={cookies}
+        setCookie={setCookie}
+        removeCookie={removeCookie}
+      />
       <main className={classes.main}>
         <Switch>
           <Route exact path="/">
-            <MainPage />
+            <MainPage
+              cookies={cookies}
+              setCookie={setCookie}
+              removeCookie={removeCookie}
+            />
           </Route>
           <Route path="/my-events">
             <MyEvents />
