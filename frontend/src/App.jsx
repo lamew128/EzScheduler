@@ -31,7 +31,7 @@ function App() {
             />
           </Route>
           <Route path="/my-events">
-            {cookies.user ? <MyEvents /> : <Redirect to="/" />}
+            {cookies.user ? <MyEvents user={cookies.user.id} /> : <Redirect to="/" />}
           </Route>
           <Route path="/new">
             {cookies.user ? <NewEvent /> : <Redirect to="/" />}
