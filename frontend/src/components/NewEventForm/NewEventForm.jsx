@@ -52,21 +52,26 @@ const NewEvent = () => {
   //save the new event data to database
   const submitHandler = (e) => {
     e.preventDefault();
+    const dateE = date.split("-");
+    const start = startTime.split(":");
+    const dateStart = new Date(
+      dateE[0],
+      dateE[1],
+      dateE[2],
+      start[0],
+      start[1]
+    );
+    const end = endTime.split(":");
+    const dateEnd = new Date(dateE[0], dateE[1], dateE[2], end[0], end[1]);
     const formData = {
       title,
       location,
       address,
       date,
       coords,
-      startTime,
-      endTime,
+      dateStart,
+      dateEnd,
     };
-    const start = startTime.split(":");
-    const dateE = date.split("-");
-    const dateVar = new Date(dateE[0], dateE[1], dateE[2], start[0], start[1]);
-    console.log(dateVar);
-    // console.log(startTime.split(':').join(','));
-    // console.log(date.split('-').join(','));
     return axios.post(`/event/new`, formData).then((response) => {
       console.log(response);
     });
