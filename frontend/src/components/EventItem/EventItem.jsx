@@ -20,7 +20,6 @@ const MyEvent = (props) => {
 
   const acceptInvite = () => {
     setInvite("yes");
-    // Axios request to send response YES
     axios
       .put("/event/response", {
         response: "yes",
@@ -29,7 +28,6 @@ const MyEvent = (props) => {
       })
       .then((data) => {
         console.log(data);
-        console.log(`YES, EVENT: ${props.eventId}, ${props.cookies.user}`);
       });
     props.setEventChange(true);
   };
@@ -45,14 +43,12 @@ const MyEvent = (props) => {
       })
       .then((data) => {
         console.log(data);
-        console.log(`MAYBE, EVENT: ${props.eventId}`);
       });
     props.setEventChange(true);
   };
 
   const rejectInvite = () => {
     setInvite("no");
-    // Axios request to send response NO
     axios
       .put("/event/response", {
         response: "no",
@@ -61,7 +57,6 @@ const MyEvent = (props) => {
       })
       .then((data) => {
         console.log(data);
-        console.log(`NO, EVENT: ${props.eventId}`);
       });
     props.setEventChange(true);
   };

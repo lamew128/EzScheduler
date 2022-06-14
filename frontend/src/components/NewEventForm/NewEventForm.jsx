@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./NewEventForm.module.css";
 import Map from "../../pages/Map";
 import axios from "axios";
+import TimePicker from "react-time-picker";
 
 const NewEvent = () => {
   const [coords, setCoords] = useState({});
@@ -9,6 +10,8 @@ const NewEvent = () => {
   const [location, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [date, setDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
@@ -46,13 +49,25 @@ const NewEvent = () => {
       });
   };
 
-//save the new event data to database
+  //save the new event data to database
   const submitHandler = (e) => {
     e.preventDefault();
-    const formData = { title, location, address, date, coords};
-    console.log(formData);
-    return axios.post(`/event/new`, formData)
-    .then((response) => {
+    const formData = {
+      title,
+      location,
+      address,
+      date,
+      coords,
+      startTime,
+      endTime,
+    };
+    const start = startTime.split(":");
+    const dateE = date.split("-");
+    const dateVar = new Date(dateE[0], dateE[1], dateE[2], start[0], start[1]);
+    console.log(dateVar);
+    // console.log(startTime.split(':').join(','));
+    // console.log(date.split('-').join(','));
+    return axios.post(`/event/new`, formData).then((response) => {
       console.log(response);
     });
   };
@@ -76,8 +91,18 @@ const NewEvent = () => {
           />
         </div>
         <div className="col">
-          <label>Date:</label>
-          <input type="date" value={date} onChange={dateChange} />
+          <div className="row">
+            <label>Date:</label>
+            <input type="date" value={date} onChange={dateChange} />
+          </div>
+          <div className="row">
+            <label>Start Time:</label>
+            <TimePicker onChange={setStartTime} value={startTime} />
+          </div>
+          <div className="row">
+            <label>End Time:</label>
+            <TimePicker onChange={setEndTime} value={endTime} />
+          </div>
         </div>
         <hr className="mt-3" />
         <div className="row mb-3">
@@ -90,14 +115,19 @@ const NewEvent = () => {
           <div className="col-8">
             MAP
             <div className={classes.map}>
-              <Map lat={coords.lat} lng={coords.lng} height={'400px'} zoom={18}/>
+              <Map
+                lat={coords.lat}
+                lng={coords.lng}
+                height={"400px"}
+                zoom={18}
+              />
             </div>
           </div>
         </div>
         <hr />
         <div className={`${classes.center} row`}>
           <button className={classes.btn} type="submit">
-            Create New Event
+            Create Event
           </button>
         </div>
       </form>

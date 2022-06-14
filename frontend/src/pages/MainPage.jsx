@@ -25,7 +25,7 @@ const MainPage = (props) => {
   }, [userId, props.cookies.user, eventChange]);
 
   const upcomingEvents = events
-    .filter((event) => event.start_time - Date.now() / 1000 <= 388800)
+    .filter((event) => event.start_time - Date.now() / 1000 <= 388800 && event.start_time - Date.now() / 1000 >= 0)
     .map((event) => (
       <UpcomingEvents
         key={event.event_id}
@@ -33,6 +33,8 @@ const MainPage = (props) => {
         title={event.title}
         date={event.start_time}
         address={event.address}
+        lat={event.lat}
+        long={event.long}
       />
     ));
 
@@ -74,16 +76,16 @@ const MainPage = (props) => {
     .filter((event) => event.response === "maybe")
     .map((event) => (
       <EventItem
-        cookies={props.cookies}
-        setCookie={props.setCookie}
-        removeCookie={props.removeCookie}
-        key={event.event_id}
-        eventId={event.event_id}
-        title={event.title}
-        date={event.start_time}
-        address={event.address}
-        response={event.response}
-        setEventChange={setEventChange}
+      cookies={props.cookies}
+      setCookie={props.setCookie}
+      removeCookie={props.removeCookie}
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+      response={event.response}
+      setEventChange={setEventChange}
       />
     ));
 

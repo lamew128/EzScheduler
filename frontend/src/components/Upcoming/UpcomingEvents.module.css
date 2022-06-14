@@ -29,6 +29,7 @@
   max-inline-size: fit-content;
   padding: 10px;
   height: 100px;
+  height: fit-content;
 }
 
 .date__invitees {
