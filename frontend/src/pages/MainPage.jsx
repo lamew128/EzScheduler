@@ -13,9 +13,8 @@ const MainPage = (props) => {
 
   useEffect(() => {
     if (userId) {
-      axios.get(`/event/all/${userId}`).then((event) => {
-        console.log(event.data);
-        setEvents(event.data);
+      axios.get(`/event/all/${userId}`).then((d) => {
+        setEvents(d.data);
       });
       setShowEvents(true);
       setEventChange(false);
@@ -75,6 +74,9 @@ const MainPage = (props) => {
     .filter((event) => event.response === "maybe")
     .map((event) => (
       <EventItem
+        cookies={props.cookies}
+        setCookie={props.setCookie}
+        removeCookie={props.removeCookie}
         key={event.event_id}
         eventId={event.event_id}
         title={event.title}
