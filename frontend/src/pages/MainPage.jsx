@@ -32,9 +32,19 @@ const MainPage = (props) => {
       );
   }, []);
 
-  // const upcomingEvents = events.filer((event) => {
-  //   return event.start_time - Date.now()/1000 <= 388800;             
-  // });
+  const upcomingEvents = events
+  .filter(event => event.start_time - Date.now()/1000 <= 388800)         
+  .map((event) => (
+    <UpcomingEvents
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+    />
+  ));
+
+
 
   const acceptedEventsList = events
   .filter(event => event.response == "yes")
@@ -89,7 +99,7 @@ const MainPage = (props) => {
       <Link to="/new">
         <Button>Create new event!</Button>
       </Link>
-      <UpcomingEvents />
+      {upcomingEvents}
       <h3>My Events</h3>
       {acceptedEventsList}
       <h2>Open Invites</h2>
