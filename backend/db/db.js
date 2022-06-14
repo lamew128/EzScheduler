@@ -124,9 +124,9 @@ const showEventDetails = (eventId) => {
     .query(
       `
       SELECT events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long, event_invitees.response as response
-      From EVENTS
+      FROM events
       Join event_invitees ON events.id = event_invitees.event_id
-      WHERE event.id = $1;
+      WHERE events.id = $1;
       `, [eventId])
       .then((data) => {
         const event = data.rows;
@@ -280,5 +280,5 @@ module.exports = {
   getInvitees,
   responseInvite,
   deleteInvite,
-  shoeEventDetails
+  showEventDetails
 };
