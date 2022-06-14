@@ -77,7 +77,7 @@ module.exports = (db) => {
   });
 
   //update a response
-  //invite should contain { id, response }
+  //invite should contain { response, userId, eventId}
   router.put('/response', (req, res) => {
     const invite = req.body;
     db.responseInvite(invite)

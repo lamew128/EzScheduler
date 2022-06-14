@@ -97,11 +97,11 @@ const MainPage = (props) => {
 
   return (
     <>
-      <Link to="/new">
-        <Button>Create new event!</Button>
-      </Link>
       {showEvents && (
         <>
+          <Link to="/new">
+            <Button>Create new event!</Button>
+          </Link>
           {upcomingEvents}
           <h3>My Events (Accepted)</h3>
           {acceptedEventsList}
