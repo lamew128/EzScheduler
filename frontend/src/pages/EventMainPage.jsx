@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import EventPage from "../components/EventPage/EventPage";
 import { useParams } from "react-router-dom";
 

@@ -28,7 +28,7 @@ const MyEvent = (props) => {
       console.log(data);
       console.log(`YES, EVENT: ${props.eventId}, ${cookies.user}`)
     });
-    
+    props.setEventChange(true)
   };
 
   const maybeInvite = () => {
@@ -39,6 +39,7 @@ const MyEvent = (props) => {
       console.log(data);
       console.log(`MAYBE, EVENT: ${props.eventId}`)
     });
+    props.setEventChange(true)
   };
 
   const rejectInvite = () => {
@@ -49,6 +50,7 @@ const MyEvent = (props) => {
       console.log(data);
       console.log(`NO, EVENT: ${props.eventId}`)
     });
+    props.setEventChange(true)
   };
 
   return (

@@ -8,6 +8,7 @@ import axios from "axios";
 const MainPage = (props) => {
   const [events, setEvents] = useState([]);
   const [showEvents, setShowEvents] = useState(false);
+  const [eventChange, setEventChange] = useState(false);
   const userId = props.cookies.user ? props.cookies.user.id : false;
 
   useEffect(() => {
@@ -17,10 +18,12 @@ const MainPage = (props) => {
         setEvents(event.data);
       });
       setShowEvents(true);
+      setEventChange(false);
     } else {
       setShowEvents(false);
+      setEventChange(false);
     }
-  }, [userId, props.cookies.user]);
+  }, [userId, props.cookies.user, eventChange]);
 
   const upcomingEvents = events
     .filter((event) => event.start_time - Date.now() / 1000 <= 388800)
@@ -47,6 +50,7 @@ const MainPage = (props) => {
         date={event.start_time}
         address={event.address}
         response={event.response}
+        setEventChange={setEventChange}
       />
     ));
 
@@ -63,6 +67,7 @@ const MainPage = (props) => {
         date={event.start_time}
         address={event.address}
         response={event.response}
+        setEventChange={setEventChange}
       />
     ));
 
@@ -76,6 +81,7 @@ const MainPage = (props) => {
         date={event.start_time}
         address={event.address}
         response={event.response}
+        setEventChange={setEventChange}
       />
     ));
 
@@ -92,6 +98,7 @@ const MainPage = (props) => {
         date={event.start_time}
         address={event.address}
         response={event.response}
+        setEventChange={setEventChange}
       />
     ));
 
