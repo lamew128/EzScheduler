@@ -3,8 +3,11 @@ import EventDate from "../EventDate";
 
 import classes from "./UpcomingEvents.module.css";
 
+
+
 const UpcomingEvents = (props) => {
-  const date = new Date("09-24-2022");
+  const date = new Date(props.date*1000);
+  //const date = new Date("09-24-2022");
 
   return (
     <article className={classes["upcoming-events"]}>
@@ -16,6 +19,7 @@ const UpcomingEvents = (props) => {
             </header>
             <div className={`${classes.content} d-flex`}>
               <h3 className={classes.title__event}>Event Title</h3>
+              {props.title}
               <section className={classes.weather}>Weather section ⛈</section>
             </div>
           </div>
