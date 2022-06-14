@@ -5,7 +5,7 @@ import classes from "./EventPage.module.css";
 
 const EventPage = (props) => {
   const [response, setResponse] = useState("Accept");
-  const date = new Date(1655147792 * 1000);
+  const date = new Date(props.date * 1000);
   return (
     <article className={classes.container}>
       <h3 className={`${classes.title} row`}>
@@ -44,7 +44,7 @@ const EventPage = (props) => {
           Description: <strong>{props.eventDescription}</strong>
         </p>
         <p>
-          Address: <strong>1 Yonge St., Toronto, ON</strong>
+          Address: <strong>{props.address}</strong>
         </p>
       </div>
       <hr />

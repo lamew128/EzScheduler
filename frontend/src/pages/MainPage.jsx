@@ -77,13 +77,16 @@ const MainPage = (props) => {
     .filter((event) => event.response === "maybe")
     .map((event) => (
       <EventItem
-        key={event.event_id}
-        eventId={event.event_id}
-        title={event.title}
-        date={event.start_time}
-        address={event.address}
-        response={event.response}
-        setEventChange={setEventChange}
+      cookies={props.cookies}
+      setCookie={props.setCookie}
+      removeCookie={props.removeCookie}
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+      response={event.response}
+      setEventChange={setEventChange}
       />
     ));
 

@@ -16,11 +16,10 @@ const UpcomingEvents = (props) => {
               <h3>Upcoming Events</h3>
             </header>
             <div className={`${classes.content} d-flex`}>
-              <h3 className={classes.title__event}>Event Title</h3>
-              {props.title}
+              <h3 className={classes.title__event}>{props.title}</h3>
               <section className={classes.weather}>
-                Weather section
-                <Weather lat={props.lat} long={props.long} time={props.date} />
+                <h4>Weather</h4>
+                <Weather lat={props.lat} long={props.long} date={props.date} />
               </section>
             </div>
           </div>
