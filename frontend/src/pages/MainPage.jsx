@@ -10,7 +10,9 @@ import { useCookies } from "react-cookie";
 const MainPage = (props) => {
   const [cookies, setCookie] = useCookies(["user"]);
   console.log(cookies)
+  
   let userId = cookies.user.id;
+
   console.log(userId)
   const [user, setUser] = useState(userId);
   const [events, setEvents] = useState([]);

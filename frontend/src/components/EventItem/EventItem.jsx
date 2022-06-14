@@ -23,22 +23,32 @@ const MyEvent = (props) => {
   const acceptInvite = () => {
     setInvite("accepted");
     // Axios request to send response YES
-    axios.put();
-    console.log(`YES, EVENT: ${props.eventId}, ${cookies.user}`)
+    axios.put('/event/response', { response: 'yes', userId: cookies.user.id, eventId: props.eventId})
+    .then((data) => {
+      console.log(data);
+      console.log(`YES, EVENT: ${props.eventId}, ${cookies.user}`)
+    });
+    
   };
 
   const maybeInvite = () => {
     setInvite("maybe");
     // Axios request to send response MAYBE
-    // axios.put();
-    console.log(`MAYBE, EVENT: ${props.eventId}`)
+    axios.put('/event/response', { response: 'maybe', userId: cookies.user.id, eventId: props.eventId})
+    .then((data) => {
+      console.log(data);
+      console.log(`MAYBE, EVENT: ${props.eventId}`)
+    });
   };
 
   const rejectInvite = () => {
     setInvite("rejected");
     // Axios request to send response NO
-    // axios.put();
-    console.log(`NO, EVENT: ${props.eventId}`)
+    axios.put('/event/response', { response: 'no', userId: cookies.user.id, eventId: props.eventId})
+    .then((data) => {
+      console.log(data);
+      console.log(`NO, EVENT: ${props.eventId}`)
+    });
   };
 
   return (

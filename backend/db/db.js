@@ -210,13 +210,14 @@ const getInvitees = (eventId) => {
 
 //edit inv (change response)
 const responseInvite = (invite) => {
-  let inviteParams = [invite.id, invite.response];
+  let inviteParams = [invite.response, invite.userId, invite.eventId];
   return pool
     .query(
     `
     UPDATE event_invitees
-    SET response = $2
-    WHERE id = $1
+    SET response = $1
+    WHERE user_id = $2
+    AND event_id = $3
     RETURNING *;
     `, inviteParams)
     .then((data) => {
