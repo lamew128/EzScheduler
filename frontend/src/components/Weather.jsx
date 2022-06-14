@@ -12,6 +12,8 @@ const Weather = (props) => {
   const API_KEY = process.env.REACT_APP_API_KEY_WEATHER;
   const FULL_API_URL = `${API_URL}?lat=${LAT}&lon=${LONG}&appid=${API_KEY}`;
 
+  console.log(props.date);
+
   // const now = Math.round(new Date().getTime() / 1000);
   // const weatherAvaiable = props.time - now < 421200 ? true : false;
 
@@ -43,7 +45,11 @@ const Weather = (props) => {
       )}
       {!loading && (
         <>
-          temp = {weather && Math.round(weather.main.temp - 273.15)}{" "}
+          <p>
+            The temperature on day of the event will be{" "}
+            {weather && Math.round(weather.main.temp - 273.15)}
+            {"°"}
+          </p>
           <img
             src={
               weather &&
