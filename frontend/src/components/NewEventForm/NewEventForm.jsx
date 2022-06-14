@@ -6,7 +6,7 @@ import axios from "axios";
 const NewEvent = () => {
   const [coords, setCoords] = useState({});
   const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [date, setDate] = useState("");
 
@@ -28,8 +28,8 @@ const NewEvent = () => {
     setDate(e.target.value);
   };
 
-  const locationChange = (e) => {
-    setLocation(e.target.value);
+  const descriptionChange = (e) => {
+    setDescription(e.target.value);
   };
 
   const getLocation = () => {
@@ -64,8 +64,8 @@ const NewEvent = () => {
         <div className={`${classes.inputs} col`}>
           <label>Title:</label>
           <input type="text" value={title} onChange={titleChange} />
-          <label>Name of Location:</label>
-          <input type="text" value={location} onChange={locationChange} />
+          <label>Description:</label>
+          <input type="text" value={location} onChange={descriptionChange} />
           <label>Address:</label>
           <input
             type="text"

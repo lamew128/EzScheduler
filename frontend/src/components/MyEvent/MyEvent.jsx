@@ -13,7 +13,7 @@ const MyEvent = (props) => {
   const deleteEvent = () => {
     // Axios Delete request
     axios.delete();
-    console.log(props.eventId)
+    console.log(props.eventId);
   };
 
   return (
