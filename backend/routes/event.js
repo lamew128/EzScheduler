@@ -98,7 +98,6 @@ module.exports = (db) => {
     const invite = req.body;
     db.responseInvite(invite)
       .then((data) => {
-        res.json(data);
         return res.json({ status: 200, data: data });
       })
   });
