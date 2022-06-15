@@ -52,7 +52,7 @@ const NewEvent = (props) => {
   };
 
   //save the new event data to database
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const dateE = date.split("-");
     const start = startTimestamp.split(":");
@@ -73,14 +73,26 @@ const NewEvent = (props) => {
       creator: props.user,
     };
     console.log(formData);
-    return axios.post(`/event/new`, formData).then((response) => {
-      console.log(response.data.data.id);
-      //invite myself
-      axios.post('/event/invite', {response: 'yes', userId: props.user, eventId: response.data.data.id})
-      .then((data) => {
-        console.log(data.data.data);
-      })
-    });
+
+
+    const allUsersData = await axios.get(`/users/test`);
+    const allUsers = allUsersData.data;
+    console.log(allUsers);
+    //create the event
+    const response = await axios.post(`/event/new`, formData);
+    const eventId = response.data.data.id;
+    //invite myself
+    const data = await axios.post('/event/invite', {response: 'yes', userId: props.user, eventId: response.data.data.id});
+    //invite others with fake email array
+    const emailArray = ['e@e','d@d'];
+    const userIdArray = allUsers.filter((user) => emailArray.includes(user.email)).map((user)=>user.id);
+    const axiosCalls = userIdArray.map((userId) => axios.post(`/event/invite`,{response:null,userId:userId,eventId:eventId}));
+    Promise.all(axiosCalls)
+           . then((data) => {
+             console.log("promise all succeeded!");
+             console.log(data[0]);
+             console.log(data[1]);
+           });
   };
 
   return (
