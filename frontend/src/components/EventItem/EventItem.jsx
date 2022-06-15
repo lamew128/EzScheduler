@@ -1,7 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
 import EventDate from "../EventDate";
 import classes from "./EventItem.module.css";
+import {
+  acceptInvite,
+  maybeInvite,
+  rejectInvite,
+} from "../../helpers/inviteResponse";
+import { Link } from "react-router-dom";
 
 const MyEvent = (props) => {
   const date = new Date(Number(props.date) * 1000);
@@ -18,65 +23,40 @@ const MyEvent = (props) => {
     setInvite(null);
   };
 
-  const acceptInvite = () => {
-    setInvite("yes");
-    axios
-      .put("/event/response", {
-        response: "yes",
-        userId: props.cookies.user.id,
-        eventId: props.eventId,
-      })
-      .then((data) => {
-        console.log(data);
-      });
+  const acceptResponse = () => {
+    acceptInvite(setInvite, props);
     props.setEventChange(true);
   };
 
-  const maybeInvite = () => {
-    setInvite("maybe");
-    // Axios request to send response MAYBE
-    axios
-      .put("/event/response", {
-        response: "maybe",
-        userId: props.cookies.user.id,
-        eventId: props.eventId,
-      })
-      .then((data) => {
-        console.log(data);
-      });
+  const maybeResponse = () => {
+    maybeInvite(setInvite, props);
     props.setEventChange(true);
   };
 
-  const rejectInvite = () => {
-    setInvite("no");
-    axios
-      .put("/event/response", {
-        response: "no",
-        userId: props.cookies.user.id,
-        eventId: props.eventId,
-      })
-      .then((data) => {
-        console.log(data);
-      });
+  const declineResponse = () => {
+    rejectInvite(setInvite, props);
     props.setEventChange(true);
   };
 
   return (
     <div className={container}>
       <EventDate className="col" date={date} />
+      <Link className={`${classes.fit} col`} to={`/events/${props.eventId}`}>
+        <button className={classes.btn}>OPEN EVENT</button>
+      </Link>
       <h3 className={`${classes.title} col`}>{props.title}</h3>
       {invite === null && (
         <>
           <i
-            onClick={rejectInvite}
+            onClick={declineResponse}
             className={`${icon} ${x} bi bi-x-lg col`}
           ></i>
           <i
-            onClick={maybeInvite}
+            onClick={maybeResponse}
             className={`${icon} ${maybe} bi bi-question-lg col`}
           ></i>
           <i
-            onClick={acceptInvite}
+            onClick={acceptResponse}
             className={`${icon} ${check} bi bi-check-lg col`}
           ></i>
         </>

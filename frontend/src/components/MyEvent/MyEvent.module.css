@@ -39,6 +39,35 @@
   transform: translateY(-1px);
 }
 
+.btncancel {
+  max-width: fit-content;
+  align-self: center;
+  padding: 10px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #000;
+  background-color: rgb(255, 180, 180);
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btncancel:hover {
+  background-color: red;
+  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btncancel:active {
+  transform: translateY(-1px);
+}
+
 .location {
   text-align: right;
   align-self: center;

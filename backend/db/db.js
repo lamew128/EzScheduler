@@ -123,7 +123,7 @@ const showEventDetails = (eventId) => {
   return pool
     .query(
       `
-      SELECT events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long, event_invitees.response as response
+      SELECT events.id as event_id, events.user_id as creator, events.name as title, events.description, events.start_time, events.end_time, events.address, events.latitude as lat, events.longtitude as long, event_invitees.user_id as invitee_id, event_invitees.response as response
       FROM events
       Join event_invitees ON events.id = event_invitees.event_id
       WHERE events.id = $1;

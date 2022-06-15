@@ -26,7 +26,7 @@ const MyEvent = (props) => {
             <>
               <button className={classes.btn}>Edit</button>
               <button
-                className={classes.btn}
+                className={classes.btncancel}
                 onClick={() => setConfirmation(true)}
               >
                 Cancel Event
@@ -44,7 +44,7 @@ const MyEvent = (props) => {
               >
                 No
               </button>
-              <button className={classes.btn} onClick={deleteEvent}>
+              <button className={classes.btncancel} onClick={deleteEvent}>
                 Yes
               </button>
             </>
