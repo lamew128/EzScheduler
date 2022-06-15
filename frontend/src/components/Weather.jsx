@@ -13,6 +13,7 @@ const Weather = (props) => {
   const FULL_API_URL = `${API_URL}?lat=${LAT}&lon=${LONG}&appid=${API_KEY}`;
 
   const now = Math.round(new Date().getTime()/1000);
+  console.log(props.time - now);
   const weatherAvaiable = (props.time - now < 421200) ? true : false;
 
   useEffect(() => {
