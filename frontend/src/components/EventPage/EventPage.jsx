@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Map from "../../pages/Map";
+import Map from "../Map";
 import EventDate from "../EventDate";
 import classes from "./EventPage.module.css";
 
@@ -12,16 +12,6 @@ import Weather from "../Weather";
 
 const EventPage = (props) => {
   const [invite, setInvite] = useState(props.response);
-
-  // if (props.response === "yes") {
-  //   setResponse("Accepted");
-  // }
-  // if (props.response === "no") {
-  //   setResponse("Declined");
-  // }
-  // if (props.response === "maybe") {
-  //   setResponse("Maybe");
-  // }
 
   const acceptResponse = () => {
     acceptInvite(setInvite, props);
@@ -100,7 +90,9 @@ const EventPage = (props) => {
         </div>
         <div className="col">
           Weather Information:
-          <div className={classes.weather}>{/* <Weather></Weather> */}</div>
+          <div className={classes.weather}>
+            <Weather lat={props.lat} long={props.long} date={props.date} />
+          </div>
         </div>
       </div>
       <hr />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./NewEventForm.module.css";
-import Map from "../../pages/Map";
+import Map from "../Map";
 import axios from "axios";
 import TimePicker from "react-time-picker";
 
@@ -12,8 +12,6 @@ const NewEvent = (props) => {
   const [date, setDate] = useState("");
   const [startTimestamp, setStartTime] = useState("");
   const [endTimestamp, setEndTime] = useState("");
-
-  console.log(props.user);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {

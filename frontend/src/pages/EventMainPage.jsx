@@ -16,22 +16,6 @@ const EventMainPage = (props) => {
         }
       });
     });
-    // .then(() => {
-    //   switch (event.response) {
-    //     case "yes":
-    //       setResponse("Accepted");
-    //       break;
-    //     case "maybe":
-    //       setResponse("Maybe");
-    //       break;
-    //     case "no":
-    //       setResponse("Declined");
-    //       break;
-    //     default:
-    //       setResponse("No Response");
-    //       break;
-    //   }
-    // });
   }, [id, user]);
   console.log(event);
 
@@ -49,6 +33,8 @@ const EventMainPage = (props) => {
             address={event.address}
             date={event.start_time}
             response={event.response}
+            lat={event.lat}
+            long={event.long}
           />
         </>
       )}
