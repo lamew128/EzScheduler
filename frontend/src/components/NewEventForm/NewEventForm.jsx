@@ -74,7 +74,12 @@ const NewEvent = (props) => {
     };
     console.log(formData);
     return axios.post(`/event/new`, formData).then((response) => {
-      console.log(response);
+      console.log(response.data.data.id);
+      //invite myself
+      axios.post('/event/invite', {response: 'yes', userId: props.user, eventId: response.data.data.id})
+      .then((data) => {
+        console.log(data.data.data);
+      })
     });
   };
 
