@@ -28,7 +28,7 @@ const MainPage = (props) => {
     .filter(
       (event) =>
         event.start_time - Date.now() / 1000 <= 388800 &&
-        event.start_time - Date.now() / 1000 >= 0
+        event.end_time - Date.now() / 1000 >= 0
     )
     .map((event) => (
       <UpcomingEvents
@@ -43,7 +43,10 @@ const MainPage = (props) => {
     ));
 
   const acceptedEventsList = events
-    .filter((event) => event.response === "yes")
+    .filter((event) =>
+     event.response === "yes" &&
+     event.end_time - Date.now() / 1000 >= 0
+     )
     .map((event) => (
       <EventItem
         cookies={props.cookies}
@@ -60,7 +63,10 @@ const MainPage = (props) => {
     ));
 
   const notRespondedEventsList = events
-    .filter((event) => event.response === null)
+    .filter((event) => 
+    event.response === null &&
+    event.end_time - Date.now() / 1000 >= 0
+    )
     .map((event) => (
       <EventItem
         cookies={props.cookies}
@@ -77,7 +83,10 @@ const MainPage = (props) => {
     ));
 
   const maybeEventsList = events
-    .filter((event) => event.response === "maybe")
+    .filter((event) => 
+    event.response === "maybe" &&
+    event.end_time - Date.now() / 1000 >= 0
+    )
     .map((event) => (
       <EventItem
         cookies={props.cookies}
@@ -94,7 +103,10 @@ const MainPage = (props) => {
     ));
 
   const rejectedEventsList = events
-    .filter((event) => event.response === "no")
+    .filter((event) => 
+    event.response === "no" &&
+    event.end_time - Date.now() / 1000 >= 0
+    )
     .map((event) => (
       <EventItem
         cookies={props.cookies}

@@ -37,7 +37,7 @@ const PastEvents = (props) => {
         lat={event.lat}
         long={event.long}
       />
-    ));
+    )).reverse();
 
   return (
     <>
