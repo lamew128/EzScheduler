@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const EventMainPage = (props) => {
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState({});
   const [response, setResponse] = useState("");
   const { id } = useParams();
   const user = props.cookies.user.id;
@@ -15,13 +15,11 @@ const EventMainPage = (props) => {
       .then((event) => {
         event.data.forEach((e) => {
           if (e.invitee_id === user) {
-            console.log(e);
             setEvent(e);
           }
         });
       })
       .then(() => {
-        console.log(event.response);
         switch (event.response) {
           case "yes":
             setResponse("Accepted");
@@ -37,12 +35,13 @@ const EventMainPage = (props) => {
             break;
         }
       });
-  }, [id, user]);
+  }, [id, user, event.response]);
+  console.log(event)
 
   return (
     <>
-      {!event.length && <>This event does not exist!</>}
-      {event && (
+      {!event.event_id  && <>This event does not exist!</>}
+      {event.event_id && (
         <>
           <EventPage
             cookies={props.cookies}

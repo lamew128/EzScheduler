@@ -101,7 +101,7 @@ VALUES(
    -79.3548,
    2
 );
-NSERT INTO event_invitees (event_id,user_id,response) VALUES (6,1,null);
+INSERT INTO event_invitees (event_id,user_id,response) VALUES (6,1,null);
 INSERT INTO event_invitees (event_id,user_id,response) VALUES (6,2,null);
 INSERT INTO event_invitees (event_id,user_id,response) VALUES (6,3,'yes');
 
