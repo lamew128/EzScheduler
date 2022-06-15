@@ -123,13 +123,16 @@ const NewEvent = (props) => {
 
   const addInvitee = (e) => {
     e.preventDefault();
-    console.log(invitee);
     if (invitee.trim() === "") {
       alert("Please fill out with the information!");
       return;
     }
     if (inviteesList.includes(invitee.trim())) {
       alert("You cannot add the same e-mail");
+      return;
+    }
+    if (!invitee.includes("@")) {
+      alert("enter a valid e-mail");
       return;
     }
     setInviteesList((prev) => [...prev, invitee]);
@@ -181,9 +184,9 @@ const NewEvent = (props) => {
                 <div className="row align-items-center justify-content-center">
                   <input
                     className={classes.invitee_form}
-                    type="email"
                     value={invitee}
                     onChange={inviteeChange}
+                    required
                   />
                   <button onClick={addInvitee} className={classes.btn_add}>
                     ADD
