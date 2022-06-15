@@ -156,12 +156,12 @@ const createEvent = (event) => {
 
 //create an event
 const invite = (invite) => {
-  let inviteParams = [invite.eventId, invite.userId, invite.response];
+  let inviteParams = [invite.response, invite.userId, invite.eventId];
   return pool
     .query(
-      `
+    `
     INSERT INTO event_invitees (event_id, user_id, response) 
-    VALUES ($1, $2, $3)
+    VALUES ($3, $2, $1)
     RETURNING *;
     `, inviteParams)
     .then((data) => {

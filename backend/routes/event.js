@@ -39,8 +39,7 @@ module.exports = (db) => {
     console.log(event);
     db.createEvent(event)
       .then((data) => {
-        console.log("dataaaaaaa" + data);
-        res.json(data);
+        return res.json({ status: 200, data: data });
       })
   });
 
@@ -52,14 +51,14 @@ module.exports = (db) => {
         res.json(data);
       })
   })
+
   //edit an event
   //event should contain { title, description, startTime, endTime, address, lat, long, creator, id } id = event id
   router.put('/', (req, res) => {
     const event = req.body;
     db.editEvent(event)
       .then((data) => {
-        console.log("dataaaaaaa" + data);
-        res.json(data);
+        return res.json({ status: 200, data: data });
       })
   });
 
@@ -69,8 +68,7 @@ module.exports = (db) => {
     console.log(eventId);
     db.deleteEvent(eventId)
       .then((data) => {
-        console.log("dataaaaaaa" + data);
-        res.json(data);
+        return res.json({ status: 200, data: data });
       })
   });
 
@@ -79,8 +77,18 @@ module.exports = (db) => {
     const eventId = req.params.id;
     db.getInvitees(eventId)
       .then((data) => {
-        console.log("dataaaaaaa" + data);
         res.json(data);
+      })
+  });
+
+  //create an invite
+  //invite should contain { response, userId, eventId }
+  //response sould be null if not inviting myself
+  router.post('/invite', (req, res) => {
+    const invite = req.body;
+    db.invite(invite)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
       })
   });
 
@@ -90,8 +98,8 @@ module.exports = (db) => {
     const invite = req.body;
     db.responseInvite(invite)
       .then((data) => {
-        console.log("dataaaaaaa" + data);
         res.json(data);
+        return res.json({ status: 200, data: data });
       })
   });
 
