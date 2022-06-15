@@ -8,24 +8,34 @@ import {
   maybeInvite,
   rejectInvite,
 } from "../../helpers/inviteResponse";
+import Weather from "../Weather";
 
 const EventPage = (props) => {
   const [invite, setInvite] = useState(props.response);
-  const [response, setResponse] = useState(props.response);
+
+  // if (props.response === "yes") {
+  //   setResponse("Accepted");
+  // }
+  // if (props.response === "no") {
+  //   setResponse("Declined");
+  // }
+  // if (props.response === "maybe") {
+  //   setResponse("Maybe");
+  // }
 
   const acceptResponse = () => {
     acceptInvite(setInvite, props);
-    setResponse("Accepted");
+    setInvite("yes");
   };
 
   const maybeResponse = () => {
     maybeInvite(setInvite, props);
-    setResponse("Maybe");
+    setInvite("maybe");
   };
 
   const declineResponse = () => {
     rejectInvite(setInvite, props);
-    setResponse("Declined");
+    setInvite("no");
   };
 
   const date = new Date(props.date * 1000);
@@ -58,9 +68,21 @@ const EventPage = (props) => {
         </div>
       </div>
       <div className="row">
-        <p>
-          Responded with: <strong>{props.response}</strong>
-        </p>
+        {invite === "yes" && (
+          <p>
+            Responded with: <strong>Accepted</strong>
+          </p>
+        )}
+        {invite === "no" && (
+          <p>
+            Responded with: <strong>Declined</strong>
+          </p>
+        )}
+        {invite === "maybe" && (
+          <p>
+            Responded with: <strong>Maybe</strong>
+          </p>
+        )}
         <p>
           Description: <strong>{props.description}</strong>
         </p>
@@ -78,7 +100,7 @@ const EventPage = (props) => {
         </div>
         <div className="col">
           Weather Information:
-          <div className={classes.weather} />
+          <div className={classes.weather}>{/* <Weather></Weather> */}</div>
         </div>
       </div>
       <hr />
