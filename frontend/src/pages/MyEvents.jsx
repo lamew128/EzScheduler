@@ -15,7 +15,10 @@ const MyEvents = (props) => {
       .then(setDeleted(false));
   }, [deleted, props.user]);
 
-  const eventsList = events.map((event) => (
+  const eventsList = events
+  .filter((event) =>
+      event.end_time - Date.now() / 1000 >= 0)
+  .map((event) => (
     <MyEvent
       key={event.event_id}
       eventId={event.event_id}

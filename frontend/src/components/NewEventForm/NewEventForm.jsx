@@ -75,19 +75,19 @@ const NewEvent = (props) => {
 
     const allUsersData = await axios.get(`/users/test`);
     const allUsers = allUsersData.data;
-    console.log(allUsers);
     //create the event
     const response = await axios.post(`/event/new`, formData);
     const eventId = response.data.data.id;
     //invite myself
     const data = await axios.post('/event/invite', {response: 'yes', userId: props.user, eventId: response.data.data.id});
     //invite others with fake email array
+    // email Array will be an input from the form. put in dummy place hoder for now
     const emailArray = ['e@e','d@d'];
     const userIdArray = allUsers.filter((user) => emailArray.includes(user.email)).map((user)=>user.id);
     const axiosCalls = userIdArray.map((userId) => axios.post(`/event/invite`,{response:null,userId:userId,eventId:eventId}));
     Promise.all(axiosCalls)
            . then((data) => {
-             console.log("promise all succeeded!");
+            //  console.log("promise all succeeded!");
              console.log(data[0]);
              console.log(data[1]);
            });
