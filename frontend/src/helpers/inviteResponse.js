@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const acceptInvite = (setInvite, props) => {
+export function acceptInvite (setInvite, props){
   setInvite("yes");
   axios
     .put("/event/response", {
@@ -13,7 +13,7 @@ const acceptInvite = (setInvite, props) => {
     });
 };
 
-const maybeInvite = (setInvite, props) => {
+export function maybeInvite(setInvite, props) {
   setInvite("maybe");
   // Axios request to send response MAYBE
   axios
@@ -27,7 +27,7 @@ const maybeInvite = (setInvite, props) => {
     });
 };
 
-const rejectInvite = (setInvite, props) => {
+export function rejectInvite (setInvite, props){
   setInvite("no");
   axios
     .put("/event/response", {
@@ -40,4 +40,4 @@ const rejectInvite = (setInvite, props) => {
     });
 };
 
-export { acceptInvite, maybeInvite, rejectInvite }
+// export { acceptInvite, maybeInvite, rejectInvite }
