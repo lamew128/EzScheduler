@@ -4,14 +4,16 @@ import Map from "../../pages/Map";
 import axios from "axios";
 import TimePicker from "react-time-picker";
 
-const NewEvent = () => {
+const NewEvent = (props) => {
   const [coords, setCoords] = useState({});
   const [title, setTitle] = useState("");
-  const [location, setDescription] = useState("");
+  const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [startTimestamp, setStartTime] = useState("");
+  const [endTimestamp, setEndTime] = useState("");
+
+  console.log(props.user);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
@@ -53,25 +55,24 @@ const NewEvent = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const dateE = date.split("-");
-    const start = startTime.split(":");
-    const dateStart = new Date(
-      dateE[0],
-      dateE[1],
-      dateE[2],
-      start[0],
-      start[1]
-    );
-    const end = endTime.split(":");
-    const dateEnd = new Date(dateE[0], dateE[1], dateE[2], end[0], end[1]);
+    const start = startTimestamp.split(":");
+    const startTime =
+      new Date(dateE[0], dateE[1], dateE[2], start[0], start[1]).getTime() /
+      1000;
+    const end = endTimestamp.split(":");
+    const endTime =
+      new Date(dateE[0], dateE[1], dateE[2], end[0], end[1]).getTime() / 1000;
     const formData = {
       title,
-      location,
+      description,
+      startTime,
+      endTime,
       address,
-      date,
-      coords,
-      dateStart,
-      dateEnd,
+      lat: coords.lat,
+      long: coords.lng,
+      creator: props.user,
     };
+    console.log(formData);
     return axios.post(`/event/new`, formData).then((response) => {
       console.log(response);
     });
@@ -85,7 +86,7 @@ const NewEvent = () => {
           <label>Title:</label>
           <input type="text" value={title} onChange={titleChange} />
           <label>Description:</label>
-          <input type="text" value={location} onChange={descriptionChange} />
+          <input type="text" value={description} onChange={descriptionChange} />
           <label>Address:</label>
           <input
             type="text"
@@ -102,11 +103,11 @@ const NewEvent = () => {
           </div>
           <div className="row">
             <label>Start Time:</label>
-            <TimePicker onChange={setStartTime} value={startTime} />
+            <TimePicker onChange={setStartTime} value={startTimestamp} />
           </div>
           <div className="row">
             <label>End Time:</label>
-            <TimePicker onChange={setEndTime} value={endTime} />
+            <TimePicker onChange={setEndTime} value={endTimestamp} />
           </div>
         </div>
         <hr className="mt-3" />

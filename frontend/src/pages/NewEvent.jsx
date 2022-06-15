@@ -1,9 +1,9 @@
 import React from 'react'
 import NewEventForm from '../components/NewEventForm/NewEventForm'
 
-const NewEvent = () => {
+const NewEvent = (props) => {
   return (
-    <NewEventForm />
+    <NewEventForm user={props.user}/>
   )
 }
 

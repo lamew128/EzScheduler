@@ -6,6 +6,8 @@ const MyEvents = (props) => {
   const [events, setEvents] = useState([]);
   const [deleted, setDeleted] = useState(false);
 
+  console.log(props.user)
+
   useEffect(() => {
     axios
       .get(`/event/created/${props.user}`)
