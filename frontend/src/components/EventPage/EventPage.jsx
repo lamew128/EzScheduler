@@ -5,10 +5,12 @@ import classes from "./EventPage.module.css";
 
 const EventPage = (props) => {
   const [response, setResponse] = useState("Accept");
-  const date = new Date(1655147792 * 1000);
+  const date = new Date(props.date * 1000);
   return (
     <article className={classes.container}>
-      <h3 className={`${classes.title} row`}>Event Title</h3>
+      <h3 className={`${classes.title} row`}>
+        {props.eventTitle}
+      </h3>
       <div className="row">
         <div className="col">
           <button
@@ -39,10 +41,10 @@ const EventPage = (props) => {
           Responded with: <strong>{response}</strong>
         </p>
         <p>
-          Location: <strong>Somebody's House</strong>
+          Description: <strong>{props.eventDescription}</strong>
         </p>
         <p>
-          Address: <strong>1 Yonge St., Toronto, ON</strong>
+          Address: <strong>{props.address}</strong>
         </p>
       </div>
       <hr />
