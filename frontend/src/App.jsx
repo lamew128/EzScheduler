@@ -31,16 +31,28 @@ function App() {
             />
           </Route>
           <Route path="/my-events">
-            {cookies.user ? <MyEvents user={cookies.user.id} /> : <Redirect to="/" />}
+            {cookies.user ? (
+              <MyEvents user={cookies.user.id} />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Route>
           <Route path="/new">
-            {cookies.user ? <NewEvent user={cookies.user.id} /> : <Redirect to="/" />}
+            {cookies.user ? (
+              <NewEvent user={cookies.user.id} />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Route>
           <Route exact path="/events/past">
             {cookies.user ? <PastEvents /> : <Redirect to="/" />}
           </Route>
           <Route path="/events/:id">
-            {cookies.user ? <EventMainPage /> : <Redirect to="/" />}
+            {cookies.user ? (
+              <EventMainPage cookies={cookies} />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Route>
           <Route path="*">
             <NotFound />
