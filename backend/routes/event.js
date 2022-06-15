@@ -93,12 +93,11 @@ module.exports = (db) => {
   });
 
   //update a response
-  //invite should contain { response, userId, eventId}
+  //invite should contain { response, userId, eventId }
   router.put('/response', (req, res) => {
     const invite = req.body;
     db.responseInvite(invite)
       .then((data) => {
-        res.json(data);
         return res.json({ status: 200, data: data });
       })
   });

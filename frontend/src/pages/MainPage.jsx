@@ -24,9 +24,11 @@ const MainPage = (props) => {
     }
   }, [userId, props.cookies.user, eventChange]);
 
+  console.log(Date.now()/1000);
   const upcomingEvents = events
     .filter(
       (event) =>
+        
         event.start_time - Date.now() / 1000 <= 388800 &&
         event.start_time - Date.now() / 1000 >= 0
     )
