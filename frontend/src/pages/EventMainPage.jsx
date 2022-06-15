@@ -5,29 +5,54 @@ import axios from "axios";
 
 const EventMainPage = (props) => {
   const [event, setEvent] = useState([]);
+  const [response, setResponse] = useState("");
   const { id } = useParams();
+  const user = props.cookies.user.id;
 
   useEffect(() => {
-    axios.get(`/event/${id}`).then((event) => {
-      console.log(event.data);
-      setEvent(event.data);
-    });
-  }, [id]);
+    axios
+      .get(`/event/${id}`)
+      .then((event) => {
+        event.data.forEach((e) => {
+          if (e.invitee_id === user) {
+            console.log(e);
+            setEvent(e);
+          }
+        });
+      })
+      .then(() => {
+        console.log(event.response);
+        switch (event.response) {
+          case "yes":
+            setResponse("Accepted");
+            break;
+          case "maybe":
+            setResponse("Maybe");
+            break;
+          case "no":
+            setResponse("Declined");
+            break;
+          default:
+            setResponse("No Response");
+            break;
+        }
+      });
+  }, [id, user]);
 
   return (
     <>
       {!event.length && <>This event does not exist!</>}
-      {event.length > 0 && (
+      {event && (
         <>
           <EventPage
             cookies={props.cookies}
             eventId={id}
-            title={event[0].title}
-            description={event[0].description}
+            title={event.title}
+            description={event.description}
             //how to convert long and lat to full address?
-            address={event[0].address}
-            date={event[0].start_time}
-            response={event[0].response}
+            address={event.address}
+            date={event.start_time}
+            response={response}
           />
         </>
       )}

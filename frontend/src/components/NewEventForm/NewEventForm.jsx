@@ -57,11 +57,11 @@ const NewEvent = (props) => {
     const dateE = date.split("-");
     const start = startTimestamp.split(":");
     const startTime =
-      new Date(dateE[0], dateE[1], dateE[2], start[0], start[1]).getTime() /
+      new Date(dateE[0], Number(dateE[1])-1, dateE[2], start[0], start[1]).getTime() /
       1000;
     const end = endTimestamp.split(":");
     const endTime =
-      new Date(dateE[0], dateE[1], dateE[2], end[0], end[1]).getTime() / 1000;
+      new Date(dateE[0], Number(dateE[1])-1, dateE[2], end[0], end[1]).getTime() / 1000;
     const formData = {
       title,
       description,

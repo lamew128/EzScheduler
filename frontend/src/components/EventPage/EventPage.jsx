@@ -11,23 +11,7 @@ import {
 
 const EventPage = (props) => {
   const [invite, setInvite] = useState(props.response);
-  const [response, setResponse] = useState("");
-
-  useEffect(() => {
-    switch (invite) {
-      case "yes":
-        setResponse("Accepted");
-        break;
-      case "no":
-        setResponse("Declined");
-        break;
-      case "maybe":
-        setResponse("Maybe");
-        break;
-      default:
-        setResponse("No Response");
-    }
-  }, [invite]);
+  const [response, setResponse] = useState(props.response);
 
   const acceptResponse = () => {
     acceptInvite(setInvite, props);
@@ -75,7 +59,7 @@ const EventPage = (props) => {
       </div>
       <div className="row">
         <p>
-          Responded with: <strong>{response}</strong>
+          Responded with: <strong>{props.response}</strong>
         </p>
         <p>
           Description: <strong>{props.description}</strong>
