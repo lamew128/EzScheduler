@@ -24,7 +24,7 @@ INSERT INTO event_invitees (event_id,user_id,response) VALUES (1,3,null);
 INSERT INTO events (name, description, start_time, end_time, address, latitude, longtitude,user_id)
 VALUES(
   'I am bored',
-  'Let'/'s do something',
+  'Let us do something',
    1655200800,
    1655215200,
    'CF Toronto Eaton Centre',
@@ -42,7 +42,7 @@ INSERT INTO event_invitees (event_id,user_id,response) VALUES (2,3,'yes');
 INSERT INTO events (name, description, start_time, end_time, address, latitude, longtitude,user_id)
 VALUES(
   'Vancouver Trip',
-  'Finaly it'/'s time for east to meet west!!!Party at Moon'/'s place. Don'/'t get yourself banned' ,
+  'Finaly it is time for east to meet west!!!Party at Moons place. Dont get yourself banned' ,
    1656126000,
    1656201540,
    'Stanley Park',
@@ -93,7 +93,7 @@ INSERT INTO event_invitees (event_id,user_id,response) VALUES (5,3,'yes');
 INSERT INTO events (name, description, start_time, end_time, address, latitude, longtitude,user_id)
 VALUES(
   'Clubbing?',
-  'I am stressed about the demo tomorrow. Let'\'s have some fun tonight!',
+  'I am stressed about the demo tomorrow. Let us have some fun tonight!',
    1655942400,
    1655953200,
    'Rebel, 11 Polson St, Toronto',
@@ -101,6 +101,10 @@ VALUES(
    -79.3548,
    2
 );
+NSERT INTO event_invitees (event_id,user_id,response) VALUES (6,1,null);
+INSERT INTO event_invitees (event_id,user_id,response) VALUES (6,2,null);
+INSERT INTO event_invitees (event_id,user_id,response) VALUES (6,3,'yes');
+
 
 
 
