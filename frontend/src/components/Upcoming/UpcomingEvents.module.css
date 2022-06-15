@@ -40,3 +40,8 @@
 .date__invitees p {
   margin:0;
 }
+
+img {
+  border-radius: 25px;
+  background-color: lightgrey;
+}
