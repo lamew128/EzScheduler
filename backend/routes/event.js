@@ -93,12 +93,31 @@ module.exports = (db) => {
   });
 
   //update a response
-  //invite should contain { response, userId, eventId}
+  //invite should contain { response, userId, eventId }
   router.put('/response', (req, res) => {
     const invite = req.body;
     db.responseInvite(invite)
       .then((data) => {
         return res.json({ status: 200, data: data });
+      })
+  });
+
+  //create a comment
+  //comment should contain { eventId, userId, time, text }
+  router.post('/comment', (req, res) => {
+    const comment = req.body;
+    db.addComment(comment)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
+      })
+  });
+
+  //get all comments given an event id
+  router.get('/comments/:id', (req, res) => {
+    const eventId = req.params.id;
+    db.getComments(eventId)
+      .then((data) => {
+        res.json(data);
       })
   });
 

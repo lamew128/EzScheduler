@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import EventPage from "../components/EventPage/EventPage";
+import CommentSection from "../components/EventPage/CommentSection";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const EventMainPage = (props) => {
   const [event, setEvent] = useState({});
+  const [comments, setComments] = useState([]);
   const { id } = useParams();
   const user = props.cookies.user.id;
 
   useEffect(() => {
-    axios.get(`/event/${id}`).then((event) => {
-      event.data.forEach((e) => {
+    Promise.all([axios.get(`/event/${id}`), axios.get(`/event/comments/${id}`)])
+    .then((data) => {
+      data[0].data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
           console.log(e)
         }
       });
+      setComments(data[1].data);
     });
   }, [id, user, event.creator]);
+
+  console.log("event: ", event);
+  console.log("comments: ", comments);
 
   return (
     <>
@@ -36,6 +43,9 @@ const EventMainPage = (props) => {
             lat={event.lat}
             long={event.long}
             creator={event.creator}
+          />
+          <CommentSection 
+            
           />
         </>
       )}
