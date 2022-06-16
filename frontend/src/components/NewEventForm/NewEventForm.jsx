@@ -15,6 +15,7 @@ const NewEvent = (props) => {
   const [invitee, setInvitee] = useState("");
   const [newInvitee, setNewInvitee] = useState(false);
   const [inviteesList, setInviteesList] = useState([]);
+  const [inviteesListSubmission, setInviteesListSubmission] = useState([]);
   const [dynamicList, setDynamicList] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(false);
 
@@ -49,7 +50,7 @@ const NewEvent = (props) => {
     axios.get(`/users/test`).then((e) => {
       const list = e.data.filter((user) => user.email.includes(invitee));
       // console.log(list)
-      setDynamicList((prev) => list);
+      setDynamicList(() => list);
     });
   }, [invitee]);
 
@@ -98,6 +99,7 @@ const NewEvent = (props) => {
       lat: coords.lat,
       long: coords.lng,
       creator: props.user,
+      invitees: inviteesListSubmission,
     };
     console.log(formData);
 
@@ -132,8 +134,7 @@ const NewEvent = (props) => {
     });
   };
 
-  const addInvitee = (e) => {
-    e.preventDefault();
+  const addInvitee = (p) => {
     if (invitee.trim() === "") {
       alert("Please fill out with the information!");
       return;
@@ -142,18 +143,11 @@ const NewEvent = (props) => {
       alert("You cannot add the same e-mail");
       return;
     }
-    if (!invitee.includes("@")) {
-      alert("enter a valid e-mail");
-      return;
-    }
-    setInviteesList((prev) => [...prev, invitee]);
+    setInviteesList((prev) => [...prev, p.name]);
     setNewInvitee(false);
-    setInvitee("");
-  };
-
-  const selectEmail = (email) => {
-    setInvitee(email);
+    setInviteesListSubmission((prev) => [...prev, p.email]);
     setOpenDropDown(false);
+    setInvitee("");
   };
 
   useEffect(() => {
@@ -165,8 +159,8 @@ const NewEvent = (props) => {
   const list = inviteesList.map((invitee) => <p key={invitee}>{invitee}</p>);
 
   const addList = dynamicList.map((p) => (
-    <p onClick={() => selectEmail(p.email)} key={p.email}>
-      {p.email}
+    <p onClick={() => addInvitee(p)} key={p.email}>
+      {p.name}
     </p>
   ));
 
