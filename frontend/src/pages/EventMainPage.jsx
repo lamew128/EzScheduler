@@ -16,6 +16,7 @@ const EventMainPage = (props) => {
       data[0].data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
+          console.log(e)
         }
       });
       setComments(data[1].data);

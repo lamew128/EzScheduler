@@ -44,7 +44,9 @@ const EventPage = (props) => {
       .then((res) => setInviteesList(res.data));
   }, [props.eventId]);
 
-  const showList = inviteesList.map((invitee) => <p key={invitee.user_id}>{invitee.user_id}</p>);
+  const showList = inviteesList.map((invitee) => (
+    <p key={invitee.user_id}>{invitee.user_id}</p>
+  ));
 
   const date = new Date(props.date * 1000);
   return (
