@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react";
-// import classes from "./NewEventForm.module.css";
-import axios from "axios";
+import classes from "./Notification.module.css";
+
+
+
+// const useFocus = () => {
+//   const htmlElRef = useRef(null)
+//   const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()}
+//   return [ htmlElRef, setFocus ] 
+// }
+
 
 const Notification = (props) => {
   const date = new Date(props.date * 1000);
   const humanDate = date.toLocaleString("en-CA");
-  console.log(humanDate);
-
-  console.log(date);
+ 
   return (
-    <div>
+  <>
+    <div 
+      className={classes.container}
+      onClick={() => {console.log("clicked");
+      let event = document.getElementById(`${props.eventId}`);
+      event.focus({preventScroll:false});
+    }}
+
+      
+      // onClick={e => props.} 
+    >
       Please respond to {props.creator}'s invite to {props.title} at {humanDate} 
     </div>
+  </>
   );
 }
 
