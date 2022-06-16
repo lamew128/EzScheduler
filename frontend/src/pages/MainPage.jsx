@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
 import EventItem from "../components/EventItem/EventItem";
+import Notification from "../components/Notification/Notification";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -83,6 +84,7 @@ const MainPage = (props) => {
         setEventChange={setEventChange}
       />
     ));
+  
 
   const maybeEventsList = events
     .filter((event) => 
@@ -128,6 +130,7 @@ const MainPage = (props) => {
     <>
       {showEvents && (
         <>
+          <Notification/>
           <Link to="/new">
             <Button>Create new event!</Button>
           </Link>
