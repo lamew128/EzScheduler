@@ -102,5 +102,24 @@ module.exports = (db) => {
       })
   });
 
+  //create a comment
+  //comment should contain { eventId, userId, time, text }
+  router.post('/comment', (req, res) => {
+    const comment = req.body;
+    db.addComment(comment)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
+      })
+  });
+
+  //get all comments given an event id
+  router.get('/comments/:id', (req, res) => {
+    const eventId = req.params.id;
+    db.getComments(eventId)
+      .then((data) => {
+        res.json(data);
+      })
+  });
+
   return router;
 };

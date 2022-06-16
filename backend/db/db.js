@@ -216,7 +216,7 @@ const deleteEvent = (eventId) => {
 const getInvitees = (eventId) => {
   return pool
     .query(
-      `
+    `
     SELECT * FROM event_invitees
     WHERE event_id = $1;
     `, [eventId])
@@ -266,6 +266,41 @@ const deleteInvite = (id) => {
     });
 };
 
+//create a comment
+const addComment = (comment) => {
+  let commentParams = [ comment.eventId, comment.userId, comment.time, comment.text ];
+  return pool
+    .query(
+    `
+    INSERT INTO comments (event_id, user_id, time, comment_text) 
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;
+    `, commentParams)
+    .then((data) => {
+      return data.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+//get all comments of an event by given id
+const getComments = (eventId) => {
+  return pool
+    .query(
+    `
+    SELECT * FROM comments
+    WHERE event_id = $1
+    ORDER BY time;
+    `, [eventId])
+    .then((data) => {
+      return data.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
 
 
 module.exports = {
@@ -282,5 +317,7 @@ module.exports = {
   getInvitees,
   responseInvite,
   deleteInvite,
-  showEventDetails
+  showEventDetails,
+  addComment,
+  getComments
 };
