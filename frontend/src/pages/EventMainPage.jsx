@@ -44,7 +44,9 @@ const EventMainPage = (props) => {
             creator={event.creator}
           />
           <CommentSection 
-            
+            cookies={props.cookies}
+            eventId={id}
+            comments={comments}
           />
         </>
       )}

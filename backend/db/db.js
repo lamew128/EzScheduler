@@ -37,6 +37,24 @@ const addUser = function(user) {
 };
 
 /**
+ * Get the user name from the database given their id.
+ * @param {Number} id The email of the user.
+ * @return {Promise<{}>} A promise to the user.
+ */
+ const getNameById = function(id) {
+  return pool
+    .query(
+      `SELECT name FROM users
+       WHERE id = $1`, [id])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+/**
  * Get a single user from the database given their email.
  * @param {String} email The email of the user.
  * @return {Promise<{}>} A promise to the user.
@@ -289,7 +307,8 @@ const getComments = (eventId) => {
   return pool
     .query(
     `
-    SELECT * FROM comments
+    SELECT event_id, user_id, name, time, comment_text FROM comments
+    JOIN users ON users.id = comments.user_id
     WHERE event_id = $1
     ORDER BY time;
     `, [eventId])
@@ -305,6 +324,7 @@ const getComments = (eventId) => {
 
 module.exports = {
   addUser,
+  getNameById,
   getUserWithEmail,
   getAllUsers,
   getAllEvents,
