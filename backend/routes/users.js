@@ -14,6 +14,14 @@ module.exports = (db) => {
       });
   }
   );
+  
+  router.get('/name/:id', (req, res) => {
+    db.getNameById(req.params.id)
+      .then((data) => {
+        return res.json({status: 200, data: data.name});
+      });
+    }
+  );
 
   /**
    * Check if a user exists with a given username and password
