@@ -12,9 +12,11 @@ const NewEvent = (props) => {
   const [date, setDate] = useState("");
   const [startTimestamp, setStartTime] = useState("");
   const [endTimestamp, setEndTime] = useState("");
-  const [newInvitee, setNewInvitee] = useState(false);
   const [invitee, setInvitee] = useState("");
+  const [newInvitee, setNewInvitee] = useState(false);
   const [inviteesList, setInviteesList] = useState([]);
+  const [dynamicList, setDynamicList] = useState([]);
+  const [openDropDown, setOpenDropDown] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
@@ -40,7 +42,16 @@ const NewEvent = (props) => {
 
   const inviteeChange = (e) => {
     setInvitee(e.target.value);
+    setOpenDropDown(true);
   };
+
+  useEffect(() => {
+    axios.get(`/users/test`).then((e) => {
+      const list = e.data.filter((user) => user.email.includes(invitee));
+      // console.log(list)
+      setDynamicList((prev) => list);
+    });
+  }, [invitee]);
 
   const getLocation = () => {
     axios
@@ -140,7 +151,24 @@ const NewEvent = (props) => {
     setInvitee("");
   };
 
+  const selectEmail = (email) => {
+    setInvitee(email);
+    setOpenDropDown(false);
+  };
+
+  useEffect(() => {
+    if (invitee.trim() === "") {
+      setOpenDropDown(false);
+    }
+  }, [invitee]);
+
   const list = inviteesList.map((invitee) => <p key={invitee}>{invitee}</p>);
+
+  const addList = dynamicList.map((p) => (
+    <p onClick={() => selectEmail(p.email)} key={p.email}>
+      {p.email}
+    </p>
+  ));
 
   return (
     <div className={classes.container}>
@@ -191,6 +219,11 @@ const NewEvent = (props) => {
                   <button onClick={addInvitee} className={classes.btn_add}>
                     ADD
                   </button>
+                </div>
+              )}
+              {openDropDown && (
+                <div className={`${classes.dropdown} row`}>
+                  <div className={classes["dropdown-content"]}>{addList}</div>
                 </div>
               )}
               <i
