@@ -3,6 +3,7 @@ import classes from "./NewEventForm.module.css";
 import Map from "../Map";
 import axios from "axios";
 import TimePicker from "react-time-picker";
+import { Link } from "react-router-dom";
 
 const NewEvent = (props) => {
   const [coords, setCoords] = useState({});
@@ -105,13 +106,12 @@ const NewEvent = (props) => {
       invitees: inviteesListSubmission,
     };
     console.log(formData);
-    console.log(inviteesListSubmission)
+    console.log(inviteesListSubmission);
 
     const allUsersData = await axios.get(`/users/test`);
     const allUsers = allUsersData.data;
     //create the event
     const response = await axios.post(`/event/new`, formData);
-    console.log(response.data)
     const eventId = response.data.data.id;
     //invite myself
     const data = await axios.post("/event/invite", {
@@ -121,7 +121,7 @@ const NewEvent = (props) => {
     });
     //invite others with fake email array
     // email Array will be an input from the form. put in dummy place hoder for now
-    const emailArray = ["e@e", "d@d"];
+    const emailArray = inviteesListSubmission;
     const userIdArray = allUsers
       .filter((user) => emailArray.includes(user.email))
       .map((user) => user.id);
@@ -270,9 +270,11 @@ const NewEvent = (props) => {
         </div>
         <hr />
         <div className={`${classes.center} row`}>
-          <button className={classes.btn} onClick={submitHandler}>
-            Create Event
-          </button>
+          <Link to='/'>
+            <button className={classes.btn} onClick={submitHandler}>
+              Create Event
+            </button>
+          </Link>
         </div>
       </form>
     </div>

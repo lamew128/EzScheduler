@@ -16,15 +16,14 @@ const EventMainPage = (props) => {
       data[0].data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
-          console.log(e)
         }
       });
       setComments(data[1].data);
     });
   }, [id, user, event.creator]);
 
-  console.log("event: ", event);
-  console.log("comments: ", comments);
+  // console.log("event: ", event);
+  // console.log("comments: ", comments);
 
   return (
     <>
