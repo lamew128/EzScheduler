@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Map from "../Map";
 import EventDate from "../EventDate";
 import classes from "./EventPage.module.css";
@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 const EventPage = (props) => {
   const [invite, setInvite] = useState(props.response);
   const [confirmation, setConfirmation] = useState(false);
+  const [inviteesList, setInviteesList] = useState([]);
   const isCreator = props.cookies.user.id === props.creator;
 
   const deleteEvent = () => {
@@ -37,12 +38,23 @@ const EventPage = (props) => {
     setInvite("no");
   };
 
+  useEffect(() => {
+    axios
+      .get(`/event/invitees/${props.eventId}`)
+      .then((res) => setInviteesList(res.data));
+  }, [props.eventId]);
+
+  const showList = inviteesList.map((invitee) => <p>{invitee.user_id}</p>);
+
   const date = new Date(props.date * 1000);
   return (
     <article className={classes.container}>
       <h3 className={`${classes.title} row`}>
         {props.title}{" "}
-        <Link style={{ width: "fit-content" }} to={`/events/${props.eventId}/edit`}>
+        <Link
+          style={{ width: "fit-content" }}
+          to={`/events/${props.eventId}/edit`}
+        >
           <button>EDIT</button>
         </Link>
       </h3>
@@ -131,7 +143,8 @@ const EventPage = (props) => {
         <div className="col">
           Invitees:
           <div className={classes.invitees}>
-            <i className={`${classes.add} bi bi-plus-lg`}></i>
+            {showList}
+            {isCreator && <i className={`${classes.add} bi bi-plus-lg`}></i>}
           </div>
         </div>
         <div className="col">
