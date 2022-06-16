@@ -48,9 +48,12 @@ const NewEvent = (props) => {
 
   useEffect(() => {
     axios.get(`/users/test`).then((e) => {
-      const list = e.data.filter((user) => user.email.includes(invitee));
-      // console.log(list)
-      setDynamicList(() => list);
+      const list = e.data.filter(
+        (user) =>
+          user.email.toLowerCase().includes(invitee.toLowerCase()) ||
+          user.name.toLowerCase().includes(invitee.toLowerCase())
+      );
+      setDynamicList(list);
     });
   }, [invitee]);
 
@@ -139,13 +142,34 @@ const NewEvent = (props) => {
       alert("Please fill out with the information!");
       return;
     }
-    if (inviteesList.includes(invitee.trim())) {
-      alert("You cannot add the same e-mail");
+    if (inviteesListSubmission.includes(p.email.trim())) {
+      alert("You cannot add the same user!");
       return;
     }
     setInviteesList((prev) => [...prev, p.name]);
     setNewInvitee(false);
     setInviteesListSubmission((prev) => [...prev, p.email]);
+    setOpenDropDown(false);
+    setInvitee("");
+  };
+
+  const addButton = (e) => {
+    e.preventDefault();
+    if (invitee.trim() === "") {
+      alert("Please fill out with the information!");
+      return;
+    }
+    if (inviteesListSubmission.includes(invitee.trim())) {
+      alert("You cannot add the same user!");
+      return;
+    }
+    if (!invitee.trim().includes("@")) {
+      alert("Please enter a valid e-mail!");
+      return;
+    }
+    setInviteesList((prev) => [...prev, invitee]);
+    setNewInvitee(false);
+    setInviteesListSubmission((prev) => [...prev, invitee]);
     setOpenDropDown(false);
     setInvitee("");
   };
@@ -159,8 +183,12 @@ const NewEvent = (props) => {
   const list = inviteesList.map((invitee) => <p key={invitee}>{invitee}</p>);
 
   const addList = dynamicList.map((p) => (
-    <p onClick={() => addInvitee(p)} key={p.email}>
-      {p.name}
+    <p
+      className={classes.list_item}
+      onClick={() => addInvitee(p)}
+      key={p.email}
+    >
+      {p.name} ({p.email})
     </p>
   ));
 
@@ -210,7 +238,7 @@ const NewEvent = (props) => {
                     onChange={inviteeChange}
                     required
                   />
-                  <button onClick={addInvitee} className={classes.btn_add}>
+                  <button onClick={addButton} className={classes.btn_add}>
                     ADD
                   </button>
                 </div>
