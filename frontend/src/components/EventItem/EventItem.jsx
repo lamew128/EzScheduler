@@ -41,7 +41,7 @@ const MyEvent = (props) => {
   return (
     <div className={container}>
       <EventDate className="col" date={date} />
-      <Link className={`${classes.fit} col`} to={`/events/${props.eventId}`}>
+      <Link className={`${classes.fit}`} to={`/events/${props.eventId}`}>
         <button className={classes.btn}>OPEN EVENT</button>
       </Link>
       <h3 className={`${classes.title} col`}>{props.title}</h3>

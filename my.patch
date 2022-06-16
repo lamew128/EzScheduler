@@ -1,0 +1,197 @@
+diff --git a/frontend/src/components/EventItem/EventItem.jsx b/frontend/src/components/EventItem/EventItem.jsx
+index ad793e1..f4b3ac9 100644
+--- a/frontend/src/components/EventItem/EventItem.jsx
++++ b/frontend/src/components/EventItem/EventItem.jsx
+@@ -41,7 +41,7 @@ const MyEvent = (props) => {
+   return (
+     <div className={container}>
+       <EventDate className="col" date={date} />
+-      <Link className={`${classes.fit} col`} to={`/events/${props.eventId}`}>
++      <Link className={`${classes.fit}`} to={`/events/${props.eventId}`}>
+         <button className={classes.btn}>OPEN EVENT</button>
+       </Link>
+       <h3 className={`${classes.title} col`}>{props.title}</h3>
+diff --git a/frontend/src/components/EventItem/EventItem.module.css b/frontend/src/components/EventItem/EventItem.module.css
+index 23d9569..a22d6db 100644
+--- a/frontend/src/components/EventItem/EventItem.module.css
++++ b/frontend/src/components/EventItem/EventItem.module.css
+@@ -4,7 +4,6 @@
+   width: 80%;
+   padding: 10px;
+   margin: 10px;
+-  cursor: pointer;
+ }
+ 
+ .container:hover {
+diff --git a/frontend/src/components/EventPage/EventPage.jsx b/frontend/src/components/EventPage/EventPage.jsx
+index 4a3eed9..69f6e48 100644
+--- a/frontend/src/components/EventPage/EventPage.jsx
++++ b/frontend/src/components/EventPage/EventPage.jsx
+@@ -8,24 +8,34 @@ import {
+   maybeInvite,
+   rejectInvite,
+ } from "../../helpers/inviteResponse";
++import Weather from "../Weather";
+ 
+ const EventPage = (props) => {
+   const [invite, setInvite] = useState(props.response);
+-  const [response, setResponse] = useState(props.response);
++
++  // if (props.response === "yes") {
++  //   setResponse("Accepted");
++  // }
++  // if (props.response === "no") {
++  //   setResponse("Declined");
++  // }
++  // if (props.response === "maybe") {
++  //   setResponse("Maybe");
++  // }
+ 
+   const acceptResponse = () => {
+     acceptInvite(setInvite, props);
+-    setResponse("Accepted");
++    setInvite("yes");
+   };
+ 
+   const maybeResponse = () => {
+     maybeInvite(setInvite, props);
+-    setResponse("Maybe");
++    setInvite("maybe");
+   };
+ 
+   const declineResponse = () => {
+     rejectInvite(setInvite, props);
+-    setResponse("Declined");
++    setInvite("no");
+   };
+ 
+   const date = new Date(props.date * 1000);
+@@ -58,9 +68,21 @@ const EventPage = (props) => {
+         </div>
+       </div>
+       <div className="row">
+-        <p>
+-          Responded with: <strong>{props.response}</strong>
+-        </p>
++        {invite === "yes" && (
++          <p>
++            Responded with: <strong>Accepted</strong>
++          </p>
++        )}
++        {invite === "no" && (
++          <p>
++            Responded with: <strong>Declined</strong>
++          </p>
++        )}
++        {invite === "maybe" && (
++          <p>
++            Responded with: <strong>Maybe</strong>
++          </p>
++        )}
+         <p>
+           Description: <strong>{props.description}</strong>
+         </p>
+@@ -78,7 +100,7 @@ const EventPage = (props) => {
+         </div>
+         <div className="col">
+           Weather Information:
+-          <div className={classes.weather} />
++          <div className={classes.weather}>{/* <Weather></Weather> */}</div>
+         </div>
+       </div>
+       <hr />
+diff --git a/frontend/src/components/Upcoming/UpcomingEvents.module.css b/frontend/src/components/Upcoming/UpcomingEvents.module.css
+index bbb1c9a..81aa649 100644
+--- a/frontend/src/components/Upcoming/UpcomingEvents.module.css
++++ b/frontend/src/components/Upcoming/UpcomingEvents.module.css
+@@ -39,4 +39,9 @@
+ 
+ .date__invitees p {
+   margin:0;
++}
++
++img {
++  border-radius: 25px;
++  background-color: lightgrey;
+ }
+\ No newline at end of file
+diff --git a/frontend/src/pages/EventMainPage.jsx b/frontend/src/pages/EventMainPage.jsx
+index f8e509a..20fe8aa 100644
+--- a/frontend/src/pages/EventMainPage.jsx
++++ b/frontend/src/pages/EventMainPage.jsx
+@@ -5,42 +5,39 @@ import axios from "axios";
+ 
+ const EventMainPage = (props) => {
+   const [event, setEvent] = useState({});
+-  const [response, setResponse] = useState("");
+   const { id } = useParams();
+   const user = props.cookies.user.id;
+ 
+   useEffect(() => {
+-    axios
+-      .get(`/event/${id}`)
+-      .then((event) => {
+-        event.data.forEach((e) => {
+-          if (e.invitee_id === user) {
+-            setEvent(e);
+-          }
+-        });
+-      })
+-      .then(() => {
+-        switch (event.response) {
+-          case "yes":
+-            setResponse("Accepted");
+-            break;
+-          case "maybe":
+-            setResponse("Maybe");
+-            break;
+-          case "no":
+-            setResponse("Declined");
+-            break;
+-          default:
+-            setResponse("No Response");
+-            break;
++    axios.get(`/event/${id}`).then((event) => {
++      event.data.forEach((e) => {
++        if (e.invitee_id === user) {
++          setEvent(e);
+         }
+       });
+-  }, [id, user, event.response]);
+-  console.log(event)
++    });
++    // .then(() => {
++    //   switch (event.response) {
++    //     case "yes":
++    //       setResponse("Accepted");
++    //       break;
++    //     case "maybe":
++    //       setResponse("Maybe");
++    //       break;
++    //     case "no":
++    //       setResponse("Declined");
++    //       break;
++    //     default:
++    //       setResponse("No Response");
++    //       break;
++    //   }
++    // });
++  }, [id, user]);
++  console.log(event);
+ 
+   return (
+     <>
+-      {!event.event_id  && <>This event does not exist!</>}
++      {!event.event_id && <>This event does not exist!</>}
+       {event.event_id && (
+         <>
+           <EventPage
+@@ -51,7 +48,7 @@ const EventMainPage = (props) => {
+             //how to convert long and lat to full address?
+             address={event.address}
+             date={event.start_time}
+-            response={response}
++            response={event.response}
+           />
+         </>
+       )}

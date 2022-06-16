@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./NewEventForm.module.css";
-import Map from "../../pages/Map";
+import Map from "../Map";
 import axios from "axios";
 import TimePicker from "react-time-picker";
 
@@ -12,8 +12,9 @@ const NewEvent = (props) => {
   const [date, setDate] = useState("");
   const [startTimestamp, setStartTime] = useState("");
   const [endTimestamp, setEndTime] = useState("");
-
-  console.log(props.user);
+  const [newInvitee, setNewInvitee] = useState(false);
+  const [invitee, setInvitee] = useState("");
+  const [inviteesList, setInviteesList] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
@@ -37,6 +38,10 @@ const NewEvent = (props) => {
     setDescription(e.target.value);
   };
 
+  const inviteeChange = (e) => {
+    setInvitee(e.target.value);
+  };
+
   const getLocation = () => {
     axios
       .get("https://maps.googleapis.com/maps/api/geocode/json", {
@@ -52,16 +57,27 @@ const NewEvent = (props) => {
   };
 
   //save the new event data to database
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const dateE = date.split("-");
     const start = startTimestamp.split(":");
     const startTime =
-      new Date(dateE[0], Number(dateE[1])-1, dateE[2], start[0], start[1]).getTime() /
-      1000;
+      new Date(
+        dateE[0],
+        Number(dateE[1]) - 1,
+        dateE[2],
+        start[0],
+        start[1]
+      ).getTime() / 1000;
     const end = endTimestamp.split(":");
     const endTime =
-      new Date(dateE[0], Number(dateE[1])-1, dateE[2], end[0], end[1]).getTime() / 1000;
+      new Date(
+        dateE[0],
+        Number(dateE[1]) - 1,
+        dateE[2],
+        end[0],
+        end[1]
+      ).getTime() / 1000;
     const formData = {
       title,
       description,
@@ -73,20 +89,60 @@ const NewEvent = (props) => {
       creator: props.user,
     };
     console.log(formData);
-    return axios.post(`/event/new`, formData).then((response) => {
-      console.log(response.data.data.id);
-      //invite myself
-      axios.post('/event/invite', {response: 'yes', userId: props.user, eventId: response.data.data.id})
-      .then((data) => {
-        console.log(data.data.data);
+
+    const allUsersData = await axios.get(`/users/test`);
+    const allUsers = allUsersData.data;
+    //create the event
+    const response = await axios.post(`/event/new`, formData);
+    const eventId = response.data.data.id;
+    //invite myself
+    const data = await axios.post("/event/invite", {
+      response: "yes",
+      userId: props.user,
+      eventId: response.data.data.id,
+    });
+    //invite others with fake email array
+    // email Array will be an input from the form. put in dummy place hoder for now
+    const emailArray = ["e@e", "d@d"];
+    const userIdArray = allUsers
+      .filter((user) => emailArray.includes(user.email))
+      .map((user) => user.id);
+    const axiosCalls = userIdArray.map((userId) =>
+      axios.post(`/event/invite`, {
+        response: null,
+        userId: userId,
+        eventId: eventId,
       })
+    );
+    Promise.all(axiosCalls).then((data) => {
+      //  console.log("promise all succeeded!");
+      console.log(data[0]);
+      console.log(data[1]);
     });
   };
+
+  const addInvitee = (e) => {
+    e.preventDefault();
+    console.log(invitee);
+    if (invitee.trim() === "") {
+      alert("Please fill out with the information!");
+      return;
+    }
+    if (inviteesList.includes(invitee.trim())) {
+      alert("You cannot add the same e-mail");
+      return;
+    }
+    setInviteesList((prev) => [...prev, invitee]);
+    setNewInvitee(false);
+    setInvitee("");
+  };
+
+  const list = inviteesList.map((invitee) => <p key={invitee}>{invitee}</p>);
 
   return (
     <div className={classes.container}>
       <h3 className="row">New Event</h3>
-      <form className="row" onSubmit={submitHandler}>
+      <form className="row">
         <div className={`${classes.inputs} col`}>
           <label>Title:</label>
           <input type="text" value={title} onChange={titleChange} />
@@ -120,7 +176,24 @@ const NewEvent = (props) => {
           <div className="col-4">
             Invitees
             <div className={classes.invitees}>
-              <i className={`${classes.add} bi bi-plus-lg`}></i>
+              {list}
+              {newInvitee && (
+                <div className="row align-items-center justify-content-center">
+                  <input
+                    className={classes.invitee_form}
+                    type="email"
+                    value={invitee}
+                    onChange={inviteeChange}
+                  />
+                  <button onClick={addInvitee} className={classes.btn_add}>
+                    ADD
+                  </button>
+                </div>
+              )}
+              <i
+                onClick={() => setNewInvitee(true)}
+                className={`${classes.add} bi bi-plus-lg`}
+              ></i>
             </div>
           </div>
           <div className="col-8">
@@ -137,7 +210,7 @@ const NewEvent = (props) => {
         </div>
         <hr />
         <div className={`${classes.center} row`}>
-          <button className={classes.btn} type="submit">
+          <button className={classes.btn} onClick={submitHandler}>
             Create Event
           </button>
         </div>

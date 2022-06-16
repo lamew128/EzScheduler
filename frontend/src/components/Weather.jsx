@@ -7,8 +7,8 @@ const Weather = (props) => {
   const [loading, setLoading] = useState(true);
 
   const API_URL = "https://api.openweathermap.org/data/2.5/forecast";
-  const LAT = `${props.lat}`;
-  const LONG = `${props.long}`;
+  const LAT = props.lat;
+  const LONG = props.long;
   const API_KEY = process.env.REACT_APP_API_KEY_WEATHER;
   const FULL_API_URL = `${API_URL}?lat=${LAT}&lon=${LONG}&appid=${API_KEY}`;
 
@@ -31,7 +31,8 @@ const Weather = (props) => {
           }
         }
       })
-      .then(() => setLoading(false));
+      .then(() => setLoading(false))
+      .catch((e) => console.log(e));
   }, [FULL_API_URL, props.date]);
 
   return (

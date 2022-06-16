@@ -45,7 +45,7 @@ function App() {
             )}
           </Route>
           <Route exact path="/events/past">
-            {cookies.user ? <PastEvents user={cookies.user.id}/> : <Redirect to="/" />}
+            {cookies.user ? <PastEvents /> : <Redirect to="/" />}
           </Route>
           <Route path="/events/:id">
             {cookies.user ? (
