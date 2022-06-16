@@ -3,9 +3,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Notification = (props) => {
+  const date = new Date(props.date * 1000);
+  const humanDate = date.toLocaleString("en-CA");
+  console.log(humanDate);
+
+  console.log(date);
   return (
     <div>
-      Please respond to Eugene's invite to dotaaa at date and time 
+      Please respond to {props.creator}'s invite to {props.title} at {humanDate} 
     </div>
   );
 }
