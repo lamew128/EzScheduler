@@ -13,8 +13,7 @@
 
 .invitees {
   border: 2px solid black;
-  height: auto;
-  max-height: 402px;
+  height: 402px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -106,4 +105,24 @@
 
 .btn_add:active {
   transform: translateY(-1px);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.list_item:hover {
+  font-weight: bold;
+  text-decoration: underline;
 }

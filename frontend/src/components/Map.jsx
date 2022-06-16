@@ -7,7 +7,7 @@ const Map = (props) => {
   const [center, setCenter] = useState({ lat: props.lat, lng: props.lng });
 
   useEffect(() => {
-    setCenter({ lat: parseFloat(props.lat), lng: parseFloat(props.lng) });
+    setCenter({ lat: props.lat, lng: props.lng });
   }, [props.lat, props.lng]);
 
   const containerStyle = {

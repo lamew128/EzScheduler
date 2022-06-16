@@ -12,9 +12,12 @@ const NewEvent = (props) => {
   const [date, setDate] = useState("");
   const [startTimestamp, setStartTime] = useState("");
   const [endTimestamp, setEndTime] = useState("");
-  const [newInvitee, setNewInvitee] = useState(false);
   const [invitee, setInvitee] = useState("");
+  const [newInvitee, setNewInvitee] = useState(false);
   const [inviteesList, setInviteesList] = useState([]);
+  const [inviteesListSubmission, setInviteesListSubmission] = useState([]);
+  const [dynamicList, setDynamicList] = useState([]);
+  const [openDropDown, setOpenDropDown] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
@@ -40,7 +43,19 @@ const NewEvent = (props) => {
 
   const inviteeChange = (e) => {
     setInvitee(e.target.value);
+    setOpenDropDown(true);
   };
+
+  useEffect(() => {
+    axios.get(`/users/test`).then((e) => {
+      const list = e.data.filter(
+        (user) =>
+          user.email.toLowerCase().includes(invitee.toLowerCase()) ||
+          user.name.toLowerCase().includes(invitee.toLowerCase())
+      );
+      setDynamicList(list);
+    });
+  }, [invitee]);
 
   const getLocation = () => {
     axios
@@ -87,6 +102,7 @@ const NewEvent = (props) => {
       lat: coords.lat,
       long: coords.lng,
       creator: props.user,
+      invitees: inviteesListSubmission,
     };
     console.log(formData);
 
@@ -121,23 +137,60 @@ const NewEvent = (props) => {
     });
   };
 
-  const addInvitee = (e) => {
-    e.preventDefault();
-    console.log(invitee);
+  const addInvitee = (p) => {
     if (invitee.trim() === "") {
       alert("Please fill out with the information!");
       return;
     }
-    if (inviteesList.includes(invitee.trim())) {
-      alert("You cannot add the same e-mail");
+    if (inviteesListSubmission.includes(p.email.trim())) {
+      alert("You cannot add the same user!");
+      return;
+    }
+    setInviteesList((prev) => [...prev, p.name]);
+    setNewInvitee(false);
+    setInviteesListSubmission((prev) => [...prev, p.email]);
+    setOpenDropDown(false);
+    setInvitee("");
+  };
+
+  const addButton = (e) => {
+    e.preventDefault();
+    if (invitee.trim() === "") {
+      alert("Please fill out with the information!");
+      return;
+    }
+    if (inviteesListSubmission.includes(invitee.trim())) {
+      alert("You cannot add the same user!");
+      return;
+    }
+    if (!invitee.trim().includes("@")) {
+      alert("Please enter a valid e-mail!");
       return;
     }
     setInviteesList((prev) => [...prev, invitee]);
     setNewInvitee(false);
+    setInviteesListSubmission((prev) => [...prev, invitee]);
+    setOpenDropDown(false);
     setInvitee("");
   };
 
+  useEffect(() => {
+    if (invitee.trim() === "") {
+      setOpenDropDown(false);
+    }
+  }, [invitee]);
+
   const list = inviteesList.map((invitee) => <p key={invitee}>{invitee}</p>);
+
+  const addList = dynamicList.map((p) => (
+    <p
+      className={classes.list_item}
+      onClick={() => addInvitee(p)}
+      key={p.email}
+    >
+      {p.name} ({p.email})
+    </p>
+  ));
 
   return (
     <div className={classes.container}>
@@ -181,13 +234,18 @@ const NewEvent = (props) => {
                 <div className="row align-items-center justify-content-center">
                   <input
                     className={classes.invitee_form}
-                    type="email"
                     value={invitee}
                     onChange={inviteeChange}
+                    required
                   />
-                  <button onClick={addInvitee} className={classes.btn_add}>
+                  <button onClick={addButton} className={classes.btn_add}>
                     ADD
                   </button>
+                </div>
+              )}
+              {openDropDown && (
+                <div className={`${classes.dropdown} row`}>
+                  <div className={classes["dropdown-content"]}>{addList}</div>
                 </div>
               )}
               <i
