@@ -106,6 +106,26 @@ const MainPage = (props) => {
       />
     ));
 
+  const notificationList = events
+  .filter((event) => 
+  event.response === null &&
+  event.end_time - Date.now() / 1000 >= 0
+  )
+  .map((event) => (
+    <Notification
+      cookies={props.cookies}
+      setCookie={props.setCookie}
+      removeCookie={props.removeCookie}
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+      response={event.response}
+      setEventChange={setEventChange}
+    />
+  ));
+
   const rejectedEventsList = events
     .filter((event) => 
     event.response === "no" &&
@@ -130,7 +150,7 @@ const MainPage = (props) => {
     <>
       {showEvents && (
         <>
-          <Notification/>
+          {notificationList}
           <Link to="/new">
             <Button>Create new event!</Button>
           </Link>
