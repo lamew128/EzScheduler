@@ -270,7 +270,7 @@ const NewEvent = (props) => {
         </div>
         <hr />
         <div className={`${classes.center} row`}>
-          <Link to='/'>
+          <Link to="/">
             <button className={classes.btn} onClick={submitHandler}>
               Create Event
             </button>
