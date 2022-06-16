@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Login from "./Login-Register/Login";
 import Register from "./Login-Register/Register";
 
@@ -126,9 +126,11 @@ const TopNav = (props) => {
               <span className="nav-item">
                 Logged in as <b>{name}</b>
               </span>
-              <button onClick={logout} className={buttonClass}>
-                Log out
-              </button>
+              <Link to="/">
+                <button onClick={logout} className={buttonClass}>
+                  Log out
+                </button>
+              </Link>
             </>
           )}
         </div>

@@ -13,11 +13,11 @@ const EventMainPage = (props) => {
       event.data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
+          console.log(e)
         }
       });
     });
-  }, [id, user]);
-  console.log(event);
+  }, [id, user, event.creator]);
 
   return (
     <>
@@ -35,6 +35,7 @@ const EventMainPage = (props) => {
             response={event.response}
             lat={event.lat}
             long={event.long}
+            creator={event.creator}
           />
         </>
       )}

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Map from "../Map";
 import EventDate from "../EventDate";
 import classes from "./EventPage.module.css";
+import axios from "axios";
 
 import {
   acceptInvite,
@@ -9,9 +10,17 @@ import {
   rejectInvite,
 } from "../../helpers/inviteResponse";
 import Weather from "../Weather";
+import { Link } from "react-router-dom";
 
 const EventPage = (props) => {
   const [invite, setInvite] = useState(props.response);
+  const [confirmation, setConfirmation] = useState(false);
+  const isCreator = props.cookies.user.id === props.creator;
+
+  const deleteEvent = () => {
+    // Axios Delete request
+    axios.delete(`/event/${props.eventId}`);
+  };
 
   const acceptResponse = () => {
     acceptInvite(setInvite, props);
@@ -31,27 +40,64 @@ const EventPage = (props) => {
   const date = new Date(props.date * 1000);
   return (
     <article className={classes.container}>
-      <h3 className={`${classes.title} row`}>{props.title}</h3>
+      <h3 className={`${classes.title} row`}>
+        {props.title}{" "}
+        <Link style={{ width: "fit-content" }} to={`/events/${props.eventId}/edit`}>
+          <button>EDIT</button>
+        </Link>
+      </h3>
       <div className="row">
         <div className="col">
-          <button
-            onClick={acceptResponse}
-            className={`${classes.btn} ${classes.accept}`}
-          >
-            Accept
-          </button>
-          <button
-            onClick={maybeResponse}
-            className={`${classes.btn} ${classes.maybe}`}
-          >
-            Maybe
-          </button>
-          <button
-            onClick={declineResponse}
-            className={`${classes.btn} ${classes.decline}`}
-          >
-            Decline
-          </button>
+          {!isCreator && (
+            <>
+              <button
+                onClick={acceptResponse}
+                className={`${classes.btn} ${classes.accept}`}
+              >
+                Accept
+              </button>
+              <button
+                onClick={maybeResponse}
+                className={`${classes.btn} ${classes.maybe}`}
+              >
+                Maybe
+              </button>
+              <button
+                onClick={declineResponse}
+                className={`${classes.btn} ${classes.decline}`}
+              >
+                Decline
+              </button>
+            </>
+          )}
+          {isCreator && !confirmation && (
+            <>
+              <button
+                onClick={() => setConfirmation(true)}
+                className={`${classes.btn} ${classes.decline}`}
+              >
+                CANCEL EVENT
+              </button>
+            </>
+          )}
+          {confirmation && (
+            <>
+              <button
+                onClick={() => setConfirmation(false)}
+                className={`${classes.btn} ${classes.accept}`}
+              >
+                CANCEL
+              </button>
+              <Link to="/">
+                <button
+                  onClick={deleteEvent}
+                  className={`${classes.btn} ${classes.decline}`}
+                >
+                  CONFIRM DELETION
+                </button>
+              </Link>
+            </>
+          )}
         </div>
         <div className={`${classes.date} col`}>
           <EventDate date={date} />
@@ -97,7 +143,7 @@ const EventPage = (props) => {
       </div>
       <hr />
       <div className="row">
-        <Map lat={43.7181557} lng={-79.5181417} height={"400px"} zoom={15} />
+        <Map lat={props.lat} lng={props.long} height={"400px"} zoom={15} />
       </div>
     </article>
   );

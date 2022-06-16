@@ -105,11 +105,13 @@ const NewEvent = (props) => {
       invitees: inviteesListSubmission,
     };
     console.log(formData);
+    console.log(inviteesListSubmission)
 
     const allUsersData = await axios.get(`/users/test`);
     const allUsers = allUsersData.data;
     //create the event
     const response = await axios.post(`/event/new`, formData);
+    console.log(response.data)
     const eventId = response.data.data.id;
     //invite myself
     const data = await axios.post("/event/invite", {

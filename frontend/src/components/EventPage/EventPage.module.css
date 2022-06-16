@@ -61,21 +61,34 @@
 }
 
 .accept {
-  background-color:green;
+  background-color: rgb(170, 255, 170);
+}
+
+.accept:hover {
+  background-color: green;
+  color: white;
+  box-shadow: 0px 5px 10px green;
+  transform: translateY(-3px);
 }
 
 .decline {
+  background-color: rgb(255, 175, 175);
+}
+
+.decline:hover {
   background-color: red;
+  color: white;
+  box-shadow: 0px 5px 10px red;
+  transform: translateY(-3px);
 }
 
 .maybe {
-  background-color: yellow;
+  background-color: rgb(255, 255, 185);
 }
 
-.btn:hover {
-  background-color: #23acc4;
-  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
-  color: #fff;
+.maybe:hover {
+  background-color: yellow;
+  box-shadow: 0px 5px 10px yellow;
   transform: translateY(-3px);
 }
 
