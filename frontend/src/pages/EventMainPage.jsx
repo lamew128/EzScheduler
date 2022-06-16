@@ -24,7 +24,7 @@ const EventMainPage = (props) => {
 
   // console.log("event: ", event);
   // console.log("comments: ", comments);
-
+  console.log(comments);
   return (
     <>
       {!event.event_id && <>This event does not exist!</>}

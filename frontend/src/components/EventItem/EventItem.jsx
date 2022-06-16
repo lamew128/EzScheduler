@@ -26,16 +26,19 @@ const MyEvent = (props) => {
   const acceptResponse = () => {
     acceptInvite(setInvite, props);
     props.setEventChange(true);
+    props.setResponded(true);
   };
 
   const maybeResponse = () => {
     maybeInvite(setInvite, props);
     props.setEventChange(true);
+    props.setResponded(true);
   };
 
   const declineResponse = () => {
     rejectInvite(setInvite, props);
     props.setEventChange(true);
+    props.setResponded(true);
   };
 
   return (

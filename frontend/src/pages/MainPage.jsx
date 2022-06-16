@@ -10,6 +10,7 @@ const MainPage = (props) => {
   const [events, setEvents] = useState([]);
   const [showEvents, setShowEvents] = useState(false);
   const [eventChange, setEventChange] = useState(false);
+  const [responded, setResponded] = useState(false);
   const userId = props.cookies.user ? props.cookies.user.id : false;
 
   useEffect(() => {
@@ -23,9 +24,9 @@ const MainPage = (props) => {
       setShowEvents(false);
       setEventChange(false);
     }
-  }, [userId, props.cookies.user, eventChange]);
+  }, [userId, props.cookies.user, eventChange, responded]);
 
-  console.log(Date.now()/1000);
+
   const upcomingEvents = events
     .filter(
       (event) =>
@@ -146,6 +147,7 @@ const MainPage = (props) => {
         address={event.address}
         response={event.response}
         setEventChange={setEventChange}
+        setResponded={setResponded}
       />
     ));
 
