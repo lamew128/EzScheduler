@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
 import EventItem from "../components/EventItem/EventItem";
+import Notification from "../components/Notification/Notification";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -83,6 +84,7 @@ const MainPage = (props) => {
         setEventChange={setEventChange}
       />
     ));
+  
 
   const maybeEventsList = events
     .filter((event) => 
@@ -103,6 +105,26 @@ const MainPage = (props) => {
         setEventChange={setEventChange}
       />
     ));
+
+  const notificationList = events
+  .filter((event) => 
+  event.response === null &&
+  event.end_time - Date.now() / 1000 >= 0
+  )
+  .map((event) => (
+    <Notification
+      cookies={props.cookies}
+      setCookie={props.setCookie}
+      removeCookie={props.removeCookie}
+      key={event.event_id}
+      eventId={event.event_id}
+      title={event.title}
+      date={event.start_time}
+      address={event.address}
+      response={event.response}
+      setEventChange={setEventChange}
+    />
+  ));
 
   const rejectedEventsList = events
     .filter((event) => 
@@ -128,6 +150,7 @@ const MainPage = (props) => {
     <>
       {showEvents && (
         <>
+          {notificationList}
           <Link to="/new">
             <Button>Create new event!</Button>
           </Link>
