@@ -42,7 +42,9 @@ const EventMainPage = (props) => {
             long={event.long}
           />
           <CommentSection 
-            
+            cookies={props.cookies}
+            eventId={id}
+            comments={comments}
           />
         </>
       )}

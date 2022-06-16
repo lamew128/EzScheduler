@@ -289,7 +289,8 @@ const getComments = (eventId) => {
   return pool
     .query(
     `
-    SELECT * FROM comments
+    SELECT event_id, user_id, name, time, comment_text FROM comments
+    JOIN users ON users.id = comments.user_id
     WHERE event_id = $1
     ORDER BY time;
     `, [eventId])
