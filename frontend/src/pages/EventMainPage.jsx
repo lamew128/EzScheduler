@@ -16,11 +16,13 @@ const EventMainPage = (props) => {
       data[0].data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
+          console.log(e)
         }
       });
       setComments(data[1].data);
     });
-  }, [id, user]);
+  }, [id, user, event.creator]);
+
   console.log("event: ", event);
   console.log("comments: ", comments);
 
@@ -40,6 +42,7 @@ const EventMainPage = (props) => {
             response={event.response}
             lat={event.lat}
             long={event.long}
+            creator={event.creator}
           />
           <CommentSection 
             cookies={props.cookies}
