@@ -44,6 +44,8 @@ const MainPage = (props) => {
         long={event.long}
       />
     ));
+    console.log("events:");
+    console.log(events);
 
   const acceptedEventsList = events
     .filter((event) =>
@@ -118,6 +120,7 @@ const MainPage = (props) => {
       removeCookie={props.removeCookie}
       key={event.event_id}
       eventId={event.event_id}
+      creator={event.creator}
       title={event.title}
       date={event.start_time}
       address={event.address}
