@@ -87,14 +87,17 @@ const EventPage = (props) => {
   // Setting up the list with names
   useEffect(() => {
     const list = nameList.map((invitee) => (
-      <div className={classes.list_item}>
-        <p className={classes.p_fix} key={invitee.email}>
+      <div key={invitee.email} className={classes.list_item}>
+        <p className={classes.p_fix}>
           {invitee.name}
         </p>
-        <button className={`${classes.btn} ${classes.delete}`}><i className={`bi bi-x-lg col`}></i></button>
+        <button className={`${classes.btn} ${classes.delete}`}>
+          <i className={`bi bi-x-lg col`}></i>
+        </button>
       </div>
     ));
     setShowList(list);
+    console.log(nameList);
   }, [nameList]);
 
   const date = new Date(props.date * 1000);
@@ -119,7 +122,7 @@ const EventPage = (props) => {
       return;
     }
     console.log(p.email, props.eventId);
-    setNameList((prev) => [...prev, p.name]);
+    setNameList((prev) => [...prev, p]);
     setNewInvitee(false);
     setOpenDropDown(false);
     setInvitee("");
@@ -149,15 +152,14 @@ const EventPage = (props) => {
     <article className={classes.container}>
       <h3 className={`${classes.title} row`}>
         {props.title}{" "}
-       {isCreator &&
-        <Link
-          style={{ width: "fit-content" }}
-          to={`/events/${props.eventId}/edit`}
-        >
-          <button>EDIT</button>
-        </Link>
-       }
-        
+        {isCreator && (
+          <Link
+            style={{ width: "fit-content" }}
+            to={`/events/${props.eventId}/edit`}
+          >
+            <button>EDIT</button>
+          </Link>
+        )}
         <p>Created by {creator}</p>
       </h3>
       <div className="row">
