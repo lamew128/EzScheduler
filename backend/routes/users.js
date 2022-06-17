@@ -6,7 +6,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 module.exports = (db) => {
 
   /* GET users listing. */
-  router.get('/test', (req, res) => {
+  router.get('/', (req, res) => {
     db.getAllUsers()
       .then((data) => {
         console.log("dataaaaaaa" + data);
