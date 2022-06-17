@@ -12,7 +12,6 @@ const UpcomingEvents = (props) => {
   useEffect(() => {
     axios.get(`/event/invitees/${props.eventId}`).then((d) => {
       setList(d.data);
-      console.log(d.data);
     });
   }, [props.eventId]);
 

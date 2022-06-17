@@ -16,9 +16,9 @@ const NewEvent = (props) => {
   const [invitee, setInvitee] = useState("");
   const [newInvitee, setNewInvitee] = useState(false);
   const [inviteesList, setInviteesList] = useState([]);
-  const [inviteesListSubmission, setInviteesListSubmission] = useState([]);
   const [dynamicList, setDynamicList] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [showList, setShowList] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
@@ -103,10 +103,8 @@ const NewEvent = (props) => {
       lat: coords.lat,
       long: coords.lng,
       creator: props.user,
-      invitees: inviteesListSubmission,
     };
     console.log(formData);
-    console.log(inviteesListSubmission);
 
     const allUsersData = await axios.get(`/users`);
     const allUsers = allUsersData.data;
@@ -121,7 +119,8 @@ const NewEvent = (props) => {
     });
     //invite others with fake email array
     // email Array will be an input from the form. put in dummy place hoder for now
-    const emailArray = inviteesListSubmission;
+    const emailArray = inviteesList.map((e) => e.email);
+    console.log(emailArray);
     const userIdArray = allUsers
       .filter((user) => emailArray.includes(user.email))
       .map((user) => user.id);
@@ -144,34 +143,21 @@ const NewEvent = (props) => {
       alert("Please fill out with the information!");
       return;
     }
-    if (inviteesListSubmission.includes(p.email.trim())) {
-      alert("You cannot add the same user!");
+    // FIX THIS!!!!!
+    let notAdd = true;
+    inviteesList.forEach((elem) => {
+      if (elem.email === p.email.trim()) {
+        alert("You cannot add the same user!");
+        notAdd = false;
+      }
+    });
+    if (!notAdd) return;
+    if (p.id === props.user) {
+      alert("You cannot add yourself!");
       return;
     }
-    setInviteesList((prev) => [...prev, p.name]);
+    setInviteesList((prev) => [...prev, p]);
     setNewInvitee(false);
-    setInviteesListSubmission((prev) => [...prev, p.email]);
-    setOpenDropDown(false);
-    setInvitee("");
-  };
-
-  const addButton = (e) => {
-    e.preventDefault();
-    if (invitee.trim() === "") {
-      alert("Please fill out with the information!");
-      return;
-    }
-    if (inviteesListSubmission.includes(invitee.trim())) {
-      alert("You cannot add the same user!");
-      return;
-    }
-    if (!invitee.trim().includes("@")) {
-      alert("Please enter a valid e-mail!");
-      return;
-    }
-    setInviteesList((prev) => [...prev, invitee]);
-    setNewInvitee(false);
-    setInviteesListSubmission((prev) => [...prev, invitee]);
     setOpenDropDown(false);
     setInvitee("");
   };
@@ -182,14 +168,27 @@ const NewEvent = (props) => {
     }
   }, [invitee]);
 
-  const list = inviteesList.map((invitee) => (
-    <div className={classes.list_item}>
-      <p className={classes.p_fix} key={invitee}>{invitee}</p>
-      <button className={`${classes.btn} ${classes.delete}`}>
-        <i className={`bi bi-x-lg col`}></i>
-      </button>
-    </div>
-  ));
+  useEffect(() => {
+    const deleteInvitee = (e, inv) => {
+      e.preventDefault();
+      const newList1 = inviteesList.filter((elem) => elem.name !== inv.name);
+      console.log(inviteesList);
+      setInviteesList(newList1);
+    };
+
+    const list = inviteesList.map((invitee) => (
+      <div key={invitee.email} className={classes.list_item}>
+        <p className={classes.p_fix}>{invitee.name}</p>
+        <button
+          onClick={(e) => deleteInvitee(e, invitee)}
+          className={`${classes.btn} ${classes.delete}`}
+        >
+          <i className={`bi bi-x-lg col`}></i>
+        </button>
+      </div>
+    ));
+    setShowList(list);
+  }, [inviteesList]);
 
   const addList = dynamicList.map((p) => (
     <p
@@ -238,7 +237,7 @@ const NewEvent = (props) => {
           <div className="col-4">
             Invitees
             <div className={classes.invitees}>
-              {list}
+              {showList}
               {newInvitee && (
                 <div className="row align-items-center justify-content-center">
                   <input
@@ -247,9 +246,6 @@ const NewEvent = (props) => {
                     onChange={inviteeChange}
                     required
                   />
-                  <button onClick={addButton} className={classes.btn_add}>
-                    ADD
-                  </button>
                 </div>
               )}
               {openDropDown && (

@@ -67,27 +67,6 @@ const EventPage = (props) => {
     setInvitee("");
   };
 
-  const addButton = (e) => {
-    e.preventDefault();
-    if (invitee.trim() === "") {
-      alert("Please fill out with the information!");
-      return;
-    }
-    if (inviteesEmail.includes(invitee.trim())) {
-      alert("You cannot add the same user!");
-      return;
-    }
-    if (!invitee.trim().includes("@")) {
-      alert("Please enter a valid e-mail!");
-      return;
-    }
-    console.log(invitee);
-    setNameList((prev) => [...prev, invitee]);
-    setNewInvitee(false);
-    setOpenDropDown(false);
-    setInvitee("");
-  };
-
   useEffect(() => {
     axios.get(`/users`).then((e) => {
       const list = e.data.filter(
@@ -127,24 +106,13 @@ const EventPage = (props) => {
   // Setting up the list with names
   useEffect(() => {
     const deleteInvitee = (invitee) => {
-      console.log(invitee);
-      // console.log(inviteesList);
-      // console.log(props.eventId);
       const newList = nameList.filter(
         (elem) => elem.data.name !== invitee.data.name
       );
-      console.log(typeof invitee.userId);
-      console.log(typeof Number(props.eventId));
       const deleteInvitee = {
         userId: invitee.userId,
         eventId: Number(props.eventId),
       };
-      // axios
-      //   .delete("/event/invite", {
-      //     userId: invitee.userId,
-      //     eventId: Number(props.eventId),
-      //   })
-      //   .then((res) => console.log(res));
 
       axios({
         method: "DELETE",
@@ -156,10 +124,8 @@ const EventPage = (props) => {
     };
 
     const list = nameList.map((invitee) => {
-      const keyProp = !invitee.data.email ? invitee.data : invitee.data.email;
-      // const nameProp = !invitee.name ? invitee : invitee.name;
       return (
-        <div key={keyProp} className={classes.list_item}>
+        <div key={invitee.data.email} className={classes.list_item}>
           {invitee.userId !== props.cookies.user.id && (
             <>
               <p className={classes.p_fix}>{invitee.data.name}</p>
