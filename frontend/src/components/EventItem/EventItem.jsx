@@ -41,8 +41,9 @@ const MyEvent = (props) => {
     props.setResponded(true);
   };
 
+
   return (
-    <div className={container}>
+    <div className={container} id={`${props.eventId}`}>
       <EventDate className="col" date={date} />
       <Link className={`${classes.fit}`} to={`/events/${props.eventId}`}>
         <button className={classes.btn}>OPEN EVENT</button>
