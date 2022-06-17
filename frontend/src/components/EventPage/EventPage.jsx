@@ -16,6 +16,7 @@ const EventPage = (props) => {
   const [invite, setInvite] = useState(props.response);
   const [confirmation, setConfirmation] = useState(false);
   const [inviteesList, setInviteesList] = useState([]);
+  const [creator, setCreator] = useState("");
   const isCreator = props.cookies.user.id === props.creator;
 
   const deleteEvent = () => {
@@ -38,13 +39,19 @@ const EventPage = (props) => {
     setInvite("no");
   };
 
+  axios
+    .get(`/users/name/${String(props.creator)}`)
+    .then((res) => setCreator(res.data.data));
+
   useEffect(() => {
     axios
       .get(`/event/invitees/${props.eventId}`)
       .then((res) => setInviteesList(res.data));
   }, [props.eventId]);
 
-  const showList = inviteesList.map((invitee) => <p key={invitee.user_id}>{invitee.user_id}</p>);
+  const showList = inviteesList.map((invitee) => (
+    <p key={invitee.user_id}>{invitee.user_id}</p>
+  ));
 
   const date = new Date(props.date * 1000);
   return (
@@ -57,6 +64,7 @@ const EventPage = (props) => {
         >
           <button>EDIT</button>
         </Link>
+        <p>Created by {creator}</p>
       </h3>
       <div className="row">
         <div className="col">

@@ -11,7 +11,6 @@ const CommentSection = (props) => {
 
   const commentChange = (e) => {
     setComment(e.target.value);
-    console.log(Date.now()/1000);
   };
 
   const submitHandler = async (e) => {
@@ -21,7 +20,6 @@ const CommentSection = (props) => {
       time: Math.round(Date.now()/1000), 
       text: comment
     };
-    console.log(formData);
     axios.post('/event/comment', formData)
     .then((res) => {
       console.log(res.data);
