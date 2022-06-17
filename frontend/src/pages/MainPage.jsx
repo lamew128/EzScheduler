@@ -25,7 +25,7 @@ const MainPage = (props) => {
     }
   }, [userId, props.cookies.user, eventChange]);
 
-  console.log(Date.now()/1000);
+  // console.log(Date.now()/1000);
   const upcomingEvents = events
     .filter(
       (event) =>
@@ -44,8 +44,8 @@ const MainPage = (props) => {
         long={event.long}
       />
     ));
-    console.log("events:");
-    console.log(events);
+    // console.log("events:");
+    // console.log(events);
 
   const acceptedEventsList = events
     .filter((event) =>
