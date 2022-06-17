@@ -75,9 +75,10 @@ const EventPage = (props) => {
 
   useEffect(() => {
     inviteesList.forEach((invitee) => {
+      console.log(invitee.user)
       axios
-        .get(`/users/name/${invitee.user_id}`)
-        .then((res) => setNameList((prev) => [...prev, res.data.data]));
+        .get(`/users/info/${invitee.user_id}`)
+        .then((res) => console.log(res));
     });
   }, [inviteesList]);
 
