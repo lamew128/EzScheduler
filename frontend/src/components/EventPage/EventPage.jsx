@@ -60,8 +60,9 @@ const EventPage = (props) => {
       alert("You cannot add the same user!");
       return;
     }
-    console.log(p.email, props.eventId);
-    setNameList((prev) => [...prev, p]);
+    console.log(p);
+    const user = { userId: p.id, data: p };
+    setNameList((prev) => [...prev, user]);
     setNewInvitee(false);
     setOpenDropDown(false);
     setInvitee("");
@@ -124,6 +125,7 @@ const EventPage = (props) => {
     };
 
     const list = nameList.map((invitee) => {
+      console.log(invitee);
       return (
         <div key={invitee.data.email} className={classes.list_item}>
           {invitee.userId !== props.cookies.user.id && (
@@ -271,9 +273,6 @@ const EventPage = (props) => {
                   onChange={inviteeChange}
                   required
                 />
-                <button onClick={addButton} className={classes.btn_add}>
-                  ADD
-                </button>
               </div>
             )}
             {openDropDown && (
