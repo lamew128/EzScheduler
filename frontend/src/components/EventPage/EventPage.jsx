@@ -58,12 +58,15 @@ const EventPage = (props) => {
     <article className={classes.container}>
       <h3 className={`${classes.title} row`}>
         {props.title}{" "}
+       {isCreator &&
         <Link
           style={{ width: "fit-content" }}
           to={`/events/${props.eventId}/edit`}
         >
           <button>EDIT</button>
         </Link>
+       }
+        
         <p>Created by {creator}</p>
       </h3>
       <div className="row">
