@@ -41,10 +41,10 @@ const addUser = function(user) {
  * @param {Number} id The email of the user.
  * @return {Promise<{}>} A promise to the user.
  */
- const getNameById = function(id) {
+ const getInfoById = function(id) {
   return pool
     .query(
-      `SELECT name FROM users
+      `SELECT name, email FROM users
        WHERE id = $1`, [id])
     .then((result) => {
       return result.rows[0];
@@ -267,17 +267,19 @@ const responseInvite = (invite) => {
     });
 };
 
-//delete inv
-const deleteInvite = (id) => {
+//delete inv given user id and event id
+const deleteInvite = (invite) => {
+  let inviteParams = [invite.userId, invite.eventId];
   return pool
     .query(
-      `
-    DELETE FROM events_invitees
-    WHERE id = $1
+    `
+    DELETE FROM event_invitees
+    WHERE user_id = $1
+    AND event_id = $2
     RETURNING *;
-    `, id)
+    `, inviteParams)
     .then((data) => {
-
+      return data.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
@@ -324,7 +326,7 @@ const getComments = (eventId) => {
 
 module.exports = {
   addUser,
-  getNameById,
+  getInfoById,
   getUserWithEmail,
   getAllUsers,
   getAllEvents,

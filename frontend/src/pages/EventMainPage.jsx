@@ -24,8 +24,6 @@ const EventMainPage = (props) => {
     });
   }, [id, user, event.creator]);
 
-  // console.log("event: ", event);
-  // console.log("comments: ", comments);
 
   return (
     <>

@@ -62,16 +62,6 @@ module.exports = (db) => {
       })
   });
 
-  //delete an event
-  router.delete('/:id', (req, res) => {
-    const eventId = req.params.id;
-    console.log(eventId);
-    db.deleteEvent(eventId)
-      .then((data) => {
-        return res.json({ status: 200, data: data });
-      })
-  });
-
   //get all invitees given an event id
   router.get('/invitees/:id', (req, res) => {
     const eventId = req.params.id;
@@ -102,6 +92,16 @@ module.exports = (db) => {
       })
   });
 
+  //delete an invite
+  //invite should contain { userId, eventId }
+  router.delete('/invite', (req, res) => {
+    const invite = req.body;
+    db.deleteInvite(invite)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
+      })
+  });
+
   //create a comment
   //comment should contain { eventId, userId, time, text }
   router.post('/comment', (req, res) => {
@@ -118,6 +118,16 @@ module.exports = (db) => {
     db.getComments(eventId)
       .then((data) => {
         res.json(data);
+      })
+  });
+
+  //delete an event
+  router.delete('/:id', (req, res) => {
+    const eventId = req.params.id;
+    console.log(eventId);
+    db.deleteEvent(eventId)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
       })
   });
 
