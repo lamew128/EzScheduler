@@ -24,25 +24,22 @@ const EventMainPage = (props) => {
 
   useEffect(() => {
     axios.get(`/event/comments/${id}`)
-    .then((data) => {
-      setComments(data.data);
-      setChange(false);
+    .then((commentsData) => {
+      
+      const requests = commentsData.data.map((comment) => 
+        axios.get(`/event/reply/${comment.comment_id}`)
+      );
+
+      Promise.all(requests)
+      .then((repliesData) => {
+        for(let i = 0; i < commentsData.data.length; i++) {
+          commentsData.data[i].reply = repliesData[i].data.data;
+        }
+        setComments(commentsData.data);
+        setChange(false);
+      })
     })
   }, [change]);
-
-  // const submitHandler = (comment) => {
-  //   const formData = {
-  //     eventId: id, 
-  //     userId: props.cookies.user.id, 
-  //     time: Math.round(Date.now()/1000), 
-  //     text: comment
-  //   };
-  //   axios.post('/event/comment', formData)
-  //   .then((res) => {
-  //     console.log(res.data);
-  //     setChange
-  //   })
-  // }
 
   
   return (
