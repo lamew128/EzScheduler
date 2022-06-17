@@ -127,7 +127,7 @@ const EventPage = (props) => {
   // Setting up the list with names
   useEffect(() => {
     const deleteInvitee = (invitee) => {
-      console.log(invitee)
+      console.log(invitee);
       console.log(inviteesList);
       console.log(props.eventId);
       const newList = nameList.filter((elem) => {
