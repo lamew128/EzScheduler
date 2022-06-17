@@ -128,35 +128,56 @@ const EventPage = (props) => {
   useEffect(() => {
     const deleteInvitee = (invitee) => {
       console.log(invitee);
-      console.log(inviteesList);
-      console.log(props.eventId);
-      const newList = nameList.filter((elem) => {
-        const inviteeName = !elem.name ? elem : elem.name;
-        return inviteeName !== invitee;
+      // console.log(inviteesList);
+      // console.log(props.eventId);
+      const newList = nameList.filter(
+        (elem) => elem.data.name !== invitee.data.name
+      );
+      console.log(typeof invitee.userId);
+      console.log(typeof Number(props.eventId));
+      const deleteInvitee = {
+        userId: invitee.userId,
+        eventId: Number(props.eventId),
+      };
+      // axios
+      //   .delete("/event/invite", {
+      //     userId: invitee.userId,
+      //     eventId: Number(props.eventId),
+      //   })
+      //   .then((res) => console.log(res));
+
+      axios({
+        method: "DELETE",
+        url: "/event/invite",
+        data: deleteInvitee,
       });
-      // axios.delete('/event/invite', {userId: , eventId: props.eventId})
+
       setNameList(newList);
     };
 
     const list = nameList.map((invitee) => {
-      console.log(invitee);
       const keyProp = !invitee.data.email ? invitee.data : invitee.data.email;
-      console.log(keyProp);
       // const nameProp = !invitee.name ? invitee : invitee.name;
       return (
         <div key={keyProp} className={classes.list_item}>
-          <p className={classes.p_fix}>{invitee.data.name}</p>
-          <button
-            onClick={() => deleteInvitee(invitee.data)}
-            className={`${classes.btn} ${classes.delete}`}
-          >
-            <i className={`bi bi-x-lg col`}></i>
-          </button>
+          {invitee.userId !== props.cookies.user.id && (
+            <>
+              <p className={classes.p_fix}>{invitee.data.name}</p>
+              {isCreator && (
+                <button
+                  onClick={() => deleteInvitee(invitee)}
+                  className={`${classes.btn} ${classes.delete}`}
+                >
+                  <i className={`bi bi-x-lg col`}></i>
+                </button>
+              )}
+            </>
+          )}
         </div>
       );
     });
     setShowList(list);
-  }, [nameList, inviteesList, props.eventId]);
+  }, [nameList, inviteesList, props.eventId, isCreator, props.cookies.user.id]);
 
   useEffect(() => {
     if (invitee.trim() === "") {

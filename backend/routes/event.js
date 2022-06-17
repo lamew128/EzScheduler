@@ -96,6 +96,7 @@ module.exports = (db) => {
   //invite should contain { userId, eventId }
   router.delete('/invite', (req, res) => {
     const invite = req.body;
+    console.log('AAAAAA',req.body)
     db.deleteInvite(invite)
       .then((data) => {
         return res.json({ status: 200, data: data });
