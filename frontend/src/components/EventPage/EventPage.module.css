@@ -181,8 +181,6 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  transform: translateY(-40px);
-  z-index: 1999;
 }
 
 .dropdown-content {

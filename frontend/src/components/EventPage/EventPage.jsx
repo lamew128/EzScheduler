@@ -60,7 +60,11 @@ const EventPage = (props) => {
       alert("You cannot add the same user!");
       return;
     }
-    console.log(p);
+    axios
+      .post("/event/invite", { userId: p.id, eventId: props.eventId })
+      .then((res) => console.log(res));
+    console.log(p.id);
+    console.log(props.eventId);
     const user = { userId: p.id, data: p };
     setNameList((prev) => [...prev, user]);
     setNewInvitee(false);
@@ -125,7 +129,6 @@ const EventPage = (props) => {
     };
 
     const list = nameList.map((invitee) => {
-      console.log(invitee);
       return (
         <div key={invitee.data.email} className={classes.list_item}>
           {invitee.userId !== props.cookies.user.id && (
