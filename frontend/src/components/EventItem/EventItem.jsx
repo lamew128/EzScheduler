@@ -41,7 +41,6 @@ const MyEvent = (props) => {
     props.setResponded(true);
   };
 
-
   return (
     <div className={container} id={`${props.eventId}`}>
       <EventDate className="col" date={date} />
