@@ -309,11 +309,47 @@ const getComments = (eventId) => {
   return pool
     .query(
     `
-    SELECT event_id, user_id, name, time, comment_text FROM comments
+    SELECT comments.id as comment_id, event_id, user_id, name, time, comment_text FROM comments
     JOIN users ON users.id = comments.user_id
     WHERE event_id = $1
     ORDER BY time;
     `, [eventId])
+    .then((data) => {
+      return data.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+//create a reply
+const addReply = (reply) => {
+  let replyParams = [ reply.userId, reply.commentId, reply.time, reply.text ];
+  return pool
+    .query(
+    `
+    INSERT INTO reply (user_id, comment_id, time, reply_text) 
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;
+    `, replyParams)
+    .then((data) => {
+      return data.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+//get all replys of a comment by given id
+const getReply = (commentId) => {
+  return pool
+    .query(
+    `
+    SELECT user_id, comment_id, name, time, reply_text FROM reply
+    JOIN users ON users.id = reply.user_id
+    WHERE comment_id = $1
+    ORDER BY time;
+    `, [commentId])
     .then((data) => {
       return data.rows;
     })
@@ -341,5 +377,7 @@ module.exports = {
   deleteInvite,
   showEventDetails,
   addComment,
-  getComments
+  getComments,
+  addReply,
+  getReply
 };

@@ -122,6 +122,25 @@ module.exports = (db) => {
       })
   });
 
+  //reply a comment
+  //comment should contain { userId, commentId, time, text }
+  router.post('/reply', (req, res) => {
+    const reply = req.body;
+    db.addReply(reply)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
+      })
+  });
+
+  //get all comments given an event id
+  router.get('/reply/:id', (req, res) => {
+    const commentId = req.params.id;
+    db.getReply(commentId)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
+      })
+  });
+
   //delete an event
   router.delete('/:id', (req, res) => {
     const eventId = req.params.id;
