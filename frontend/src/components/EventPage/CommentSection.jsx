@@ -10,10 +10,12 @@ const CommentSection = (props) => {
   ));
 
   const commentChange = (e) => {
+    //e.preventDefault();
     setComment(e.target.value);
   };
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     const formData = {
       eventId: props.eventId, 
       userId: props.cookies.user.id, 
@@ -23,6 +25,8 @@ const CommentSection = (props) => {
     axios.post('/event/comment', formData)
     .then((res) => {
       console.log(res.data);
+      setComment("");
+      props.setChange(true);
     })
   }
 

@@ -7,23 +7,44 @@ import axios from "axios";
 const EventMainPage = (props) => {
   const [event, setEvent] = useState({});
   const [comments, setComments] = useState([]);
+  const [change, setChange] = useState(false);
   const { id } = useParams();
   const user = props.cookies.user.id;
 
   useEffect(() => {
-    Promise.all([
-      axios.get(`/event/${id}`),
-      axios.get(`/event/comments/${id}`),
-    ]).then((data) => {
-      data[0].data.forEach((e) => {
+      axios.get(`/event/${id}`)
+      .then((data) => {
+      data.data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
         }
-      });
-      setComments(data[1].data);
+      });     
     });
   }, [id, user, event.creator]);
 
+  useEffect(() => {
+    axios.get(`/event/comments/${id}`)
+    .then((data) => {
+      setComments(data.data);
+      setChange(false);
+    })
+  }, [change]);
+
+  // const submitHandler = (comment) => {
+  //   const formData = {
+  //     eventId: id, 
+  //     userId: props.cookies.user.id, 
+  //     time: Math.round(Date.now()/1000), 
+  //     text: comment
+  //   };
+  //   axios.post('/event/comment', formData)
+  //   .then((res) => {
+  //     console.log(res.data);
+  //     setChange
+  //   })
+  // }
+
+  
   return (
     <>
       {!event.event_id && <>This event does not exist!</>}
@@ -45,6 +66,7 @@ const EventMainPage = (props) => {
           <CommentSection
             cookies={props.cookies}
             eventId={id}
+            setChange={setChange}
             comments={comments}
           />
         </>
