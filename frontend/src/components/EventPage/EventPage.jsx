@@ -23,6 +23,7 @@ const EventPage = (props) => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const [dynamicList, setDynamicList] = useState([]);
   const [showList, setShowList] = useState([]);
+  const [inviteesEmail, setInviteesEmail] = useState([]);
   const isCreator = props.cookies.user.id === props.creator;
 
   const deleteEvent = () => {
@@ -73,16 +74,26 @@ const EventPage = (props) => {
       .then((res) => setInviteesList(res.data));
   }, [props.eventId]);
 
+  // Setting the name invitees list from user ID
   useEffect(() => {
     inviteesList.forEach((invitee) => {
-      axios
-        .get(`/users/info/${invitee.user_id}`)
-        .then((res) => setNameList((prev) => [...prev, res.data.data.name]));
+      axios.get(`/users/info/${invitee.user_id}`).then((res) => {
+        setNameList((prev) => [...prev, res.data.data]);
+        setInviteesEmail((prev) => [...prev, res.data.data.email]);
+      });
     });
   }, [inviteesList]);
 
+  // Setting up the list with names
   useEffect(() => {
-    const list = nameList.map((invitee) => <p key={invitee}>{invitee}</p>);
+    const list = nameList.map((invitee) => (
+      <div className={classes.list_item}>
+        <p className={classes.p_fix} key={invitee.email}>
+          {invitee.name}
+        </p>
+        <button className={`${classes.btn} ${classes.delete}`}><i className={`bi bi-x-lg col`}></i></button>
+      </div>
+    ));
     setShowList(list);
   }, [nameList]);
 
@@ -90,7 +101,7 @@ const EventPage = (props) => {
 
   const addList = dynamicList.map((p) => (
     <p
-      className={classes.list_item}
+      className={classes.list_name}
       onClick={() => addInvitee(p)}
       key={p.email}
     >
@@ -103,10 +114,11 @@ const EventPage = (props) => {
       alert("Please fill out with the information!");
       return;
     }
-    if (nameList.includes(p.name.trim())) {
+    if (inviteesEmail.includes(p.email.trim())) {
       alert("You cannot add the same user!");
       return;
     }
+    console.log(p.email, props.eventId);
     setNameList((prev) => [...prev, p.name]);
     setNewInvitee(false);
     setOpenDropDown(false);

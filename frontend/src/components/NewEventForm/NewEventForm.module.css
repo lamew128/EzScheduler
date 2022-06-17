@@ -122,7 +122,27 @@
   cursor: pointer;
 }
 
-.list_item:hover {
+.list_name:hover {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.delete {
+  padding: 5px;
+  background-color: rgb(255, 160, 160);
+  width: 30px;
+}
+
+.delete:hover {
+  background-color: red;
+}
+
+.list_item {
+  display: flex;
+  align-self: center;
+  align-items: center;
+}
+
+.p_fix {
+  margin: 0;
 }

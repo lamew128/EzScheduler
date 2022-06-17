@@ -45,19 +45,38 @@
 }
 
 .btn {
-  width: fit-content;
   align-self: center;
-  padding: 0.5rem;
+  padding: 10px;
   font-size: 1rem;
   text-transform: uppercase;
   color: #000;
+  background-color: #fff;
   border: none;
   border-radius: 45px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
-  margin: 5px;
-  font-weight: 500;
+  margin: 10px;
+}
+
+.delete {
+  padding: 5px;
+  background-color: rgb(255, 160, 160);
+  width: 30px;
+}
+
+.delete:hover {
+  background-color: red;
+}
+
+.btn:hover {
+  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
 }
 
 .accept {
@@ -107,7 +126,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   overflow-y: auto;
 }
 
@@ -177,7 +196,17 @@
   cursor: pointer;
 }
 
-.list_item:hover {
+.list_name:hover {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.list_item {
+  display: flex;
+  align-self: center;
+  align-items: center;
+}
+
+.p_fix {
+  margin: 0;
 }

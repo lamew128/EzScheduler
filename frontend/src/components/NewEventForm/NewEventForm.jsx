@@ -128,8 +128,8 @@ const NewEvent = (props) => {
     const axiosCalls = userIdArray.map((userId) =>
       axios.post(`/event/invite`, {
         response: null,
-        userId: userId,
-        eventId: eventId,
+        userId,
+        eventId,
       })
     );
     Promise.all(axiosCalls).then((data) => {
@@ -182,11 +182,18 @@ const NewEvent = (props) => {
     }
   }, [invitee]);
 
-  const list = inviteesList.map((invitee) => <p key={invitee}>{invitee}</p>);
+  const list = inviteesList.map((invitee) => (
+    <div className={classes.list_item}>
+      <p className={classes.p_fix} key={invitee}>{invitee}</p>
+      <button className={`${classes.btn} ${classes.delete}`}>
+        <i className={`bi bi-x-lg col`}></i>
+      </button>
+    </div>
+  ));
 
   const addList = dynamicList.map((p) => (
     <p
-      className={classes.list_item}
+      className={classes.list_name}
       onClick={() => addInvitee(p)}
       key={p.email}
     >
