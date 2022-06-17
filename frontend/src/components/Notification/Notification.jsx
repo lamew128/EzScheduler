@@ -16,18 +16,27 @@ const Notification = (props) => {
  
   return (
   <>
-    <div 
-      className={classes.container}
-      onClick={() => {console.log("clicked");
-      let event = document.getElementById(`${props.eventId}`);
-      event.focus({preventScroll:false});
-    }}
+    <a  className={classes.container} href= {`#${props.eventId}`}>
+      
+      {/* onClick={() => {
+      console.log("clicked");
+      // location.href = `#${props.eventId}`;
+      document.querySelector(`#${props.eventId}`).scrollIntoView({
+        behavior: 'smooth'
+      }); */}
+      {/* // let event = document.getElementById(`${props.eventId}`);
+      // // console.log(event);
+      // window.setTimeout(() => { */}
+      {/* //   console.log("setTimeout called");
+      //   event.scroll()}, 1000);
+      // event.focus({preventScroll:false});
+    }} */}
 
       
-      // onClick={e => props.} 
-    >
+      {/* // onClick={e => props.}  */}
+    
       Please respond to {props.creator}'s invite to {props.title} at {humanDate} 
-    </div>
+    </a>
   </>
   );
 }
