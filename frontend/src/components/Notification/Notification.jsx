@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Notification.module.css";
+import axios from 'axios';
+
 
 
 
@@ -11,31 +13,22 @@ import classes from "./Notification.module.css";
 
 
 const Notification = (props) => {
+  const[ownerName, setOwnerName] = useState("");
   const date = new Date(props.date * 1000);
   const humanDate = date.toLocaleString("en-CA");
- 
+  const getData = async () => {
+  let ownerName = await (await axios.get(`users/info/${props.creator}`)).data.data.name;
+  setOwnerName(ownerName);
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
   <>
     <a  className={classes.container} href= {`#${props.eventId}`}>
-      
-      {/* onClick={() => {
-      console.log("clicked");
-      // location.href = `#${props.eventId}`;
-      document.querySelector(`#${props.eventId}`).scrollIntoView({
-        behavior: 'smooth'
-      }); */}
-      {/* // let event = document.getElementById(`${props.eventId}`);
-      // // console.log(event);
-      // window.setTimeout(() => { */}
-      {/* //   console.log("setTimeout called");
-      //   event.scroll()}, 1000);
-      // event.focus({preventScroll:false});
-    }} */}
-
-      
-      {/* // onClick={e => props.}  */}
-    
-      Please respond to {props.creator}'s invite to {props.title} at {humanDate} 
+      Please respond to {ownerName}'s invite to {props.title} at {humanDate} 
     </a>
   </>
   );
