@@ -20,7 +20,7 @@ module.exports = (db) => {
       .then((data) => {
         return res.json({status: 200, data: data});
       });
-    }
+  }
   );
 
   /**

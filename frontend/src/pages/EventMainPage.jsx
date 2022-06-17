@@ -11,12 +11,13 @@ const EventMainPage = (props) => {
   const user = props.cookies.user.id;
 
   useEffect(() => {
-    Promise.all([axios.get(`/event/${id}`), axios.get(`/event/comments/${id}`)])
-    .then((data) => {
+    Promise.all([
+      axios.get(`/event/${id}`),
+      axios.get(`/event/comments/${id}`),
+    ]).then((data) => {
       data[0].data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
-          console.log(e)
         }
       });
       setComments(data[1].data);
@@ -42,7 +43,7 @@ const EventMainPage = (props) => {
             long={event.long}
             creator={event.creator}
           />
-          <CommentSection 
+          <CommentSection
             cookies={props.cookies}
             eventId={id}
             comments={comments}
