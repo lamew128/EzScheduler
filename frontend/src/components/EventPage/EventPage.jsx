@@ -13,10 +13,16 @@ import Weather from "../Weather";
 import { Link } from "react-router-dom";
 
 const EventPage = (props) => {
-  const [invite, setInvite] = useState(props.response);
+  const [response, setResponse] = useState(props.response);
   const [confirmation, setConfirmation] = useState(false);
   const [inviteesList, setInviteesList] = useState([]);
+  const [nameList, setNameList] = useState([]);
   const [creator, setCreator] = useState("");
+  const [newInvitee, setNewInvitee] = useState(false);
+  const [invitee, setInvitee] = useState("");
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const [dynamicList, setDynamicList] = useState([]);
+  const [showList, setShowList] = useState([]);
   const isCreator = props.cookies.user.id === props.creator;
 
   const deleteEvent = () => {
@@ -25,23 +31,41 @@ const EventPage = (props) => {
   };
 
   const acceptResponse = () => {
-    acceptInvite(setInvite, props);
-    setInvite("yes");
+    acceptInvite(setResponse, props);
+    setResponse("yes");
   };
 
   const maybeResponse = () => {
-    maybeInvite(setInvite, props);
-    setInvite("maybe");
+    maybeInvite(setResponse, props);
+    setResponse("maybe");
   };
 
   const declineResponse = () => {
-    rejectInvite(setInvite, props);
-    setInvite("no");
+    rejectInvite(setResponse, props);
+    setResponse("no");
   };
 
-  axios
-    .get(`/users/name/${String(props.creator)}`)
-    .then((res) => setCreator(res.data.data));
+  const inviteeChange = (e) => {
+    setInvitee(e.target.value);
+    setOpenDropDown(true);
+  };
+
+  useEffect(() => {
+    axios.get(`/users/test`).then((e) => {
+      const list = e.data.filter(
+        (user) =>
+          user.email.toLowerCase().includes(invitee.toLowerCase()) ||
+          user.name.toLowerCase().includes(invitee.toLowerCase())
+      );
+      setDynamicList(list);
+    });
+  }, [invitee]);
+
+  useEffect(() => {
+    axios
+      .get(`/users/info/${props.creator}`)
+      .then((res) => setCreator(res.data.data.name));
+  }, [props.creator]);
 
   useEffect(() => {
     axios
@@ -49,11 +73,66 @@ const EventPage = (props) => {
       .then((res) => setInviteesList(res.data));
   }, [props.eventId]);
 
-  const showList = inviteesList.map((invitee) => (
-    <p key={invitee.user_id}>{invitee.user_id}</p>
-  ));
+  useEffect(() => {
+    inviteesList.forEach((invitee) => {
+      axios
+        .get(`/users/info/${invitee.user_id}`)
+        .then((res) => setNameList((prev) => [...prev, res.data.data.name]));
+    });
+  }, [inviteesList]);
+
+  useEffect(() => {
+    const list = nameList.map((invitee) => <p key={invitee}>{invitee}</p>);
+    setShowList(list);
+  }, [nameList]);
 
   const date = new Date(props.date * 1000);
+
+  const addList = dynamicList.map((p) => (
+    <p
+      className={classes.list_item}
+      onClick={() => addInvitee(p)}
+      key={p.email}
+    >
+      {p.name} ({p.email})
+    </p>
+  ));
+
+  const addInvitee = (p) => {
+    if (invitee.trim() === "") {
+      alert("Please fill out with the information!");
+      return;
+    }
+    if (nameList.includes(p.name.trim())) {
+      alert("You cannot add the same user!");
+      return;
+    }
+    setNameList((prev) => [...prev, p.name]);
+    setNewInvitee(false);
+    setOpenDropDown(false);
+    setInvitee("");
+  };
+
+  const addButton = (e) => {
+    e.preventDefault();
+    if (invitee.trim() === "") {
+      alert("Please fill out with the information!");
+      return;
+    }
+    if (nameList.includes(invitee.trim())) {
+      alert("You cannot add the same user!");
+      return;
+    }
+    if (!invitee.trim().includes("@")) {
+      alert("Please enter a valid e-mail!");
+      return;
+    }
+    setNameList((prev) => [...prev, invitee]);
+    setNewInvitee(false);
+    setOpenDropDown(false);
+    setInvitee("");
+  };
+
   return (
     <article className={classes.container}>
       <h3 className={`${classes.title} row`}>
@@ -124,17 +203,17 @@ const EventPage = (props) => {
         </div>
       </div>
       <div className="row">
-        {invite === "yes" && (
+        {response === "yes" && (
           <p>
             Responded with: <strong>Accepted</strong>
           </p>
         )}
-        {invite === "no" && (
+        {response === "no" && (
           <p>
             Responded with: <strong>Declined</strong>
           </p>
         )}
-        {invite === "maybe" && (
+        {response === "maybe" && (
           <p>
             Responded with: <strong>Maybe</strong>
           </p>
@@ -152,7 +231,30 @@ const EventPage = (props) => {
           Invitees:
           <div className={classes.invitees}>
             {showList}
-            {isCreator && <i className={`${classes.add} bi bi-plus-lg`}></i>}
+            {newInvitee && (
+              <div className="row align-items-center justify-content-center">
+                <input
+                  className={classes.invitee_form}
+                  value={invitee}
+                  onChange={inviteeChange}
+                  required
+                />
+                <button onClick={addButton} className={classes.btn_add}>
+                  ADD
+                </button>
+              </div>
+            )}
+            {openDropDown && (
+              <div className={`${classes.dropdown} row`}>
+                <div className={classes["dropdown-content"]}>{addList}</div>
+              </div>
+            )}
+            {isCreator && (
+              <i
+                onClick={() => setNewInvitee(true)}
+                className={`${classes.add} bi bi-plus-lg`}
+              ></i>
+            )}
           </div>
         </div>
         <div className="col">
