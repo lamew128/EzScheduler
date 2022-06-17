@@ -48,7 +48,7 @@ const NewEvent = (props) => {
   };
 
   useEffect(() => {
-    axios.get(`/users/test`).then((e) => {
+    axios.get(`/users`).then((e) => {
       const list = e.data.filter(
         (user) =>
           user.email.toLowerCase().includes(invitee.toLowerCase()) ||
@@ -108,7 +108,7 @@ const NewEvent = (props) => {
     console.log(formData);
     console.log(inviteesListSubmission);
 
-    const allUsersData = await axios.get(`/users/test`);
+    const allUsersData = await axios.get(`/users`);
     const allUsers = allUsersData.data;
     //create the event
     const response = await axios.post(`/event/new`, formData);

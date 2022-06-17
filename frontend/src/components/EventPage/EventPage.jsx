@@ -51,8 +51,45 @@ const EventPage = (props) => {
     setOpenDropDown(true);
   };
 
+  const addInvitee = (p) => {
+    if (invitee.trim() === "") {
+      alert("Please fill out with the information!");
+      return;
+    }
+    if (inviteesEmail.includes(p.email.trim())) {
+      alert("You cannot add the same user!");
+      return;
+    }
+    console.log(p.email, props.eventId);
+    setNameList((prev) => [...prev, p]);
+    setNewInvitee(false);
+    setOpenDropDown(false);
+    setInvitee("");
+  };
+
+  const addButton = (e) => {
+    e.preventDefault();
+    if (invitee.trim() === "") {
+      alert("Please fill out with the information!");
+      return;
+    }
+    if (inviteesEmail.includes(invitee.trim())) {
+      alert("You cannot add the same user!");
+      return;
+    }
+    if (!invitee.trim().includes("@")) {
+      alert("Please enter a valid e-mail!");
+      return;
+    }
+    console.log(invitee);
+    setNameList((prev) => [...prev, invitee]);
+    setNewInvitee(false);
+    setOpenDropDown(false);
+    setInvitee("");
+  };
+
   useEffect(() => {
-    axios.get(`/users/test`).then((e) => {
+    axios.get(`/users`).then((e) => {
       const list = e.data.filter(
         (user) =>
           user.email.toLowerCase().includes(invitee.toLowerCase()) ||
@@ -86,19 +123,40 @@ const EventPage = (props) => {
 
   // Setting up the list with names
   useEffect(() => {
-    const list = nameList.map((invitee) => (
-      <div key={invitee.email} className={classes.list_item}>
-        <p className={classes.p_fix}>
-          {invitee.name}
-        </p>
-        <button className={`${classes.btn} ${classes.delete}`}>
-          <i className={`bi bi-x-lg col`}></i>
-        </button>
-      </div>
-    ));
+    const deleteInvitee = (invitee) => {
+      console.log(invitee);
+      console.log(props.eventId);
+      const newList = nameList.filter((elem) => {
+        const inviteeName = !elem.name ? elem : elem.name;
+        return inviteeName !== invitee;
+      });
+      axios.delete('/event/invite', {userId: , eventId: props.eventId})
+      setNameList(newList);
+    };
+
+    const list = nameList.map((invitee) => {
+      const keyProp = !invitee.email ? invitee : invitee.email;
+      const nameProp = !invitee.name ? invitee : invitee.name;
+      return (
+        <div key={keyProp} className={classes.list_item}>
+          <p className={classes.p_fix}>{nameProp}</p>
+          <button
+            onClick={() => deleteInvitee(nameProp)}
+            className={`${classes.btn} ${classes.delete}`}
+          >
+            <i className={`bi bi-x-lg col`}></i>
+          </button>
+        </div>
+      );
+    });
     setShowList(list);
-    console.log(nameList);
-  }, [nameList]);
+  }, [nameList, inviteesList, props.eventId]);
+
+  useEffect(() => {
+    if (invitee.trim() === "") {
+      setOpenDropDown(false);
+    }
+  }, [invitee]);
 
   const date = new Date(props.date * 1000);
 
@@ -111,42 +169,6 @@ const EventPage = (props) => {
       {p.name} ({p.email})
     </p>
   ));
-
-  const addInvitee = (p) => {
-    if (invitee.trim() === "") {
-      alert("Please fill out with the information!");
-      return;
-    }
-    if (inviteesEmail.includes(p.email.trim())) {
-      alert("You cannot add the same user!");
-      return;
-    }
-    console.log(p.email, props.eventId);
-    setNameList((prev) => [...prev, p]);
-    setNewInvitee(false);
-    setOpenDropDown(false);
-    setInvitee("");
-  };
-
-  const addButton = (e) => {
-    e.preventDefault();
-    if (invitee.trim() === "") {
-      alert("Please fill out with the information!");
-      return;
-    }
-    if (nameList.includes(invitee.trim())) {
-      alert("You cannot add the same user!");
-      return;
-    }
-    if (!invitee.trim().includes("@")) {
-      alert("Please enter a valid e-mail!");
-      return;
-    }
-    setNameList((prev) => [...prev, invitee]);
-    setNewInvitee(false);
-    setOpenDropDown(false);
-    setInvitee("");
-  };
 
   return (
     <article className={classes.container}>
