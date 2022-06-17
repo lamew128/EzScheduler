@@ -101,7 +101,11 @@ const EventPage = (props) => {
       axios.get(`/users/info/${invitee.user_id}`).then((res) => {
         setNameList((prev) => [
           ...prev,
-          { userId: invitee.user_id, data: res.data.data },
+          {
+            userId: invitee.user_id,
+            response: invitee.response,
+            data: res.data.data,
+          },
         ]);
         setInviteesEmail((prev) => [...prev, res.data.data.email]);
       });
@@ -129,10 +133,20 @@ const EventPage = (props) => {
     };
 
     const list = nameList.map((invitee) => {
+      console.log(invitee.response);
       return (
         <div key={invitee.data.email} className={classes.list_item}>
           {invitee.userId !== props.cookies.user.id && (
             <>
+              {invitee.response === "yes" && (
+                <i className={`${classes.check} bi bi-check-lg col`}></i>
+              )}
+              {invitee.response === "no" && (
+                <i className={`${classes.x} bi bi-x-lg col`}></i>
+              )}
+              {invitee.response === "maybe" && (
+                <i className={`${classes.question} bi bi-question-lg col`}></i>
+              )}
               <p className={classes.p_fix}>{invitee.data.name}</p>
               {isCreator && (
                 <button
