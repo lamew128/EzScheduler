@@ -75,7 +75,7 @@ const getUserWithEmail = function(email) {
 const getAllUsers = () => {
   return pool
     .query(
-      `SELECT * FROM users;`)
+      `SELECT id, name, email FROM users;`)
     .then((data) => {
       const users = data.rows;
       return users;
