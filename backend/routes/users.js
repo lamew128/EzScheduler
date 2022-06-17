@@ -16,7 +16,7 @@ module.exports = (db) => {
   );
   
   router.get('/info/:id', (req, res) => {
-    db.getNameById(req.params.id)
+    db.getInfoById(req.params.id)
       .then((data) => {
         return res.json({status: 200, data: data});
       });
