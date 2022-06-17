@@ -115,7 +115,10 @@ const EventPage = (props) => {
   useEffect(() => {
     inviteesList.forEach((invitee) => {
       axios.get(`/users/info/${invitee.user_id}`).then((res) => {
-        setNameList((prev) => [...prev, res.data.data]);
+        setNameList((prev) => [
+          ...prev,
+          { userId: invitee.user_id, data: res.data.data },
+        ]);
         setInviteesEmail((prev) => [...prev, res.data.data.email]);
       });
     });
@@ -124,24 +127,27 @@ const EventPage = (props) => {
   // Setting up the list with names
   useEffect(() => {
     const deleteInvitee = (invitee) => {
-      console.log(invitee);
+      console.log(invitee)
+      console.log(inviteesList);
       console.log(props.eventId);
       const newList = nameList.filter((elem) => {
         const inviteeName = !elem.name ? elem : elem.name;
         return inviteeName !== invitee;
       });
-      axios.delete('/event/invite', {userId: , eventId: props.eventId})
+      // axios.delete('/event/invite', {userId: , eventId: props.eventId})
       setNameList(newList);
     };
 
     const list = nameList.map((invitee) => {
-      const keyProp = !invitee.email ? invitee : invitee.email;
-      const nameProp = !invitee.name ? invitee : invitee.name;
+      console.log(invitee);
+      const keyProp = !invitee.data.email ? invitee.data : invitee.data.email;
+      console.log(keyProp);
+      // const nameProp = !invitee.name ? invitee : invitee.name;
       return (
         <div key={keyProp} className={classes.list_item}>
-          <p className={classes.p_fix}>{nameProp}</p>
+          <p className={classes.p_fix}>{invitee.data.name}</p>
           <button
-            onClick={() => deleteInvitee(nameProp)}
+            onClick={() => deleteInvitee(invitee.data)}
             className={`${classes.btn} ${classes.delete}`}
           >
             <i className={`bi bi-x-lg col`}></i>
