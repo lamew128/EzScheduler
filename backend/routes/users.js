@@ -15,10 +15,10 @@ module.exports = (db) => {
   }
   );
   
-  router.get('/name/:id', (req, res) => {
+  router.get('/info/:id', (req, res) => {
     db.getNameById(req.params.id)
       .then((data) => {
-        return res.json({status: 200, data: data.name});
+        return res.json({status: 200, data: data});
       });
     }
   );
