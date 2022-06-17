@@ -185,7 +185,8 @@ const EventPage = (props) => {
             style={{ width: "fit-content" }}
             to={`/events/${props.eventId}/edit`}
           >
-            <button>EDIT</button>
+            Edit
+            {/* <button>EDIT</button> */}
           </Link>
         )}
         <p>Created by {creator}</p>
