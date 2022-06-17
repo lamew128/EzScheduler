@@ -21,7 +21,6 @@ const EventPage = (props) => {
   const [newInvitee, setNewInvitee] = useState(false);
   const [invitee, setInvitee] = useState("");
   const [openDropDown, setOpenDropDown] = useState(false);
-  const [inviteesListSubmission, setInviteesListSubmission] = useState([]);
   const [dynamicList, setDynamicList] = useState([]);
   const [showList, setShowList] = useState([]);
   const isCreator = props.cookies.user.id === props.creator;
@@ -110,7 +109,6 @@ const EventPage = (props) => {
     }
     setNameList((prev) => [...prev, p.name]);
     setNewInvitee(false);
-    setInviteesListSubmission((prev) => [...prev, invitee]);
     setOpenDropDown(false);
     setInvitee("");
   };
@@ -131,7 +129,6 @@ const EventPage = (props) => {
     }
     setNameList((prev) => [...prev, invitee]);
     setNewInvitee(false);
-    setInviteesListSubmission((prev) => [...prev, invitee]);
     setOpenDropDown(false);
     setInvitee("");
   };
