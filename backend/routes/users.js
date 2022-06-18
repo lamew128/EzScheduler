@@ -52,7 +52,7 @@ module.exports = (db) => {
       .then(user => {
         if (!user) {
           console.log("no user!");
-          return null;
+          return res.json({ status: 401, message: "Invalid login information."});
         }
         console.log("login success!");
         return res.json({ status: 200, id: user.id, name: user.name });
@@ -69,7 +69,7 @@ module.exports = (db) => {
       .then((email) => {
         if (email) {
           console.log("EXIST");
-          return "EXIST";
+          return res.json({ status: 401, message: "Email already existed!" });
         }
         db.addUser(user)
           .then(user => {

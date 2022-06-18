@@ -6,6 +6,8 @@ const Register = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const nameRegister = (e) => {
     setName(e.target.value);
@@ -29,11 +31,17 @@ const Register = (props) => {
     axios
       .post("/users/register", { name: name, email: email, password: password })
       .then((user) => {
-        console.log("USER ID = ", user.data.id);
-        cookieSetter({ id: user.data.id, name: user.data.name });
-        props.setLogin(true);
-        props.close();
-        props.setName(name)
+        if (user.data.status === 200) {
+          console.log("USER ID = ", user.data.id);
+          cookieSetter({ id: user.data.id, name: user.data.name });
+          props.setLogin(true);
+          props.close();
+          props.setName(name)
+        }
+        if (user.data.status === 401) {
+          setError(true);
+          setErrorMessage(user.data.message);
+        }
       });
     //console.log(userData);
   };
@@ -80,6 +88,7 @@ const Register = (props) => {
               required
             />
           </div>
+          {error && <h4>{errorMessage}</h4>}
           <button className={classes.btn} type="submit">
             REGISTER!
           </button>
