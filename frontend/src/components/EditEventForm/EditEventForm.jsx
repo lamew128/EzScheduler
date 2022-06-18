@@ -108,77 +108,79 @@ const EditEventForm = (props) => {
     console.log(formData);
     console.log(inviteesListSubmission);
 
-    const allUsersData = await axios.get(`/users`);
-    const allUsers = allUsersData.data;
+    // const allUsersData = await axios.get(`/users`);
+    // const allUsers = allUsersData.data;
     //create the event
-    const response = await axios.post(`/event/new`, formData);
-    const eventId = response.data.data.id;
+    // const response = await axios.post(`/event/new`, formData);
+    // const eventId = response.data.data.id;
     //invite myself
-    const data = await axios.post("/event/invite", {
-      response: "yes",
-      userId: props.user,
-      eventId: response.data.data.id,
-    });
+    // const data = await axios.post("/event/invite", {
+    //   response: "yes",
+    //   userId: props.user,
+    //   eventId: response.data.data.id,
+    // });
     //invite others with fake email array
     // email Array will be an input from the form. put in dummy place hoder for now
-    const emailArray = inviteesListSubmission;
-    const userIdArray = allUsers
-      .filter((user) => emailArray.includes(user.email))
-      .map((user) => user.id);
-    const axiosCalls = userIdArray.map((userId) =>
-      axios.post(`/event/invite`, {
-        response: null,
-        userId,
-        eventId,
-      })
-    );
-    Promise.all(axiosCalls).then((data) => {
-      //  console.log("promise all succeeded!");
-      console.log(data[0]);
-      console.log(data[1]);
-    });
-  };
+  //   const emailArray = inviteesListSubmission;
+  //   const userIdArray = allUsers
+  //     .filter((user) => emailArray.includes(user.email))
+  //     .map((user) => user.id);
+  //   const axiosCalls = userIdArray.map((userId) =>
+  //     axios.post(`/event/invite`, {
+  //       response: null,
+  //       userId,
+  //       eventId,
+  //     })
+  //   );
+  //   Promise.all(axiosCalls).then((data) => {
+  //     //  console.log("promise all succeeded!");
+  //     console.log(data[0]);
+  //     console.log(data[1]);
+  //   });
+  // };
 
-  const addInvitee = (p) => {
-    if (invitee.trim() === "") {
-      alert("Please fill out with the information!");
-      return;
-    }
-    if (inviteesListSubmission.includes(p.email.trim())) {
-      alert("You cannot add the same user!");
-      return;
-    }
-    setInviteesList((prev) => [...prev, p.name]);
-    setNewInvitee(false);
-    setInviteesListSubmission((prev) => [...prev, p.email]);
-    setOpenDropDown(false);
-    setInvitee("");
-  };
+  // const addInvitee = (p) => {
+  //   if (invitee.trim() === "") {
+  //     alert("Please fill out with the information!");
+  //     return;
+  //   }
+  //   if (inviteesListSubmission.includes(p.email.trim())) {
+  //     alert("You cannot add the same user!");
+  //     return;
+  //   }
+  //   setInviteesList((prev) => [...prev, p.name]);
+  //   setNewInvitee(false);
+  //   setInviteesListSubmission((prev) => [...prev, p.email]);
+  //   setOpenDropDown(false);
+  //   setInvitee("");
+  // };
 
   useEffect(() => {
     setTitle(props.title);
     setDescription(props.description);
     setAddress(props.address);
     setDate(humanStartDate);
+    setStartTime(humanStartDayTime);
+    setEndTime(humanEndDayTime);
   },[]);
 
 
-  // console.log(props.start_time);
-  // const humanStartTime = (new Date(props.start_time*1000)).toLocaleString({year: 'numeric', month: '2-digit', day: 'numeric' });
-  // const humanStartTimeArray = humanStartTime.split(",")[0].split('/');
-  // const humanStartDate = `${humanStartTimeArray[2]}-${humanStartTimeArray[0]}-${humanStartTimeArray[1]}`
-  // console.log({humanStartTime});
-  // console.log({humanStartDate});
 
+//fixing time display
 const humanStartTime = new Date(props.start_time*1000);
+const humanEndTime = new Date(props.end_time*1000);
 const humanYear  = humanStartTime.getFullYear();
 const humanMonth = (humanStartTime.getMonth() + 1).toString().padStart(2, "0");
 const humanDate = humanStartTime.getDate().toString().padStart(2, "0");
 const humanStartDate = `${humanYear}-${humanMonth}-${humanDate}`;
+const humanStartHour = humanStartTime.getHours().toString().padStart(2,"0");
+const humanStartMinute = humanStartTime.getMinutes().toString().padStart(2,"0");
+const humanStartDayTime = `${humanStartHour}:${humanStartMinute}`;
+const humanEndHour = humanEndTime.getHours().toString().padStart(2,"0");
+const humanEndMinute = humanEndTime.getMinutes().toString().padStart(2,"0");
+const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
 
-  console.log(props.end_time);
-  console.log({startTimestamp});
-  console.log({date});
+
 
   return (
   
@@ -260,7 +262,7 @@ const humanStartDate = `${humanYear}-${humanMonth}-${humanDate}`;
         <div className={`${classes.center} row`}>
           <Link to="/">
             <button className={classes.btn} onClick={submitHandler}>
-              Create Event
+              Edit Event
             </button>
           </Link>
         </div>
