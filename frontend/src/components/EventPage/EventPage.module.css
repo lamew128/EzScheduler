@@ -29,6 +29,7 @@
   padding: 20px;
   margin: 20px;
   width: 90%;
+  height: 910px;
 }
 
 .container main {
@@ -118,10 +119,15 @@
   border: 2px solid black;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   padding: 10px;
   overflow-y: auto;
-  height: 95%;
+  height: 50%;
+}
+
+.section_title {
+  font-size: x-large;
+  font-weight: bold;
 }
 
 .invitees input {
@@ -198,8 +204,8 @@
 
 .list_item {
   display: flex;
-  align-self: center;
   align-items: center;
+  justify-content: center;
 }
 
 .p_fix {
@@ -207,9 +213,14 @@
 }
 
 .comments {
-  height: 95%;
+  height: 50%;
   border: 2px solid black;
   padding: 5px;
   display: flex;
-  flex-direction: column;
+  overflow-y: scroll;
+  justify-content: center;
+}
+
+.adjust_height {
+  height: 100%;
 }

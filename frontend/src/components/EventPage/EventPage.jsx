@@ -33,7 +33,6 @@ const EventPage = (props) => {
   // COMMENTS SECTION
   useEffect(() => {
     axios.get(`/event/comments/${props.eventId}`).then((commentsData) => {
-
       setComments(commentsData.data);
       setChange(false);
     });
@@ -221,9 +220,9 @@ const EventPage = (props) => {
 
   return (
     <article className={`${classes.container} row`}>
-      <div className="col-3">
-        Invitees:
-        <div className={classes.invitees}>
+      <div className={`${classes.adjust_height} col-3`}>
+        <div className={`${classes.invitees} row`}>
+          <span className={classes.section_title}>INVITEES:</span>
           {showList}
           {newInvitee && (
             <div className="row align-items-center justify-content-center">
@@ -247,6 +246,16 @@ const EventPage = (props) => {
               className={`${classes.add} bi bi-plus-lg`}
             ></i>
           )}
+        </div>
+        <div className={`${classes.comments} row`}>
+          <span className={`${classes.section_title} text-center`}>COMMENTS</span>
+          <CommentSection
+            className={classes.comments}
+            cookies={props.cookies}
+            eventId={props.eventId}
+            setChange={setChange}
+            comments={comments}
+          />
         </div>
       </div>
       <main className="col">
@@ -355,18 +364,6 @@ const EventPage = (props) => {
           <Map lat={props.lat} lng={props.long} height={"400px"} zoom={15} />
         </div>
       </main>
-      <div className="col-3">
-        Comments
-        <div className={classes.comments}>
-          <CommentSection
-            className={classes.comments}
-            cookies={props.cookies}
-            eventId={props.eventId}
-            setChange={setChange}
-            comments={comments}
-          />
-        </div>
-      </div>
     </article>
   );
 };
