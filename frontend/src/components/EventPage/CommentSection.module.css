@@ -27,6 +27,7 @@
 }
 
 .form {
-  display:flex;
-  width:90%
+  display: flex;
+  width: 90%;
+  margin: 10px;
 }

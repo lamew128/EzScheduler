@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TimeAgo from "timeago-react";
 import classes from "./CommentSection.module.css";
 
@@ -40,9 +40,9 @@ const CommentSection = (props) => {
 
   return (
     <>
-      <form>
+      <form className="text-center m-2 p-0">
         <label>Enter comment:</label>
-        <input type="text" value={comment} onChange={commentChange} />
+        <input className={classes.form} type="text" value={comment} onChange={commentChange} />
         <button onClick={submitHandler}>ADD</button>
       </form>
       <>{renderComments}</>

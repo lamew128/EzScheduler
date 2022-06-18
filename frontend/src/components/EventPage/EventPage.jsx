@@ -220,33 +220,44 @@ const EventPage = (props) => {
 
   return (
     <article className={`${classes.container} row`}>
-      <div className={`${classes.invitees} col-3`}>
-        Invitees:
-        {showList}
-        {newInvitee && (
-          <div className="row align-items-center justify-content-center">
-            <input
-              className={classes.invitee_form}
-              value={invitee}
-              onChange={inviteeChange}
-              onBlur={inviteeFormBlur}
-              required
-            />
-          </div>
-        )}
-        {openDropDown && (
-          <div className={`${classes.dropdown} row`}>
-            <div className={classes["dropdown-content"]}>{addList}</div>
-          </div>
-        )}
-        {isCreator && (
-          <i
-            onClick={() => setNewInvitee(true)}
-            className={`${classes.add} bi bi-plus-lg`}
-          ></i>
-        )}
+      <div className={`${classes.adjust_height} col-3`}>
+        <div className={`${classes.invitees} row`}>
+          <span className={classes.section_title}>INVITEES:</span>
+          {showList}
+          {newInvitee && (
+            <div className="row align-items-center justify-content-center">
+              <input
+                className={classes.invitee_form}
+                value={invitee}
+                onChange={inviteeChange}
+                onBlur={inviteeFormBlur}
+                required
+              />
+            </div>
+          )}
+          {openDropDown && (
+            <div className={`${classes.dropdown} row`}>
+              <div className={classes["dropdown-content"]}>{addList}</div>
+            </div>
+          )}
+          {isCreator && (
+            <i
+              onClick={() => setNewInvitee(true)}
+              className={`${classes.add} bi bi-plus-lg`}
+            ></i>
+          )}
+        </div>
+        <div className={`${classes.comments} row`}>
+          <span className={`${classes.section_title} text-center`}>COMMENTS</span>
+          <CommentSection
+            className={classes.comments}
+            cookies={props.cookies}
+            eventId={props.eventId}
+            setChange={setChange}
+            comments={comments}
+          />
+        </div>
       </div>
-
       <main className="col">
         <h3 className={`${classes.title} row`}>
           {props.title}{" "}
@@ -353,16 +364,6 @@ const EventPage = (props) => {
           <Map lat={props.lat} lng={props.long} height={"400px"} zoom={15} />
         </div>
       </main>
-      <div className={`${classes.comments} col-3`}>
-        Comments
-        <CommentSection
-          className={classes.comments}
-          cookies={props.cookies}
-          eventId={props.eventId}
-          setChange={setChange}
-          comments={comments}
-        />
-      </div>
     </article>
   );
 };
