@@ -16,7 +16,6 @@ const EditEventForm = (props) => {
   const [invitee, setInvitee] = useState("");
   const [newInvitee, setNewInvitee] = useState(false);
   const [inviteesList, setInviteesList] = useState([]);
-  const [inviteesListSubmission, setInviteesListSubmission] = useState([]);
   const [dynamicList, setDynamicList] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(false);
 
@@ -102,12 +101,12 @@ const EditEventForm = (props) => {
       address,
       lat: coords.lat,
       long: coords.lng,
-      creator: props.user,
+      creator: props.creator,
       id: props.eventId
     };
     console.log(formData);
     axios.put(`/event`,formData).then((data) => {
-      console.log({data});
+      console.log(data.data);
     });
   }
 
@@ -119,9 +118,11 @@ const EditEventForm = (props) => {
     setDate(humanStartDate);
     setStartTime(humanStartDayTime);
     setEndTime(humanEndDayTime);
+    setCoords({lat:props.lat, lng: props.long})
   },[]);
 
-
+console.log("user");
+console.log(props.user);
 
 //fixing time display
 const humanStartTime = new Date(props.start_time*1000);
@@ -142,7 +143,6 @@ const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
   return (
   
     <div className={classes.container}>
-      Edit!!!!!!
       <h3 className="row">Edit Event</h3>
       <form className="row">
         <div className={`${classes.inputs} col`}>
@@ -207,8 +207,8 @@ const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
             MAP
             <div className={classes.map}>
               <Map
-                lat={props.lat}
-                lng={props.long}
+                lat={coords.lat}
+                lng={coords.lng}
                 height={"400px"}
                 zoom={18}
               />
