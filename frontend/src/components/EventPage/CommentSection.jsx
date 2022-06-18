@@ -26,23 +26,30 @@ const CommentSection = (props) => {
     });
   };
 
-  const renderComments = props.comments.map((item) => (
-    <>
-      <article className={classes.comments_container}>
-        <div className={classes.top}>
-          <p className={classes.username}>{item.name}:</p>
-          <TimeAgo className={classes.time} datetime={item.time * 1000} />
-        </div>
-        <span className={classes.comment}>{item.comment_text}</span>
-      </article>
-    </>
-  )).reverse();
+  const renderComments = props.comments
+    .map((item) => (
+      <>
+        <article className={classes.comments_container}>
+            <span className={`${classes.username}`}>{item.name}: </span>
+            <br />
+            <span className={`${classes.comment}`}>{item.comment_text}</span>
+            <br />
+            <TimeAgo className={classes.time} datetime={item.time * 1000} />
+        </article>
+      </>
+    ))
+    .reverse();
 
   return (
     <>
       <form className="text-center m-2 p-0">
         <label>Enter comment:</label>
-        <input className={classes.form} type="text" value={comment} onChange={commentChange} />
+        <input
+          className={classes.form}
+          type="text"
+          value={comment}
+          onChange={commentChange}
+        />
         <button onClick={submitHandler}>ADD</button>
       </form>
       <>{renderComments}</>

@@ -221,7 +221,7 @@ const EventPage = (props) => {
   return (
     <article className={`${classes.container} row`}>
       <div className={`${classes.adjust_height} col-3`}>
-        <div className={`${classes.invitees} row`}>
+        <div className={`${classes.invitees}`}>
           <span className={classes.section_title}>INVITEES:</span>
           {showList}
           {newInvitee && (
@@ -247,8 +247,10 @@ const EventPage = (props) => {
             ></i>
           )}
         </div>
-        <div className={`${classes.comments} row`}>
-          <span className={`${classes.section_title} text-center`}>COMMENTS</span>
+        <div className={`${classes.comments}`}>
+          <span className={`${classes.section_title} text-center`}>
+            COMMENTS
+          </span>
           <CommentSection
             className={classes.comments}
             cookies={props.cookies}
