@@ -25,7 +25,6 @@ const Weather = (props) => {
       .then((res) => {
         for (let i = 0; i < res.data.list.length; i++) {
           if (res.data.list[i].dt >= props.date) {
-            console.log("res.data.list[i] : ", res.data.list[i]);
             setWeather(res.data.list[i]);
             break;
           }
@@ -35,7 +34,7 @@ const Weather = (props) => {
       .catch((e) => console.log(e));
   }, [FULL_API_URL, props.date]);
 
-  console.log({weather});
+  //console.log({weather});
 
   return (
     <>
