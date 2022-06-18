@@ -103,58 +103,15 @@ const EditEventForm = (props) => {
       lat: coords.lat,
       long: coords.lng,
       creator: props.user,
-      invitees: inviteesListSubmission,
+      id: props.eventId
     };
     console.log(formData);
-    console.log(inviteesListSubmission);
+    axios.put(`/event`,formData).then((data) => {
+      console.log({data});
+    });
+  }
 
-    // const allUsersData = await axios.get(`/users`);
-    // const allUsers = allUsersData.data;
-    //create the event
-    // const response = await axios.post(`/event/new`, formData);
-    // const eventId = response.data.data.id;
-    //invite myself
-    // const data = await axios.post("/event/invite", {
-    //   response: "yes",
-    //   userId: props.user,
-    //   eventId: response.data.data.id,
-    // });
-    //invite others with fake email array
-    // email Array will be an input from the form. put in dummy place hoder for now
-  //   const emailArray = inviteesListSubmission;
-  //   const userIdArray = allUsers
-  //     .filter((user) => emailArray.includes(user.email))
-  //     .map((user) => user.id);
-  //   const axiosCalls = userIdArray.map((userId) =>
-  //     axios.post(`/event/invite`, {
-  //       response: null,
-  //       userId,
-  //       eventId,
-  //     })
-  //   );
-  //   Promise.all(axiosCalls).then((data) => {
-  //     //  console.log("promise all succeeded!");
-  //     console.log(data[0]);
-  //     console.log(data[1]);
-  //   });
-  // };
-
-  // const addInvitee = (p) => {
-  //   if (invitee.trim() === "") {
-  //     alert("Please fill out with the information!");
-  //     return;
-  //   }
-  //   if (inviteesListSubmission.includes(p.email.trim())) {
-  //     alert("You cannot add the same user!");
-  //     return;
-  //   }
-  //   setInviteesList((prev) => [...prev, p.name]);
-  //   setNewInvitee(false);
-  //   setInviteesListSubmission((prev) => [...prev, p.email]);
-  //   setOpenDropDown(false);
-  //   setInvitee("");
-  // };
-
+  
   useEffect(() => {
     setTitle(props.title);
     setDescription(props.description);
