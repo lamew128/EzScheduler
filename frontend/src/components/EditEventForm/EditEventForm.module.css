@@ -1,0 +1,148 @@
+.container {
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  margin: 20px;
+  width: 80%
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.invitees {
+  border: 2px solid black;
+  height: 402px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.map {
+  border: 2px solid black;
+  height: 405px;
+}
+
+.add {
+  font-size: x-large;
+  color: blue;
+  background-color: rgba(0, 221, 255, 0.350);
+  cursor: pointer;
+  border: 2px solid white;
+  border-radius: 10px;
+  transition: all 0.3s;
+  align-self: center;
+  margin: 10px;
+  width: 50px;
+}
+
+.add:hover {
+  background-color: rgba(0, 221, 255, 0.800);
+}
+
+.btn {
+  width: fit-content;
+  align-self: center;
+  padding: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn:hover {
+  background-color: #23acc4;
+  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.center {
+  justify-content: center;
+}
+
+.invitee_form {
+  width: auto;
+  height: fit-content;
+}
+
+.btn_add {
+  width: fit-content;
+  align-self: center;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn_add:hover {
+  background-color: #23acc4;
+  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn_add:active {
+  transform: translateY(-1px);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.list_name:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.delete {
+  padding: 5px;
+  background-color: rgb(255, 160, 160);
+  width: 30px;
+}
+
+.delete:hover {
+  background-color: red;
+}
+
+.list_item {
+  display: flex;
+  align-self: center;
+  align-items: center;
+}
+
+.p_fix {
+  margin: 0;
+}

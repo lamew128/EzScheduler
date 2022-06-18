@@ -35,6 +35,8 @@ const Weather = (props) => {
       .catch((e) => console.log(e));
   }, [FULL_API_URL, props.date]);
 
+  console.log({weather});
+
   return (
     <>
       {loading && (

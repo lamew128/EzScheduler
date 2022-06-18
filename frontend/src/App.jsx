@@ -7,6 +7,7 @@ import MyEvents from "./pages/MyEvents";
 import NewEvent from "./pages/NewEvent";
 import PastEvents from "./pages/PastEvents";
 import EventMainPage from "./pages/EventMainPage";
+import EventEditPage from "./pages/EventEditPage";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
@@ -45,12 +46,19 @@ function App() {
               <Redirect to="/" />
             )}
           </Route>
+          <Route exact path="/events/:id">
+            {cookies.user ? (
+              <EventMainPage cookies={cookies} />
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Route>
           <Route exact path="/events/past">
             {cookies.user ? <PastEvents /> : <Redirect to="/" />}
           </Route>
-          <Route path="/events/:id">
+          <Route exact path="/events/:id/edit">
             {cookies.user ? (
-              <EventMainPage cookies={cookies} />
+              <EventEditPage cookies={cookies} />
             ) : (
               <Redirect to="/" />
             )}
