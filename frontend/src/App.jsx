@@ -49,7 +49,7 @@ function App() {
           <Route exact path="/events/past">
             {cookies.user ? <PastEvents user={cookies.user.id} /> : <Redirect to="/" />}
           </Route>
-          <Route path="/events/:id">
+          <Route exact path="/events/:id">
             {cookies.user ? (
               <EventMainPage cookies={cookies} />
             ) : (
