@@ -29,10 +29,10 @@ const CommentSection = (props) => {
   const renderComments = props.comments.map((item) => (
     <>
       <article className={classes.container}>
-      <div className={`${classes.title} col`}>
+      <span className={`${classes.title} col`}>
         {item.name}
         <TimeAgo datetime={item.time * 1000} />
-      </div>
+      </span>
         {item.comment_text} 
       </article>
     </>
@@ -46,7 +46,7 @@ const CommentSection = (props) => {
         <input type="text" value={comment} onChange={commentChange} />
         <button onClick={submitHandler}>ADD</button>
       </form>
-    </>
+   </>
   );
 };
 

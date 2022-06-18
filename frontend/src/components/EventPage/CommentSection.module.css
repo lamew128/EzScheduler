@@ -14,6 +14,11 @@
 .title {
   display: flex;
   justify-content: space-between;
+}
+
+.form {
+  display:flex;
+  width:90%
 
 }
 
