@@ -5,6 +5,7 @@ import axios from "axios";
 const Login = (props) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   function cookieSetter(newName) {
     props.setCookie("user", newName, { path: "/" });
@@ -18,16 +19,26 @@ const Login = (props) => {
     setPassword(e.target.value);
   };
 
+
+
   const submitHandler = (e) => {
     e.preventDefault();
     axios
       .post("/users/login", { email: user, password: password })
       .then((user) => {
-        console.log("USER ID = ", user.data.id);
-        cookieSetter({ id: user.data.id, name: user.data.name });
-        props.setName(user.data.name);
-        props.setIsLoggedIn(true);
-        props.close();
+        if (user.data.status === 200)
+        {
+          console.log("USER ID = ", user.data.id);
+          cookieSetter({ id: user.data.id, name: user.data.name });
+          props.setName(user.data.name);
+          props.setIsLoggedIn(true);
+          props.close();
+        }
+        if (user.data.status === 401)
+        {
+          console.log("WRONG", user.data.message);
+          setError(true);
+        }
       });
   };
 
@@ -61,6 +72,7 @@ const Login = (props) => {
               onChange={passwordLogin}
             />
           </div>
+          {error && <h4>Invalid login information.</h4>}
           <button className={classes.btn} type="submit">
             LOGIN!
           </button>
