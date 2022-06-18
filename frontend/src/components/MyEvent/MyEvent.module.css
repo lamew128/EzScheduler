@@ -6,6 +6,17 @@
   margin: 10px;
 }
 
+.container:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+  transform: translate(-3px, -3px);
+}
+
+.fit {
+  max-width: fit-content;
+  align-self: center;
+}
+
 .title {
   align-self: center;
 }
@@ -26,6 +37,7 @@
   transition: all 0.3s ease 0s;
   cursor: pointer;
   margin: 10px;
+  white-space: nowrap;
 }
 
 .btn:hover {
