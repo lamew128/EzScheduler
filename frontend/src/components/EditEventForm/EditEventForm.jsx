@@ -5,7 +5,7 @@ import axios from "axios";
 import TimePicker from "react-time-picker";
 import { Link } from "react-router-dom";
 
-const NewEvent = (props) => {
+const EditEventForm = (props) => {
   const [coords, setCoords] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -20,11 +20,11 @@ const NewEvent = (props) => {
   const [dynamicList, setDynamicList] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(false);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((e) => {
-      setCoords({ lng: e.coords.longitude, lat: e.coords.latitude });
-    });
-  }, []);
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition((e) => {
+  //     setCoords({ lng: e.coords.longitude, lat: e.coords.latitude });
+  //   });
+  // }, []);
 
   const addressChange = (e) => {
     setAddress(e.target.value);
@@ -42,21 +42,21 @@ const NewEvent = (props) => {
     setDescription(e.target.value);
   };
 
-  const inviteeChange = (e) => {
-    setInvitee(e.target.value);
-    setOpenDropDown(true);
-  };
+  // const inviteeChange = (e) => {
+  //   setInvitee(e.target.value);
+  //   setOpenDropDown(true);
+  // };
 
-  useEffect(() => {
-    axios.get(`/events/:`).then((e) => {
-      const list = e.data.filter(
-        (user) =>
-          user.email.toLowerCase().includes(invitee.toLowerCase()) ||
-          user.name.toLowerCase().includes(invitee.toLowerCase())
-      );
-      setDynamicList(list);
-    });
-  }, [invitee]);
+  // useEffect(() => {
+  //   axios.get(`/events/:`).then((e) => {
+  //     const list = e.data.filter(
+  //       (user) =>
+  //         user.email.toLowerCase().includes(invitee.toLowerCase()) ||
+  //         user.name.toLowerCase().includes(invitee.toLowerCase())
+  //     );
+  //     setDynamicList(list);
+  //   });
+  // }, [invitee]);
 
   const getLocation = () => {
     axios
@@ -159,12 +159,27 @@ const NewEvent = (props) => {
     setTitle(props.title);
     setDescription(props.description);
     setAddress(props.address);
-    setDate(props.date);
+    setDate(humanStartDate);
   },[]);
 
- 
-  
-  console.log(props);
+
+  // console.log(props.start_time);
+  // const humanStartTime = (new Date(props.start_time*1000)).toLocaleString({year: 'numeric', month: '2-digit', day: 'numeric' });
+  // const humanStartTimeArray = humanStartTime.split(",")[0].split('/');
+  // const humanStartDate = `${humanStartTimeArray[2]}-${humanStartTimeArray[0]}-${humanStartTimeArray[1]}`
+  // console.log({humanStartTime});
+  // console.log({humanStartDate});
+
+const humanStartTime = new Date(props.start_time*1000);
+const humanYear  = humanStartTime.getFullYear();
+const humanMonth = (humanStartTime.getMonth() + 1).toString().padStart(2, "0");
+const humanDate = humanStartTime.getDate().toString().padStart(2, "0");
+const humanStartDate = `${humanYear}-${humanMonth}-${humanDate}`;
+
+  console.log(props.end_time);
+  console.log({startTimestamp});
+  console.log({date});
+
   return (
   
     <div className={classes.container}>
@@ -201,7 +216,7 @@ const NewEvent = (props) => {
         </div>
         <hr className="mt-3" />
         <div className="row mb-3">
-          <div className="col-4">
+          {/* <div className="col-4">
             Invitees
             <div className={classes.invitees}>
               {list}
@@ -228,13 +243,13 @@ const NewEvent = (props) => {
                 className={`${classes.add} bi bi-plus-lg`}
               ></i>
             </div>
-          </div>
-          <div className="col-8">
+          </div> */}
+          <div className="col-12">
             MAP
             <div className={classes.map}>
               <Map
-                lat={coords.lat}
-                lng={coords.lng}
+                lat={props.lat}
+                lng={props.long}
                 height={"400px"}
                 zoom={18}
               />
@@ -254,4 +269,4 @@ const NewEvent = (props) => {
   );
 };
 
-export default NewEvent;
+export default EditEventForm;

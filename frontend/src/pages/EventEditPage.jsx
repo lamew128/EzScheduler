@@ -27,9 +27,10 @@ const EventEditPage = (props) => {
     });
   }, [id, user, event.creator]);
 
+  
+
   return (
     <>
-      editpage editing
       {!event.event_id && <>This event does not exist!</>}
       {event.event_id && (
         <>
@@ -40,7 +41,8 @@ const EventEditPage = (props) => {
             description={event.description}
             //how to convert long and lat to full address?
             address={event.address}
-            date={event.start_time}
+            start_time={event.start_time}
+            end_time={event.end_time}
             response={event.response}
             lat={event.lat}
             long={event.long}
