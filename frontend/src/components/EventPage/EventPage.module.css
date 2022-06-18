@@ -119,10 +119,12 @@
   border: 2px solid black;
   text-align: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 10px;
   overflow-y: auto;
-  height: 50%;
+  height: 45%;
+  margin-bottom: 20px;
 }
 
 .section_title {
@@ -213,12 +215,13 @@
 }
 
 .comments {
-  height: 50%;
+  height: 52%;
   border: 2px solid black;
   padding: 5px;
   display: flex;
+  flex-direction: column;
+  justify-content: start;
   overflow-y: scroll;
-  justify-content: center;
 }
 
 .adjust_height {
