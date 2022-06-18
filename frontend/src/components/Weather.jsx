@@ -49,9 +49,7 @@ const Weather = (props) => {
         {weather &&
           <>
             <p>
-            The temperature on day of the event will be{" "}
-            {Math.round(weather.main.temp - 273.15)}
-            {"°C"}
+            {`${Math.round(weather.main.temp - 273.15)}°C`}
           </p>
           <img
             src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
