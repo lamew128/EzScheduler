@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MyEvent from "../components/MyEvent/MyEvent";
+import PastEvent from "../components/PastEvent/PastEvent";
 import axios from "axios";
 
 
@@ -34,7 +34,7 @@ const PastEvents = (props) => {
         event.end_time - Date.now() / 1000 < 0
     )
     .map((event) => (
-      <MyEvent
+      <PastEvent
         key={event.event_id}
         eventId={event.event_id}
         title={event.title}
@@ -47,7 +47,7 @@ const PastEvents = (props) => {
 
   return (
     <>
-      <h2>PastEvents</h2>
+      <h2>Past Events</h2>
       {pastEvents}
     </>
   );
