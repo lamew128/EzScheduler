@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import TimeAgo from 'timeago-react';
+import TimeAgo from "timeago-react";
 import classes from "./CommentSection.module.css";
 
 const CommentSection = (props) => {
@@ -28,31 +28,32 @@ const CommentSection = (props) => {
 
   const renderComments = props.comments.map((item) => (
     <>
-      <article className={classes.container}>
-      <span className={`${classes.title} col`}>
-        {item.name}
-        <TimeAgo datetime={item.time * 1000} />
-      </span>
-        {item.comment_text} 
+      <article className={classes.comments_container}>
+        <div className={classes.top}>
+          <p className={classes.username}>{item.name}:</p>
+          <TimeAgo className={classes.time} datetime={item.time * 1000} />
+        </div>
+        <span className={classes.comment}>{item.comment_text}</span>
       </article>
     </>
-  ));
+  )).reverse();
 
   return (
     <>
-      <>{renderComments}</>
       <form>
         <label>Enter comment:</label>
         <input type="text" value={comment} onChange={commentChange} />
         <button onClick={submitHandler}>ADD</button>
       </form>
-   </>
+      <>{renderComments}</>
+    </>
   );
 };
 
 export default CommentSection;
 
-{/* <article class = "tweet">
+{
+  /* <article class = "tweet">
 <header>
   <span class="profile-name">
     <img class="tweetpfp" src = ${tweet.user.avatars}>
@@ -71,4 +72,5 @@ export default CommentSection;
     <i class="fa-solid fa-retweet"></i>
   </span>
 </footer>
-</article>`; */}
+</article>`; */
+}
