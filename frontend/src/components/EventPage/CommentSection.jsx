@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import TimeAgo from 'timeago-react';
+import classes from "./CommentSection.module.css";
 
 const CommentSection = (props) => {
   const [comment, setComment] = useState("");
@@ -27,12 +28,13 @@ const CommentSection = (props) => {
 
   const renderComments = props.comments.map((item) => (
     <>
-      <h5>
-        {item.name}: {item.comment_text} at 
-        <TimeAgo
-          datetime={item.time * 1000}
-        />
-      </h5>
+      <article className={classes.container}>
+      <div className={`${classes.title} col`}>
+        {item.name}
+        <TimeAgo datetime={item.time * 1000} />
+      </div>
+        {item.comment_text} 
+      </article>
     </>
   ));
 
@@ -49,3 +51,24 @@ const CommentSection = (props) => {
 };
 
 export default CommentSection;
+
+{/* <article class = "tweet">
+<header>
+  <span class="profile-name">
+    <img class="tweetpfp" src = ${tweet.user.avatars}>
+    <span>${tweet.user.name}</span>
+  </span>
+  <span class="handler">${tweet.user.handle}</span>
+</header>
+<div>
+  ${escapee(tweet.content.text)}
+</div>
+<footer>
+  <span>${timeago.format(tweet.created_at, Date())}</span>
+  <span>
+    <i class="fa-solid fa-flag"></i>
+    <i class="fa-solid fa-heart"></i>
+    <i class="fa-solid fa-retweet"></i>
+  </span>
+</footer>
+</article>`; */}
