@@ -63,8 +63,6 @@ const EventPage = (props) => {
     axios
       .post("/event/invite", { userId: p.id, eventId: props.eventId })
       .then((res) => console.log(res));
-    console.log(p.id);
-    console.log(props.eventId);
     const user = { userId: p.id, data: p };
     setNameList((prev) => [...prev, user]);
     setNewInvitee(false);
@@ -136,7 +134,8 @@ const EventPage = (props) => {
       console.log(invitee.response);
       return (
         <div key={invitee.data.email} className={classes.list_item}>
-          {invitee.userId !== props.cookies.user.id && (
+          {(invitee.userId !== props.creator ||
+            props.cookies.user.id !== props.creator) && (
             <>
               {invitee.response === "yes" && (
                 <i className={`${classes.check} bi bi-check-lg col`}></i>
@@ -162,7 +161,14 @@ const EventPage = (props) => {
       );
     });
     setShowList(list);
-  }, [nameList, inviteesList, props.eventId, isCreator, props.cookies.user.id]);
+  }, [
+    nameList,
+    inviteesList,
+    props.eventId,
+    isCreator,
+    props.cookies.user.id,
+    props.creator,
+  ]);
 
   useEffect(() => {
     if (invitee.trim() === "") {

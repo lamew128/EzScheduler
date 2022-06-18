@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import EventDate from "../EventDate";
 import classes from "./MyEvent.module.css";
 
@@ -20,6 +21,9 @@ const MyEvent = (props) => {
     <>
       <div className={container}>
         <EventDate className="col" date={date} />
+        <Link className={`${classes.fit}`} to={`/events/${props.eventId}`}>
+          <button className={classes.btn}>OPEN EVENT</button>
+        </Link>
         <h3 className={`${classes.title} col`}>{props.title}</h3>
         <div className="col align-self-center text-center">
           {!confirmation && (
