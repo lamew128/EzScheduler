@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import TimeAgo from 'timeago-react';
 
 const CommentSection = (props) => {
   const [comment, setComment] = useState("");
@@ -27,7 +28,10 @@ const CommentSection = (props) => {
   const renderComments = props.comments.map((item) => (
     <>
       <h5>
-        {item.name}: {item.comment_text} at {item.time}
+        {item.name}: {item.comment_text} at 
+        <TimeAgo
+          datetime={item.time * 1000}
+        />
       </h5>
     </>
   ));
