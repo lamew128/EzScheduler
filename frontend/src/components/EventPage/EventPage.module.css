@@ -28,7 +28,7 @@
   border-radius: 25px;
   padding: 20px;
   margin: 20px;
-  width: 80%;
+  width: 90%;
 }
 
 .title {
@@ -112,12 +112,16 @@
 
 .invitees {
   border: 2px solid black;
-  height: 200px;
   text-align: center;
   display: flex;
   flex-direction: column;
   padding: 10px;
   overflow-y: auto;
+  height: 85vh;
+}
+
+.invitees input {
+  width: fit-content;
 }
 
 .add {
@@ -139,7 +143,6 @@
 
 .weather {
   border: 2px solid black;
-  height: 200px;
   padding: 10px;
 }
 
@@ -178,7 +181,7 @@
   display: block;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   cursor: pointer;
@@ -197,4 +200,10 @@
 
 .p_fix {
   margin: 0;
+}
+
+.comments {
+  height: 85vh;
+  border: 2px solid black;
+  padding: 5px;
 }

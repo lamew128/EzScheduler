@@ -59,6 +59,9 @@ const NewEvent = (props) => {
   }, [invitee]);
 
   const getLocation = () => {
+    if (address.trim() === "") {
+      return;
+    }
     axios
       .get("https://maps.googleapis.com/maps/api/geocode/json", {
         params: {
@@ -70,6 +73,12 @@ const NewEvent = (props) => {
         const dataCoords = data.data.results[0].geometry.location;
         setCoords({ lat: dataCoords.lat, lng: dataCoords.lng });
       });
+  };
+
+  const inviteeFormBlur = () => {
+    if (invitee.trim() === "") {
+      setNewInvitee(false);
+    }
   };
 
   //save the new event data to database
@@ -143,7 +152,6 @@ const NewEvent = (props) => {
       alert("Please fill out with the information!");
       return;
     }
-    // FIX THIS!!!!!
     let notAdd = true;
     inviteesList.forEach((elem) => {
       if (elem.email === p.email.trim()) {
@@ -244,6 +252,7 @@ const NewEvent = (props) => {
                     className={classes.invitee_form}
                     value={invitee}
                     onChange={inviteeChange}
+                    onBlur={inviteeFormBlur}
                     required
                   />
                 </div>
