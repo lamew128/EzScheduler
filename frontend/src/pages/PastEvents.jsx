@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MyEvent from "../components/MyEvent/MyEvent";
+import PastEvent from "../components/PastEvent/PastEvent";
 import axios from "axios";
 
 
@@ -9,9 +9,11 @@ const PastEvents = (props) => {
   const [eventChange, setEventChange] = useState(false);
   const userId = props.user ? props.user : false;
 
+
   useEffect(() => {
     if (userId) {
       axios.get(`/event/all/${userId}`).then((d) => {
+        console.log(d);
         setEvents(d.data);
       });
       setShowEvents(true);
@@ -21,6 +23,10 @@ const PastEvents = (props) => {
       setEventChange(false);
     }
   }, [userId, eventChange]);
+  console.log(props);
+  console.log(userId);
+  console.log(events);
+  console.log(Date.now()/1000);
 
   const pastEvents = events
     .filter(
@@ -28,7 +34,7 @@ const PastEvents = (props) => {
         event.end_time - Date.now() / 1000 < 0
     )
     .map((event) => (
-      <MyEvent
+      <PastEvent
         key={event.event_id}
         eventId={event.event_id}
         title={event.title}
@@ -41,7 +47,7 @@ const PastEvents = (props) => {
 
   return (
     <>
-      <h2>PastEvents</h2>
+      <h2>Past Events</h2>
       {pastEvents}
     </>
   );

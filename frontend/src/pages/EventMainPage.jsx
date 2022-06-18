@@ -10,6 +10,8 @@ const EventMainPage = (props) => {
 
   useEffect(() => {
     axios.get(`/event/${id}`).then((data) => {
+      console.log(id);
+      console.log(data);
       data.data.forEach((e) => {
         if (e.invitee_id === user) {
           setEvent(e);
