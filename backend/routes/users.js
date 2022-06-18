@@ -69,7 +69,7 @@ module.exports = (db) => {
       .then((email) => {
         if (email) {
           console.log("EXIST");
-          return "EXIST";
+          return res.json({ status: 401, message: "Email already existed!" });
         }
         db.addUser(user)
           .then(user => {
