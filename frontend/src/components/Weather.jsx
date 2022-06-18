@@ -44,18 +44,34 @@ const Weather = (props) => {
       )}
       {!loading && (
         <>
-          <p>
+        {weather &&
+          <>
+            <p>
             The temperature on day of the event will be{" "}
-            {weather && Math.round(weather.main.temp - 273.15)}
-            {"°"}
+            {Math.round(weather.main.temp - 273.15)}
+            {"°C"}
           </p>
           <img
-            src={
-              weather &&
-              `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
-            }
+            src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
             alt="Weather Icon"
           ></img>
+          <p>{weather.weather[0].description}</p>
+
+          {weather.weather[0].main === "Clear" && 
+              <p>Enjoy!</p>
+          }
+
+          {weather.weather[0].main === "Rain" && 
+              <p>Bring an umb.</p>
+          }
+          
+          </>
+        }
+        {!weather && 
+          <>
+            <p>No weather information yet, Please check later.</p>
+          </>
+        }
         </>
       )}
     </>
