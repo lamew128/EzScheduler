@@ -9,9 +9,11 @@ const PastEvents = (props) => {
   const [eventChange, setEventChange] = useState(false);
   const userId = props.user ? props.user : false;
 
+
   useEffect(() => {
     if (userId) {
       axios.get(`/event/all/${userId}`).then((d) => {
+        console.log(d);
         setEvents(d.data);
       });
       setShowEvents(true);
@@ -21,6 +23,10 @@ const PastEvents = (props) => {
       setEventChange(false);
     }
   }, [userId, eventChange]);
+  console.log(props);
+  console.log(userId);
+  console.log(events);
+  console.log(Date.now()/1000);
 
   const pastEvents = events
     .filter(
