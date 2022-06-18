@@ -31,6 +31,10 @@
   width: 90%;
 }
 
+.container main {
+  margin: 10px;
+}
+
 .title {
   justify-content: center;
 }
@@ -117,7 +121,7 @@
   flex-direction: column;
   padding: 10px;
   overflow-y: auto;
-  height: 85vh;
+  height: 95%;
 }
 
 .invitees input {
@@ -203,7 +207,7 @@
 }
 
 .comments {
-  height: 85vh;
+  height: 95%;
   border: 2px solid black;
   padding: 5px;
 }

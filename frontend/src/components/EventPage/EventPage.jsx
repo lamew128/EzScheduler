@@ -257,7 +257,7 @@ const EventPage = (props) => {
           )}
         </div>
       </div>
-      <main className="col-6">
+      <main className="col">
         <h3 className={`${classes.title} row`}>
           {props.title}{" "}
           {isCreator && (
