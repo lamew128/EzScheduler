@@ -33,17 +33,9 @@ const EventPage = (props) => {
   // COMMENTS SECTION
   useEffect(() => {
     axios.get(`/event/comments/${props.eventId}`).then((commentsData) => {
-      const requests = commentsData.data.map((comment) =>
-        axios.get(`/event/reply/${comment.comment_id}`)
-      );
 
-      Promise.all(requests).then((repliesData) => {
-        for (let i = 0; i < commentsData.data.length; i++) {
-          commentsData.data[i].reply = repliesData[i].data.data;
-        }
-        setComments(commentsData.data);
-        setChange(false);
-      });
+      setComments(commentsData.data);
+      setChange(false);
     });
   }, [change, props.eventId]);
 
