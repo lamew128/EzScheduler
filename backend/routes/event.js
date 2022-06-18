@@ -96,6 +96,7 @@ module.exports = (db) => {
   //invite should contain { userId, eventId }
   router.delete('/invite', (req, res) => {
     const invite = req.body;
+    console.log('AAAAAA',req.body)
     db.deleteInvite(invite)
       .then((data) => {
         return res.json({ status: 200, data: data });
@@ -118,6 +119,25 @@ module.exports = (db) => {
     db.getComments(eventId)
       .then((data) => {
         res.json(data);
+      })
+  });
+
+  //reply a comment
+  //comment should contain { userId, commentId, time, text }
+  router.post('/reply', (req, res) => {
+    const reply = req.body;
+    db.addReply(reply)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
+      })
+  });
+
+  //get all comments given an event id
+  router.get('/reply/:id', (req, res) => {
+    const commentId = req.params.id;
+    db.getReply(commentId)
+      .then((data) => {
+        return res.json({ status: 200, data: data });
       })
   });
 

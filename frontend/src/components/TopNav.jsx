@@ -37,7 +37,7 @@ const TopNav = (props) => {
   return (
     <nav className={navbarClass}>
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <a className={`${classes.app_name} navbar-brand`} href="/">
           E.Z.Scheduler
         </a>
         <button

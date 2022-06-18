@@ -6,30 +6,21 @@
 }
 
 .x {
-  color: white;
-  border: 2px solid red;
-  background-color: red;
+  color: red;
   height: fit-content;
   max-width: fit-content;
-  border-radius: 30px;
 }
 
 .check {
-  color: white;
-  border: 2px solid green;
-  background-color: green;
+  color: green;
   height: fit-content;
   max-width: fit-content;
-  border-radius: 30px;
 }
 
-.maybe {
-  color: white;
-  border: 2px solid orange;
-  background-color: orange;
+.question {
+  color: orange;
   height: fit-content;
   max-width: fit-content;
-  border-radius: 30px;
 }
 
 .container {
@@ -37,7 +28,11 @@
   border-radius: 25px;
   padding: 20px;
   margin: 20px;
-  width: 80%;
+  width: 90%;
+}
+
+.container main {
+  margin: 10px;
 }
 
 .title {
@@ -121,12 +116,16 @@
 
 .invitees {
   border: 2px solid black;
-  height: 200px;
   text-align: center;
   display: flex;
   flex-direction: column;
   padding: 10px;
   overflow-y: auto;
+  height: 95%;
+}
+
+.invitees input {
+  width: fit-content;
 }
 
 .add {
@@ -148,7 +147,6 @@
 
 .weather {
   border: 2px solid black;
-  height: 200px;
   padding: 10px;
 }
 
@@ -181,15 +179,13 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  transform: translateY(-40px);
-  z-index: 1999;
 }
 
 .dropdown-content {
   display: block;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   cursor: pointer;
@@ -208,4 +204,10 @@
 
 .p_fix {
   margin: 0;
+}
+
+.comments {
+  height: 95%;
+  border: 2px solid black;
+  padding: 5px;
 }

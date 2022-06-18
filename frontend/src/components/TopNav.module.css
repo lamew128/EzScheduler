@@ -23,3 +23,7 @@
   border-bottom: 2px solid black;
   width: fit-content;
 }
+
+.app_name {
+  font-family: 'Dancing Script', cursive;
+}
