@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import EventPage from "../components/EventPage/EventPage";
 import CommentSection from "../components/EventPage/CommentSection";
 import { useParams } from "react-router-dom";
+import EditEventForm from "../components/EditEventForm/EditEventForm";
 import axios from "axios";
+
 
 const EventEditPage = (props) => {
   const [event, setEvent] = useState({});
   const [comments, setComments] = useState([]);
+  const [edit, setEdit] = useState(false);
   const { id } = useParams();
   const user = props.cookies.user.id;
 
@@ -30,7 +33,7 @@ const EventEditPage = (props) => {
       {!event.event_id && <>This event does not exist!</>}
       {event.event_id && (
         <>
-          <EventPage
+          < EditEventForm
             cookies={props.cookies}
             eventId={id}
             title={event.title}
