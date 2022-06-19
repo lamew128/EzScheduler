@@ -61,7 +61,7 @@ const Weather = (props) => {
           }
 
           {weather.weather[0].main === "Rain" && 
-              <p>Bring an umb.</p>
+              <p>Bring an umbrella! ☂️</p>
           }
           
           </>

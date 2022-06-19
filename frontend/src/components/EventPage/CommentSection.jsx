@@ -13,8 +13,7 @@ const CommentSection = (props) => {
 
   const deleteComment = (commentId) => {
     console.log("Comment id: ", commentId);
-    axios.delete(`/event/comment/${commentId}`)
-    .then((res) => {
+    axios.delete(`/event/comment/${commentId}`).then((res) => {
       console.log(res.data);
       props.setChange(true);
     });
@@ -46,8 +45,17 @@ const CommentSection = (props) => {
         <br />
         <span className={`${classes.comment}`}>{item.comment_text}</span>
         <br />
-        {(item.user_id === props.cookies.user.id) && <button onClick={() => deleteComment(item.comment_id)}>delete</button>}
-        <TimeAgo className={classes.time} datetime={item.time * 1000} />
+        <div className="row">
+          <TimeAgo className={`${classes.time} col`} datetime={item.time * 1000} />
+          {item.user_id === props.cookies.user.id && (
+            <button
+              className={`${classes.btn} ${classes.delete_comment}`}
+              onClick={() => deleteComment(item.comment_id)}
+            >
+              delete
+            </button>
+          )}
+        </div>
       </article>
     ))
     .reverse();

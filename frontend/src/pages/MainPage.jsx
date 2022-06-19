@@ -3,7 +3,8 @@ import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
 import EventItem from "../components/EventItem/EventItem";
 import Notification from "../components/Notification/Notification";
-import classes from "../components/Notification/Notification.module.css";
+import classes_notification from "../components/Notification/Notification.module.css";
+import classes_mainpage from "./MainPage.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -155,7 +156,7 @@ const MainPage = (props) => {
       {showEvents && (
         <>
           {notificationList.length !== 0 && (
-            <div className={classes.container}>
+            <div className={classes_notification.container}>
               <h3>Events You Have Not Responded</h3>
               {notificationList}
             </div>
@@ -173,7 +174,15 @@ const MainPage = (props) => {
           {rejectedEventsList}
         </>
       )}
-      {!showEvents && <h3>Please Login to See Your Events</h3>}
+      {!showEvents && (
+        <div className={classes_mainpage.welcome}>
+          <h1 className={classes_mainpage.title}>
+            Welcome to{" "}
+            <span className={classes_mainpage.app_name}>E.Z Scheduler</span>
+          </h1>
+          <h3>Please Login on the navigation bar to see Your Events</h3>
+        </div>
+      )}
     </>
   );
 };
