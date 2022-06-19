@@ -13,6 +13,10 @@ const CommentSection = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (comment.trim() === "") {
+      alert("Please fill out the field!");
+      return;
+    }
     const formData = {
       eventId: props.eventId,
       userId: props.cookies.user.id,
