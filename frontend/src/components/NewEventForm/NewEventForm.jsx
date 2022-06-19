@@ -211,7 +211,7 @@ const NewEvent = (props) => {
   return (
     <div className={classes.container}>
       <h3 className="row">New Event</h3>
-      <form className="row">
+      <form className="row justify-content-center">
         <div className={`${classes.inputs} col`}>
           <label>Title:</label>
           <input type="text" value={title} onChange={titleChange} />

@@ -35,7 +35,8 @@ const UpcomingEvents = (props) => {
           </div>
           <div className={`${classes.date__invitees} col-2`}>
             <EventDate date={date} />
-            <p>{going} people are going</p>
+            {going > 1 && <p>{going} people are going</p>}
+            {going === 1 && <p>{going} person is going</p>}
           </div>
         </div>
       </section>

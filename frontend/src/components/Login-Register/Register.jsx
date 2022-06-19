@@ -36,7 +36,7 @@ const Register = (props) => {
           cookieSetter({ id: user.data.id, name: user.data.name });
           props.setLogin(true);
           props.close();
-          props.setName(name)
+          props.setName(name);
         }
         if (user.data.status === 401) {
           setError(true);
@@ -50,7 +50,7 @@ const Register = (props) => {
   return (
     <div className={classes.container}>
       <form className={classes.login_overlay} onSubmit={submitHandler}>
-        <div className={`${classes.center} row`}>
+        <div className={`${classes.center} align-self-end`}>
           <i
             onClick={props.close}
             className={`${classes.close} bi bi-x-lg`}
@@ -61,27 +61,29 @@ const Register = (props) => {
           <div className={formClass}>
             <label>Name:</label>
             <input
-              className={classes.w}
+              className={classes.input}
               type="text"
               value={name}
               onChange={nameRegister}
+              placeholder="John Doe"
               required
             />
           </div>
           <div className={formClass}>
             <label>Email:</label>
             <input
-              className={classes.w}
+              className={classes.input}
               type="email"
               value={email}
               onChange={emailRegister}
+              placeholder="name@email.com"
               required
             />
           </div>
           <div className={formClass}>
             <label>Password:</label>
             <input
-              className={classes.w}
+              className={classes.input}
               type="password"
               value={password}
               onChange={passwordRegister}

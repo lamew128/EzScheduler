@@ -268,7 +268,7 @@ const EventPage = (props) => {
               style={{ width: "fit-content" }}
               to={`/events/${props.eventId}/edit`}
             >
-              <button>EDIT</button>
+              <button className={`${classes.btn} ${classes.edit}`}>EDIT</button>
             </Link>
           )}
           <p>Created by {creator}</p>

@@ -50,7 +50,7 @@ const CommentSection = (props) => {
           value={comment}
           onChange={commentChange}
         />
-        <button onClick={submitHandler}>ADD</button>
+        <button className={classes.btn} onClick={submitHandler}>ADD</button>
       </form>
       <>{renderComments}</>
     </>
