@@ -122,20 +122,10 @@ module.exports = (db) => {
       })
   });
 
-  //reply a comment
-  //comment should contain { userId, commentId, time, text }
-  router.post('/reply', (req, res) => {
-    const reply = req.body;
-    db.addReply(reply)
-      .then((data) => {
-        return res.json({ status: 200, data: data });
-      })
-  });
-
-  //get all comments given an event id
-  router.get('/reply/:id', (req, res) => {
+  //delete a comment
+  router.delete('/comment/:id', (req, res) => {
     const commentId = req.params.id;
-    db.getReply(commentId)
+    db.deleteComment(commentId)
       .then((data) => {
         return res.json({ status: 200, data: data });
       })

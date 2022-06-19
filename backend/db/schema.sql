@@ -40,11 +40,3 @@ CREATE TABLE comments (
   time bigInt NOT NULL,
   comment_text VARCHAR(255) NOT NULL
 );
-
-CREATE TABLE reply (
-  id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  comment_id INTEGER REFERENCES comments(id) ON DELETE CASCADE,
-  time bigInt NOT NULL,
-  reply_text VARCHAR(255) NOT NULL
-);
