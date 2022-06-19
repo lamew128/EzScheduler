@@ -27,16 +27,14 @@ const CommentSection = (props) => {
   };
 
   const renderComments = props.comments
-    .map((item) => (
-      <>
-        <article className={classes.comments_container}>
-            <span className={`${classes.username}`}>{item.name}: </span>
-            <br />
-            <span className={`${classes.comment}`}>{item.comment_text}</span>
-            <br />
-            <TimeAgo className={classes.time} datetime={item.time * 1000} />
-        </article>
-      </>
+    .map((item, index) => (
+      <article key={index} className={classes.comments_container}>
+        <span className={`${classes.username}`}>{item.name}: </span>
+        <br />
+        <span className={`${classes.comment}`}>{item.comment_text}</span>
+        <br />
+        <TimeAgo className={classes.time} datetime={item.time * 1000} />
+      </article>
     ))
     .reverse();
 
@@ -50,7 +48,9 @@ const CommentSection = (props) => {
           value={comment}
           onChange={commentChange}
         />
-        <button className={classes.btn} onClick={submitHandler}>ADD</button>
+        <button className={classes.btn} onClick={submitHandler}>
+          ADD
+        </button>
       </form>
       <>{renderComments}</>
     </>
