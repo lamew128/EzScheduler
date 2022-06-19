@@ -11,6 +11,15 @@ const CommentSection = (props) => {
     setComment(e.target.value);
   };
 
+  const deleteComment = (commentId) => {
+    console.log("Comment id: ", commentId);
+    axios.delete(`/event/comment/${commentId}`)
+    .then((res) => {
+      console.log(res.data);
+      props.setChange(true);
+    });
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (comment.trim() === "") {
@@ -37,6 +46,7 @@ const CommentSection = (props) => {
         <br />
         <span className={`${classes.comment}`}>{item.comment_text}</span>
         <br />
+        {(item.user_id === props.cookies.user.id) && <button onClick={() => deleteComment(item.comment_id)}>delete</button>}
         <TimeAgo className={classes.time} datetime={item.time * 1000} />
       </article>
     ))
