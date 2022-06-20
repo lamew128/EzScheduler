@@ -10,7 +10,8 @@ const NewEvent = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
-  const [date, setDate] = useState("");
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
   const [startTimestamp, setStartTime] = useState("");
   const [endTimestamp, setEndTime] = useState("");
   const [invitee, setInvitee] = useState("");
@@ -34,9 +35,14 @@ const NewEvent = (props) => {
     setTitle(e.target.value);
   };
 
-  const dateChange = (e) => {
-    setDate(e.target.value);
+  const dateStartChange = (e) => {
+    setDateStart(e.target.value);
   };
+
+  const dateEndChange = (e) => {
+    setDateEnd(e.target.value);
+  };
+
 
   const descriptionChange = (e) => {
     setDescription(e.target.value);
@@ -84,25 +90,29 @@ const NewEvent = (props) => {
   //save the new event data to database
   const submitHandler = async (e) => {
     e.preventDefault();
-    const dateE = date.split("-");
+    const dateStartE = dateStart.split("-");
+    const dateEndE = dateEnd.split("-");
+
     const start = startTimestamp.split(":");
     const startTime =
       new Date(
-        dateE[0],
-        Number(dateE[1]) - 1,
-        dateE[2],
+        dateStartE[0],
+        Number(dateStartE[1]) - 1,
+        dateStartE[2],
         start[0],
         start[1]
       ).getTime() / 1000;
+
     const end = endTimestamp.split(":");
     const endTime =
       new Date(
-        dateE[0],
-        Number(dateE[1]) - 1,
-        dateE[2],
+        dateEndE[0],
+        Number(dateEndE[1]) - 1,
+        dateEndE[2],
         end[0],
         end[1]
       ).getTime() / 1000;
+      
     const formData = {
       title,
       description,
@@ -228,12 +238,16 @@ const NewEvent = (props) => {
         </div>
         <div className="col">
           <div className="row">
-            <label>Date:</label>
-            <input type="date" value={date} onChange={dateChange} />
+            <label>Start Date:</label>
+            <input type="date" value={dateStart} onChange={dateStartChange} />
           </div>
           <div className="row">
             <label>Start Time:</label>
             <TimePicker onChange={setStartTime} value={startTimestamp} />
+          </div>
+          <div className="row">
+            <label>End Date:</label>
+            <input type="date" value={dateEnd} onChange={dateEndChange} />
           </div>
           <div className="row">
             <label>End Time:</label>
