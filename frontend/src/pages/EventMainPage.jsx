@@ -19,36 +19,11 @@ const EventMainPage = (props) => {
     });
   }, [id, user, event.creator]);
 
-  //fixing time display
-const humanStartTime = new Date(event.start_time*1000);
-const humanEndTime = new Date(event.end_time*1000);
-
-const humanStartYear  = humanStartTime.getFullYear();
-const humanStartMonth = (humanStartTime.getMonth() + 1).toString().padStart(2, "0");
-const humanStart = humanStartTime.getDate().toString().padStart(2, "0");
-
-const humanEndYear  = humanEndTime.getFullYear();
-const humanEndMonth = (humanEndTime.getMonth() + 1).toString().padStart(2, "0");
-const humanEnd = humanEndTime.getDate().toString().padStart(2, "0");
-
-const humanStartDate = `${humanStartYear}-${humanStartMonth}-${humanStart}`;
-const humanEndDate = `${humanEndYear}-${humanEndMonth}-${humanEnd}`;
-
-const humanStartHour = humanStartTime.getHours().toString().padStart(2,"0");
-const humanStartMinute = humanStartTime.getMinutes().toString().padStart(2,"0");
-const humanStartDayTime = `${humanStartHour}:${humanStartMinute}`;
-
-const humanEndHour = humanEndTime.getHours().toString().padStart(2,"0");
-const humanEndMinute = humanEndTime.getMinutes().toString().padStart(2,"0");
-const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
-
-const displayStart = `${humanStartDate} ${humanStartDayTime}`;
-const displayEnd = `${humanEndDate}  ${humanEndDayTime}`;
 
   return (
     <>
       {!event.event_id && <>This event does not exist!</>}
-      {event.event_id && (event.start_time > (Date.now() / 1000)) && (
+      {event.event_id && event.start_time > Date.now() / 1000 && (
         <>
           <EventPage
             cookies={props.cookies}
@@ -61,12 +36,12 @@ const displayEnd = `${humanEndDate}  ${humanEndDayTime}`;
             lat={event.lat}
             long={event.long}
             creator={event.creator}
-            start_time={displayStart}
-            end_time={displayEnd}
+            startTime={event.start_time}
+            endTime={event.end_time}
           />
         </>
       )}
-      {event.event_id && (event.start_time < (Date.now() / 1000)) && (
+      {event.event_id && event.start_time < Date.now() / 1000 && (
         <>
           <PastEventPage
             cookies={props.cookies}
@@ -79,8 +54,6 @@ const displayEnd = `${humanEndDate}  ${humanEndDayTime}`;
             lat={event.lat}
             long={event.long}
             creator={event.creator}
-            start_time={displayStart}
-            end_time={displayEnd}
           />
         </>
       )}

@@ -2,6 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: aliceblue;
-  min-height: 92vh;
+  background-color: lightblue;
+  min-height: 90vh;
 }
