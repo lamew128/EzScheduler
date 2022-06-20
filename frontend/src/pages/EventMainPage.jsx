@@ -19,6 +19,32 @@ const EventMainPage = (props) => {
     });
   }, [id, user, event.creator]);
 
+  //fixing time display
+const humanStartTime = new Date(event.start_time*1000);
+const humanEndTime = new Date(event.end_time*1000);
+
+const humanStartYear  = humanStartTime.getFullYear();
+const humanStartMonth = (humanStartTime.getMonth() + 1).toString().padStart(2, "0");
+const humanStart = humanStartTime.getDate().toString().padStart(2, "0");
+
+const humanEndYear  = humanEndTime.getFullYear();
+const humanEndMonth = (humanEndTime.getMonth() + 1).toString().padStart(2, "0");
+const humanEnd = humanEndTime.getDate().toString().padStart(2, "0");
+
+const humanStartDate = `${humanStartYear}-${humanStartMonth}-${humanStart}`;
+const humanEndDate = `${humanEndYear}-${humanEndMonth}-${humanEnd}`;
+
+const humanStartHour = humanStartTime.getHours().toString().padStart(2,"0");
+const humanStartMinute = humanStartTime.getMinutes().toString().padStart(2,"0");
+const humanStartDayTime = `${humanStartHour}:${humanStartMinute}`;
+
+const humanEndHour = humanEndTime.getHours().toString().padStart(2,"0");
+const humanEndMinute = humanEndTime.getMinutes().toString().padStart(2,"0");
+const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
+
+const displayStart = `${humanStartDate} ${humanStartDayTime}`;
+const displayEnd = `${humanEndDate}  ${humanEndDayTime}`;
+
   return (
     <>
       {!event.event_id && <>This event does not exist!</>}
@@ -29,13 +55,14 @@ const EventMainPage = (props) => {
             eventId={id}
             title={event.title}
             description={event.description}
-            //how to convert long and lat to full address?
             address={event.address}
             date={event.start_time}
             response={event.response}
             lat={event.lat}
             long={event.long}
             creator={event.creator}
+            start_time={displayStart}
+            end_time={displayEnd}
           />
         </>
       )}
@@ -52,6 +79,8 @@ const EventMainPage = (props) => {
             lat={event.lat}
             long={event.long}
             creator={event.creator}
+            start_time={displayStart}
+            end_time={displayEnd}
           />
         </>
       )}

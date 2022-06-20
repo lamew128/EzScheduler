@@ -353,6 +353,12 @@ const EventPage = (props) => {
             <p>
               Address: <strong>{props.address}</strong>
             </p>
+            <p>
+              Start Time: <strong>{props.start_time}</strong>
+            </p>
+            <p>
+              End Time: <strong>{props.end_time}</strong>
+            </p>
           </div>
           <div className="col">
             Weather Information:
