@@ -12,6 +12,7 @@
   font-family: 'Roboto', sans-serif;
   position: fixed;
   width: 100%;
+  box-shadow: 0px 1px 10px aqua;
 }
 
 .navitem {
@@ -68,5 +69,6 @@
 
 .logged_in {
   text-shadow: 5px 5px 10px aqua;
-  color: aquamarine;
+  color: aqua;
+  font-family: 'Varela Round', sans-serif;
 }
