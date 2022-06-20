@@ -166,13 +166,17 @@ const MainPage = (props) => {
             <Button>Create new event!</Button>
           </Link>
           <h1 className={classes_mainpage.invite_sections}>Upcoming Events</h1>
+          {upcomingEvents.length === 0 && <h1 className={classes_mainpage.invite_sections}>No upcoming events</h1>}
           {upcomingEvents}
-          <h1 className={classes_mainpage.invite_sections}>My Accepted Events</h1>
+
+          {acceptedEventsList.length > 0 && <h1 className={classes_mainpage.invite_sections}>My Accepted Events</h1>}
           {acceptedEventsList}
-          <h1 className={classes_mainpage.invite_sections}>Open Invites</h1>
+
+          {(notRespondedEventsList.length > 0 || maybeEventsList.length > 0 )&& <h1 className={classes_mainpage.invite_sections}>Open Invites</h1>}
           {notRespondedEventsList}
           {maybeEventsList}
-          <h1 className={classes_mainpage.invite_sections}>Declined Invites</h1>
+          
+          {rejectedEventsList.length > 0 && <h1 className={classes_mainpage.invite_sections}>Declined Invites</h1>}
           {rejectedEventsList}
         </>
       )}
