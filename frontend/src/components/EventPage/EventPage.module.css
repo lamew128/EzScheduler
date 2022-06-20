@@ -1,5 +1,5 @@
 .icon {
-  font-size: xx-large;
+  font-size: large;
   align-self: center;
   margin: 10px;
   cursor: pointer;
@@ -24,7 +24,9 @@
 }
 
 .container {
-  border: 2px solid black;
+  border: 2px solid aqua;
+  color: aqua;
+  font-family: 'Varela Round', sans-serif;
   border-radius: 25px;
   padding: 20px;
   margin: 20px;
@@ -113,15 +115,21 @@
 }
 
 .invitees {
-  border: 2px solid black;
+  box-shadow: 0px 0px 10px aqua;
+  border-radius: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 10px;
-  overflow-y: auto;
+  overflow: hidden;
   height: 45%;
   margin-bottom: 20px;
+}
+
+.invitees:hover {
+  overflow-y: scroll;
+  overflow-y: overlay;
 }
 
 .section_title {
@@ -136,23 +144,36 @@
 .add {
   font-size: x-large;
   color: blue;
-  background-color: rgba(0, 221, 255, 0.350);
+  background-color: rgba(0, 221, 255, 0.800);
   cursor: pointer;
-  border: 2px solid white;
   border-radius: 10px;
-  transition: all 0.3s;
+  transition: all 0.2s;
   align-self: center;
   margin: 10px;
   width: 50px;
 }
 
 .add:hover {
-  background-color: rgba(0, 221, 255, 0.800);
+  background-color: aqua;
+  box-shadow: 0px 0px 10px aqua;
 }
 
 .weather {
-  border: 2px solid black;
+  color: white;
+  box-shadow: 0px 0px 15px aqua;
+  border-radius: 25px;
+  max-inline-size: fit-content;
   padding: 10px;
+  height: 100px;
+  height: fit-content;
+  text-transform: capitalize;
+  text-align: center;
+  margin: 20px;
+}
+
+.weather_section {
+  display: flex;
+  justify-content: right;
 }
 
 .btn_add {
@@ -212,14 +233,21 @@
 }
 
 .comments {
+  border-radius: 10px;
   height: 52%;
-  border: 2px solid black;
   padding: 5px;
+  padding-right: 10px;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  overflow-y: scroll;
+  overflow: hidden;
   align-items: center;
+  box-shadow: 0px 0px 10px aqua;
+}
+
+.comments:hover {
+  overflow-y: scroll;
+  overflow-y: overlay;
 }
 
 .adjust_height {

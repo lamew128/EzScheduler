@@ -32,8 +32,8 @@ const EventPage = (props) => {
 
   const timestampToTime = (time) => {
     const date = new Date(time * 1000).toLocaleString("en-US", {
-      month:"long",
-      day:"numeric",
+      month: "long",
+      day: "numeric",
       hour: "numeric",
       minute: "numeric",
       hour12: true,
@@ -282,8 +282,8 @@ const EventPage = (props) => {
               <button className={`${classes.btn} ${classes.edit}`}>EDIT</button>
             </Link>
           )}
-          <p>Created by {creator}</p>
         </h3>
+        <p>Created by {creator}</p>
         <div className="row">
           <div className="col">
             {!isCreator && (
@@ -372,16 +372,15 @@ const EventPage = (props) => {
               </strong>
             </p>
           </div>
-          <div className="col">
-            Weather Information:
+          <div className={`${classes.weather_section} col`}>
             <div className={classes.weather}>
               <Weather lat={props.lat} long={props.long} date={props.date} />
             </div>
           </div>
         </div>
         <hr />
-        <div className="row">
-          <Map lat={props.lat} lng={props.long} height={"400px"} zoom={15} />
+        <div className={`${classes.map} row`}>
+          <Map className={classes.map} lat={props.lat} lng={props.long} height={"350px"} zoom={15} />
         </div>
       </main>
     </article>
