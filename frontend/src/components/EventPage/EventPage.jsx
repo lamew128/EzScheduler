@@ -30,6 +30,18 @@ const EventPage = (props) => {
   const [comments, setComments] = useState([]);
   const [change, setChange] = useState(false);
 
+  const timestampToTime = (time) => {
+    const date = new Date(time * 1000).toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+    return date;
+    // const hours = date.getHours();
+    // const minutes = "0" + date.getMinutes();
+    // return hours + ":" + minutes.substr(-2);
+  };
+
   // COMMENTS SECTION
   useEffect(() => {
     axios.get(`/event/comments/${props.eventId}`).then((commentsData) => {
@@ -352,6 +364,13 @@ const EventPage = (props) => {
             </p>
             <p>
               Address: <strong>{props.address}</strong>
+            </p>
+            <p>
+              Event Time:{" "}
+              <strong>
+                {timestampToTime(props.startTime)} -{" "}
+                {timestampToTime(props.endTime)}
+              </strong>
             </p>
           </div>
           <div className="col">

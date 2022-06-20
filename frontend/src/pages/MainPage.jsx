@@ -45,8 +45,6 @@ const MainPage = (props) => {
         long={event.long}
       />
     ));
-  // console.log("events:");
-  // console.log(events);
 
   const acceptedEventsList = events
     .filter(

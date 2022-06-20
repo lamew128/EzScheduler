@@ -72,7 +72,7 @@
 }
 
 .center {
-  text-align: center;
+  justify-content: center;
 }
 
 .invitee_form {

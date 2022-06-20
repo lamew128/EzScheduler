@@ -22,7 +22,7 @@ const EventMainPage = (props) => {
   return (
     <>
       {!event.event_id && <>This event does not exist!</>}
-      {event.event_id && (event.start_time > (Date.now() / 1000)) && (
+      {event.event_id && event.start_time > Date.now() / 1000 && (
         <>
           <EventPage
             cookies={props.cookies}
@@ -36,10 +36,12 @@ const EventMainPage = (props) => {
             lat={event.lat}
             long={event.long}
             creator={event.creator}
+            startTime={event.start_time}
+            endTime={event.end_time}
           />
         </>
       )}
-      {event.event_id && (event.start_time < (Date.now() / 1000)) && (
+      {event.event_id && event.start_time < Date.now() / 1000 && (
         <>
           <PastEventPage
             cookies={props.cookies}
