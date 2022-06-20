@@ -15,7 +15,7 @@ import { useCookies } from "react-cookie";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  
+
   return (
     <>
       <TopNav
@@ -47,7 +47,11 @@ function App() {
             )}
           </Route>
           <Route exact path="/events/past">
-            {cookies.user ? <PastEvents user={cookies.user.id} /> : <Redirect to="/" />}
+            {cookies.user ? (
+              <PastEvents user={cookies.user.id} />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Route>
           <Route exact path="/events/:id">
             {cookies.user ? (
@@ -56,7 +60,7 @@ function App() {
               <Redirect to="/" />
             )}
           </Route>
-        
+
           <Route exact path="/events/:id/edit">
             {cookies.user ? (
               <EventEditPage cookies={cookies} />

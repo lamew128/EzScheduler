@@ -17,3 +17,9 @@
 .app_name {
   font-family: 'Dancing Script', cursive;
 }
+
+.invite_sections {
+  color: aqua;
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 2px 2px 10px aqua;
+}

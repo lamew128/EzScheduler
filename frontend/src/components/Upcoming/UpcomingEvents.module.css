@@ -4,6 +4,8 @@
   margin: 2%;
   padding: 10px;
   border: 2px solid black;
+  color: aqua;
+  font-family: 'Varela Round', sans-serif;
 }
 
 .content {
