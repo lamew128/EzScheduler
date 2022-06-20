@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const { sendEmail } = require('../email')
 router.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = (db) => {
@@ -134,12 +135,19 @@ module.exports = (db) => {
   //delete an event
   router.delete('/:id', (req, res) => {
     const eventId = req.params.id;
-    console.log(eventId);
     db.deleteEvent(eventId)
       .then((data) => {
         return res.json({ status: 200, data: data });
       })
   });
+
+  router.post('/email', (req,res) => {
+    const toEmails = req.body.toEmails;
+    const eventInfo = req.body.eventInfo
+    sendEmail({ toEmails, eventInfo }).then(() => {
+      return res.json({ status: 200 });
+    })
+  })
 
   return router;
 };
