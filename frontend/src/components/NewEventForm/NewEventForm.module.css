@@ -65,7 +65,6 @@
   background-color: #23acc4;
   box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
   color: #fff;
-  transform: translateY(-3px);
 }
 
 .btn:active {
@@ -73,7 +72,7 @@
 }
 
 .center {
-  justify-content: center;
+  text-align: center;
 }
 
 .invitee_form {

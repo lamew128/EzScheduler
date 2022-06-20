@@ -322,34 +322,13 @@ const getComments = (eventId) => {
     });
 };
 
-//create a reply
-const addReply = (reply) => {
-  let replyParams = [ reply.userId, reply.commentId, reply.time, reply.text ];
+const deleteComment = (commentId) => {
   return pool
     .query(
-    `
-    INSERT INTO reply (user_id, comment_id, time, reply_text) 
-    VALUES ($1, $2, $3, $4)
-    RETURNING *;
-    `, replyParams)
-    .then((data) => {
-      return data.rows[0];
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
-
-//get all replys of a comment by given id
-const getReply = (commentId) => {
-  return pool
-    .query(
-    `
-    SELECT user_id, comment_id, name, time, reply_text FROM reply
-    JOIN users ON users.id = reply.user_id
-    WHERE comment_id = $1
-    ORDER BY time;
-    `, [commentId])
+      `
+      DELETE FROM comments
+      WHERE id = $1
+      RETURNING *;`, [commentId])
     .then((data) => {
       return data.rows;
     })
@@ -357,7 +336,6 @@ const getReply = (commentId) => {
       console.log(err.message);
     });
 };
-
 
 
 module.exports = {
@@ -378,6 +356,5 @@ module.exports = {
   showEventDetails,
   addComment,
   getComments,
-  addReply,
-  getReply
+  deleteComment
 };

@@ -28,7 +28,9 @@ const MyEvent = (props) => {
         <div className="col align-self-center text-center">
           {!confirmation && (
             <>
+         <Link className={`${classes.git}`} to={`/events/${props.eventId}/edit`}>
               <button className={classes.btn}>Edit</button>
+          </Link>
               <button
                 className={classes.btncancel}
                 onClick={() => setConfirmation(true)}

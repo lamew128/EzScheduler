@@ -5,6 +5,7 @@ import axios from "axios";
 const Login = (props) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   function cookieSetter(newName) {
     props.setCookie("user", newName, { path: "/" });
@@ -23,11 +24,17 @@ const Login = (props) => {
     axios
       .post("/users/login", { email: user, password: password })
       .then((user) => {
-        console.log("USER ID = ", user.data.id);
-        cookieSetter({ id: user.data.id, name: user.data.name });
-        props.setName(user.data.name);
-        props.setIsLoggedIn(true);
-        props.close();
+        if (user.data.status === 200) {
+          console.log("USER ID = ", user.data.id);
+          cookieSetter({ id: user.data.id, name: user.data.name });
+          props.setName(user.data.name);
+          props.setIsLoggedIn(true);
+          props.close();
+        }
+        if (user.data.status === 401) {
+          console.log("WRONG", user.data.message);
+          setError(true);
+        }
       });
   };
 
@@ -35,7 +42,7 @@ const Login = (props) => {
   return (
     <div className={classes.container}>
       <form className={classes.login_overlay} onSubmit={submitHandler}>
-        <div className={`${classes.center} row`}>
+        <div className={`${classes.center} align-self-end`}>
           <i
             onClick={props.close}
             className={`${classes.close} bi bi-x-lg`}
@@ -44,23 +51,25 @@ const Login = (props) => {
         <div className={`${classes.center} row`}>
           <h3>LOGIN</h3>
           <div className={formClass}>
-            <label>Email:</label>
+            <label>Email Address:</label>
             <input
-              className={classes.w}
+              className={classes.input}
               type="email"
               value={user}
               onChange={userLogin}
+              placeholder="name@email.com"
             />
           </div>
           <div className={formClass}>
             <label>Password:</label>
             <input
-              className={classes.w}
+              className={classes.input}
               type="password"
               value={password}
               onChange={passwordLogin}
             />
           </div>
+          {error && <h4>Invalid login information.</h4>}
           <button className={classes.btn} type="submit">
             LOGIN!
           </button>

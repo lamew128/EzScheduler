@@ -29,6 +29,7 @@
   padding: 20px;
   margin: 20px;
   width: 90%;
+  height: 910px;
 }
 
 .container main {
@@ -37,6 +38,7 @@
 
 .title {
   justify-content: center;
+  align-items: center;
 }
 
 .btn {
@@ -54,6 +56,15 @@
   margin: 10px;
 }
 
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.edit:hover {
+  background-color: aquamarine;
+  box-shadow: 0px 8px 15px rgba(127, 255, 212, 0.5);
+}
+
 .delete {
   padding: 5px;
   background-color: rgb(255, 160, 160);
@@ -62,15 +73,6 @@
 
 .delete:hover {
   background-color: red;
-}
-
-.btn:hover {
-  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
-  transform: translateY(-3px);
-}
-
-.btn:active {
-  transform: translateY(-1px);
 }
 
 .accept {
@@ -105,10 +107,6 @@
   transform: translateY(-3px);
 }
 
-.btn:active {
-  transform: translateY(-1px);
-}
-
 .date {
   display: flex;
   justify-content: flex-end;
@@ -119,9 +117,16 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   padding: 10px;
   overflow-y: auto;
-  height: 95%;
+  height: 45%;
+  margin-bottom: 20px;
+}
+
+.section_title {
+  font-size: x-large;
+  font-weight: bold;
 }
 
 .invitees input {
@@ -198,8 +203,8 @@
 
 .list_item {
   display: flex;
-  align-self: center;
   align-items: center;
+  justify-content: center;
 }
 
 .p_fix {
@@ -207,9 +212,16 @@
 }
 
 .comments {
-  height: 95%;
+  height: 52%;
   border: 2px solid black;
   padding: 5px;
   display: flex;
   flex-direction: column;
+  justify-content: start;
+  overflow-y: scroll;
+  align-items: center;
+}
+
+.adjust_height {
+  height: 100%;
 }

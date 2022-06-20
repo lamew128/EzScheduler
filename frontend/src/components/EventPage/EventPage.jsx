@@ -33,7 +33,6 @@ const EventPage = (props) => {
   // COMMENTS SECTION
   useEffect(() => {
     axios.get(`/event/comments/${props.eventId}`).then((commentsData) => {
-
       setComments(commentsData.data);
       setChange(false);
     });
@@ -221,9 +220,9 @@ const EventPage = (props) => {
 
   return (
     <article className={`${classes.container} row`}>
-      <div className="col-3">
-        Invitees:
-        <div className={classes.invitees}>
+      <div className={`${classes.adjust_height} col-3`}>
+        <div className={`${classes.invitees}`}>
+          <span className={classes.section_title}>INVITEES:</span>
           {showList}
           {newInvitee && (
             <div className="row align-items-center justify-content-center">
@@ -248,6 +247,18 @@ const EventPage = (props) => {
             ></i>
           )}
         </div>
+        <div className={`${classes.comments}`}>
+          <span className={`${classes.section_title} text-center`}>
+            COMMENTS
+          </span>
+          <CommentSection
+            className={classes.comments}
+            cookies={props.cookies}
+            eventId={props.eventId}
+            setChange={setChange}
+            comments={comments}
+          />
+        </div>
       </div>
       <main className="col">
         <h3 className={`${classes.title} row`}>
@@ -257,7 +268,7 @@ const EventPage = (props) => {
               style={{ width: "fit-content" }}
               to={`/events/${props.eventId}/edit`}
             >
-              <button>EDIT</button>
+              <button className={`${classes.btn} ${classes.edit}`}>EDIT</button>
             </Link>
           )}
           <p>Created by {creator}</p>
@@ -342,6 +353,12 @@ const EventPage = (props) => {
             <p>
               Address: <strong>{props.address}</strong>
             </p>
+            <p>
+              Start Time: <strong>{props.start_time}</strong>
+            </p>
+            <p>
+              End Time: <strong>{props.end_time}</strong>
+            </p>
           </div>
           <div className="col">
             Weather Information:
@@ -355,18 +372,6 @@ const EventPage = (props) => {
           <Map lat={props.lat} lng={props.long} height={"400px"} zoom={15} />
         </div>
       </main>
-      <div className="col-3">
-        Comments
-        <div className={classes.comments}>
-          <CommentSection
-            className={classes.comments}
-            cookies={props.cookies}
-            eventId={props.eventId}
-            setChange={setChange}
-            comments={comments}
-          />
-        </div>
-      </div>
     </article>
   );
 };

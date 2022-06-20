@@ -25,7 +25,6 @@ const Weather = (props) => {
       .then((res) => {
         for (let i = 0; i < res.data.list.length; i++) {
           if (res.data.list[i].dt >= props.date) {
-            console.log("res.data.list[i] : ", res.data.list[i]);
             setWeather(res.data.list[i]);
             break;
           }
@@ -35,7 +34,7 @@ const Weather = (props) => {
       .catch((e) => console.log(e));
   }, [FULL_API_URL, props.date]);
 
-  console.log({weather});
+  //console.log({weather});
 
   return (
     <>
@@ -49,9 +48,7 @@ const Weather = (props) => {
         {weather &&
           <>
             <p>
-            The temperature on day of the event will be{" "}
-            {Math.round(weather.main.temp - 273.15)}
-            {"°C"}
+            {`${Math.round(weather.main.temp - 273.15)}°C`}
           </p>
           <img
             src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
@@ -64,7 +61,7 @@ const Weather = (props) => {
           }
 
           {weather.weather[0].main === "Rain" && 
-              <p>Bring an umb.</p>
+              <p>Bring an umbrella! ☂️</p>
           }
           
           </>

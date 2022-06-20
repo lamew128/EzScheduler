@@ -15,8 +15,9 @@
 }
 
 .upcoming-events:hover {
-  box-shadow: 0px 5px 10px rgb(108, 123, 255);
-  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+  transform: translate(-3px, -3px);
 }
 
 .title__event {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import EventPage from "../components/EventPage/EventPage";
-import CommentSection from "../components/EventPage/CommentSection";
 import { useParams } from "react-router-dom";
 import EditEventForm from "../components/EditEventForm/EditEventForm";
 import axios from "axios";
@@ -47,11 +46,6 @@ const EventEditPage = (props) => {
             lat={event.lat}
             long={event.long}
             creator={event.creator}
-          />
-          <CommentSection
-            cookies={props.cookies}
-            eventId={id}
-            comments={comments}
           />
         </>
       )}

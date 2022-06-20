@@ -15,7 +15,6 @@ const acceptInvite = (setInvite, props) => {
 
 const maybeInvite = (setInvite, props) => {
   setInvite("maybe");
-  // Axios request to send response MAYBE
   axios
     .put("/event/response", {
       response: "maybe",
