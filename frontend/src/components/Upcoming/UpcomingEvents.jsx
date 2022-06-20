@@ -52,9 +52,6 @@ const UpcomingEvents = (props) => {
               </div>
               <div className={`${classes.weather_section} col`}>
                 <section className={classes.weather}>
-                  <h4>
-                    <strong>WEATHER</strong>
-                  </h4>
                   <Weather
                     lat={props.lat}
                     long={props.long}

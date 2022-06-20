@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import classes from "./Weather.module.css";
 
 //props require: lat, long, time
 const Weather = (props) => {
@@ -38,25 +39,25 @@ const Weather = (props) => {
       {!loading && (
         <>
           {weather && (
-            <>
+            <main className={classes.container}>
               <h3>{`${Math.round(weather.main.temp - 273.15)}°C`}</h3>
               <img
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                 alt="Weather Icon"
               ></img>
               <h6>{weather.weather[0].description}</h6>
-
-              {weather.weather[0].main === "Clear" && <p>Enjoy your event!</p>}
-
-              {weather.weather[0].main === "Rain" && (
-                <h6>Bring an umbrella! ☂️</h6>
-              )}
-            </>
+            </main>
           )}
           {!weather && (
             <>
               <p>No weather information yet, Please check later.</p>
             </>
+          )}
+          {weather.weather[0].main === "Clear" && (
+            <p className={classes.statement}>Enjoy your event!</p>
+          )}
+          {weather.weather[0].main === "Rain" && (
+            <p className={classes.statement}>Bring an umbrella! ☂️</p>
           )}
         </>
       )}

@@ -45,6 +45,7 @@
   text-transform: capitalize;
   text-align: center;
   margin: 0;
+  align-self: center;
 }
 
 .date__invitees {

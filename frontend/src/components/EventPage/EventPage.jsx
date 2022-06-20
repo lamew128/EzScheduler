@@ -345,17 +345,19 @@ const EventPage = (props) => {
           <div className="col align-self-center">
             {response === "yes" && (
               <p>
-                Responded with: <strong>Accepted</strong>
+                Responded with:{" "}
+                <strong style={{ color: "green" }}>Accepted</strong>
               </p>
             )}
             {response === "no" && (
               <p>
-                Responded with: <strong>Declined</strong>
+                Responded with:{" "}
+                <strong style={{ color: "red" }}>Declined</strong>
               </p>
             )}
             {response === "maybe" && (
               <p>
-                Responded with: <strong>Maybe</strong>
+                Responded with: <strong style={{color: 'orange'}}>Maybe</strong>
               </p>
             )}
             <p>
@@ -384,7 +386,7 @@ const EventPage = (props) => {
             className={classes.map}
             lat={props.lat}
             lng={props.long}
-            height={"350px"}
+            height={"420px"}
             zoom={15}
           />
         </div>
