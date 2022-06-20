@@ -237,13 +237,20 @@ const NewEvent = (props) => {
 
   return (
     <div className={classes.container}>
-      <h3 className="row">New Event</h3>
+      <h1 className={`${classes.new_event_title} row`}>New Event</h1>
       <form className="row justify-content-center">
         <div className={`${classes.inputs} col`}>
           <label>Title:</label>
-          <input type="text" value={title} onChange={titleChange} required />
+          <input
+            className={classes.input_form}
+            type="text"
+            value={title}
+            onChange={titleChange}
+            required
+          />
           <label>Description:</label>
           <input
+            className={classes.input_form}
             type="text"
             value={description}
             onChange={descriptionChange}
@@ -251,6 +258,7 @@ const NewEvent = (props) => {
           />
           <label>Location:</label>
           <input
+            className={classes.input_form}
             type="text"
             value={address}
             onChange={addressChange}
@@ -259,10 +267,11 @@ const NewEvent = (props) => {
             required
           />
         </div>
-        <div className="col">
+        <div className="col-3">
           <div className="row">
             <label>Date:</label>
             <input
+              className={classes.input_form_date}
               type="date"
               value={dateStart}
               onChange={dateStartChange}
@@ -271,21 +280,34 @@ const NewEvent = (props) => {
           </div>
           <div className="row">
             <label>Start Time:</label>
-            <TimePicker onChange={setStartTime} value={startTimestamp} />
+            <TimePicker
+              className={classes.input_form_time}
+              onChange={setStartTime}
+              value={startTimestamp}
+            />
           </div>
           <div className="row">
             <label>End Date:</label>
-            <input type="date" value={dateEnd} onChange={dateEndChange} />
+            <input
+              className={classes.input_form_date}
+              type="date"
+              value={dateEnd}
+              onChange={dateEndChange}
+            />
           </div>
           <div className="row">
             <label>End Time:</label>
-            <TimePicker onChange={setEndTime} value={endTimestamp} />
+            <TimePicker
+              className={classes.input_form_time}
+              onChange={setEndTime}
+              value={endTimestamp}
+            />
           </div>
         </div>
         <hr className="mt-3" />
-        <div className="row mb-3">
+        <div className="row mb-4">
           <div className="col-4">
-            Invitees
+            <h4>INVITEES</h4>
             <div className={classes.invitees}>
               {showList}
               {newInvitee && (
@@ -311,15 +333,8 @@ const NewEvent = (props) => {
             </div>
           </div>
           <div className="col-8">
-            MAP
-            <div className={classes.map}>
-              <Map
-                lat={coords.lat}
-                lng={coords.lng}
-                height={"400px"}
-                zoom={18}
-              />
-            </div>
+            <h4>MAP</h4>
+            <Map lat={coords.lat} lng={coords.lng} height={"400px"} zoom={18} />
           </div>
         </div>
         <hr />
