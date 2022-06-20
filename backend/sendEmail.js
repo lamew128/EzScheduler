@@ -1,13 +1,13 @@
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-const sendEmail = (email,title,description) => {
+const sendEmail = () => {
   console.log("send email called")
     const msg = {
-      to: `${email}`,
+      to: `dwu233@gmail.com`,
       from: 'no-reply@ezscheduler.ca',
-      subject: `${title}`,
-      text: `${description}`
+      subject: `sup`,
+      text: `yo`
     }
     sgMail
       .send(msg)
@@ -19,4 +19,4 @@ const sendEmail = (email,title,description) => {
       });
 }
 
-module.exports = { sendEmail };
+sendEmail();

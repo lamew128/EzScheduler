@@ -152,13 +152,13 @@ const NewEvent = (props) => {
       userId: props.user,
       eventId: response.data.data.id,
     });
-    //invite others with fake email array
-    // email Array will be an input from the form. put in dummy place hoder for now
+    
     const emailArray = inviteesList.map((e) => e.email);
-    console.log(emailArray);
+
     const userIdArray = allUsers
       .filter((user) => emailArray.includes(user.email))
       .map((user) => user.id);
+
     const axiosCalls = userIdArray.map((userId) =>
       axios.post(`/event/invite`, {
         response: null,
@@ -166,12 +166,18 @@ const NewEvent = (props) => {
         eventId,
       })
     );
+    //send an email to all invitees
+    axios.post(`/event/email`,{
+      emailArray: emailArray,
+      title: formData.title,
+      description: formData.description
+    });
     Promise.all(axiosCalls).then((data) => {
       //  console.log("promise all succeeded!");
       console.log(data[0]);
       console.log(data[1]);
     });
-    redirectToHome();
+    // redirectToHome();
   };
 
   const addInvitee = (p) => {

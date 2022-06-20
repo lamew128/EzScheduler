@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const { sendEmail } = require('../email')
+const { sendEmail } = require('../email');
 router.use(bodyParser.urlencoded({ extended: false }));
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = (db) => {
 
@@ -142,11 +144,12 @@ module.exports = (db) => {
   });
 
   router.post('/email', (req,res) => {
-    const toEmails = req.body.toEmails;
-    const eventInfo = req.body.eventInfo
-    sendEmail({ toEmails, eventInfo }).then(() => {
-      return res.json({ status: 200 });
-    })
+    const toEmails = req.body.emailArray;
+    for(let email of toEmails) {
+      // sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+      console.log(process.env.SENDGRID_API_KEY);
+      sendEmail(email,req.body.title,req.body.description);
+    }
   })
 
   return router;
