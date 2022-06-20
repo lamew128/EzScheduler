@@ -32,6 +32,8 @@ const EventPage = (props) => {
 
   const timestampToTime = (time) => {
     const date = new Date(time * 1000).toLocaleString("en-US", {
+      month:"long",
+      day:"numeric",
       hour: "numeric",
       minute: "numeric",
       hour12: true,
