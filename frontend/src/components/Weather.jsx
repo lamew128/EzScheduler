@@ -44,12 +44,12 @@ const Weather = (props) => {
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                 alt="Weather Icon"
               ></img>
-              <p>{weather.weather[0].description}</p>
+              <h6>{weather.weather[0].description}</h6>
 
               {weather.weather[0].main === "Clear" && <p>Enjoy your event!</p>}
 
               {weather.weather[0].main === "Rain" && (
-                <p>Bring an umbrella! ☂️</p>
+                <h6>Bring an umbrella! ☂️</h6>
               )}
             </>
           )}
