@@ -172,7 +172,7 @@ const MainPage = (props) => {
           <h1 className={classes_mainpage.invite_sections}>Open Invites</h1>
           {notRespondedEventsList}
           {maybeEventsList}
-          <h1 className={classes_mainpage.invite_sections}>Rejected Invites</h1>
+          <h1 className={classes_mainpage.invite_sections}>Declined Invites</h1>
           {rejectedEventsList}
         </>
       )}
