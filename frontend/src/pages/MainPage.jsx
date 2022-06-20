@@ -150,15 +150,13 @@ const MainPage = (props) => {
       />
     ));
 
-  console.log(notificationList);
-
   return (
     <>
       {showEvents && (
         <>
           {notificationList.length !== 0 && (
             <div className={classes_notification.container}>
-              <h3>Events You Have Not Responded</h3>
+              <h1 className={classes_mainpage.invite_sections}>Events You Have Not Responded</h1>
               {notificationList}
             </div>
           )}
@@ -166,17 +164,32 @@ const MainPage = (props) => {
             <Button>Create new event!</Button>
           </Link>
           <h1 className={classes_mainpage.invite_sections}>Upcoming Events</h1>
-          {upcomingEvents.length === 0 && <h1 className={classes_mainpage.invite_sections}>No upcoming events</h1>}
+          {upcomingEvents.length === 0 && (
+            <h1 className={classes_mainpage.invite_sections}>
+              No upcoming events
+            </h1>
+          )}
           {upcomingEvents}
 
-          {acceptedEventsList.length > 0 && <h1 className={classes_mainpage.invite_sections}>My Accepted Events</h1>}
+          {acceptedEventsList.length > 0 && (
+            <h1 className={classes_mainpage.invite_sections}>
+              My Accepted Events
+            </h1>
+          )}
           {acceptedEventsList}
 
-          {(notRespondedEventsList.length > 0 || maybeEventsList.length > 0 )&& <h1 className={classes_mainpage.invite_sections}>Open Invites</h1>}
+          {(notRespondedEventsList.length > 0 ||
+            maybeEventsList.length > 0) && (
+            <h1 className={classes_mainpage.invite_sections}>Open Invites</h1>
+          )}
           {notRespondedEventsList}
           {maybeEventsList}
-          
-          {rejectedEventsList.length > 0 && <h1 className={classes_mainpage.invite_sections}>Declined Invites</h1>}
+
+          {rejectedEventsList.length > 0 && (
+            <h1 className={classes_mainpage.invite_sections}>
+              Declined Invites
+            </h1>
+          )}
           {rejectedEventsList}
         </>
       )}

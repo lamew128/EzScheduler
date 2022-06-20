@@ -1,8 +1,9 @@
 .container {
-
   width: 80%;
   padding: 10px;
   margin: 10px;
+  box-shadow: 0px 10px 15px aqua;
+  margin-bottom: 40px;
 }
 
 .event_text {
@@ -10,11 +11,13 @@
   color: inherit;
   cursor: auto;
   cursor: pointer;
+  color: aqua;
+  margin: 10px;
 }
 
 .event_text:hover {
-  color: black;
-  font-weight: bold;
-  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-  transition: all 0.1s ease-in-out;
+  color: aqua;
+  font-weight: 500;
+  text-shadow: 5px 5px 10px aqua;
+  transition: all 0.3s ease 0s;
 }

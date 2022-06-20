@@ -290,19 +290,31 @@ const EventPage = (props) => {
               <>
                 <button
                   onClick={acceptResponse}
-                  className={`${classes.btn} ${classes.accept}`}
+                  className={
+                    response === "yes"
+                      ? `${classes.btn} ${classes.accept} ${classes.accept_active}`
+                      : `${classes.btn} ${classes.accept}`
+                  }
                 >
                   Accept
                 </button>
                 <button
                   onClick={maybeResponse}
-                  className={`${classes.btn} ${classes.maybe}`}
+                  className={
+                    response === "maybe"
+                      ? `${classes.btn} ${classes.maybe} ${classes.maybe_active}`
+                      : `${classes.btn} ${classes.maybe}`
+                  }
                 >
                   Maybe
                 </button>
                 <button
                   onClick={declineResponse}
-                  className={`${classes.btn} ${classes.decline}`}
+                  className={
+                    response === "no"
+                      ? `${classes.btn} ${classes.decline} ${classes.decline_active}`
+                      : `${classes.btn} ${classes.decline}`
+                  }
                 >
                   Decline
                 </button>
@@ -357,7 +369,8 @@ const EventPage = (props) => {
             )}
             {response === "maybe" && (
               <p>
-                Responded with: <strong style={{color: 'orange'}}>Maybe</strong>
+                Responded with:{" "}
+                <strong style={{ color: "orange" }}>Maybe</strong>
               </p>
             )}
             <p>
