@@ -3,7 +3,7 @@ import classes from "./NewEventForm.module.css";
 import Map from "../Map";
 import axios from "axios";
 import TimePicker from "react-time-picker";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const NewEvent = (props) => {
   const [coords, setCoords] = useState({});
@@ -20,6 +20,11 @@ const NewEvent = (props) => {
   const [dynamicList, setDynamicList] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(false);
   const [showList, setShowList] = useState([]);
+
+  let history = useHistory();
+  const redirectToHome = () => {
+    history.push("/my-events");
+  };
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((e) => {
@@ -42,7 +47,6 @@ const NewEvent = (props) => {
   const dateEndChange = (e) => {
     setDateEnd(e.target.value);
   };
-
 
   const descriptionChange = (e) => {
     setDescription(e.target.value);
@@ -93,6 +97,18 @@ const NewEvent = (props) => {
     const dateStartE = dateStart.split("-");
     const dateEndE = dateEnd.split("-");
 
+    if (
+      title.trim() === "" ||
+      description.trim() === "" ||
+      address.trim() === "" ||
+      dateStartE === "" ||
+      dateEndE === "" ||
+      startTimestamp === "" ||
+      endTimestamp === ""
+    ) {
+      alert("Please fill out the empty fields!");
+      return;
+    }
     const start = startTimestamp.split(":");
     const startTime =
       new Date(
@@ -112,7 +128,7 @@ const NewEvent = (props) => {
         end[0],
         end[1]
       ).getTime() / 1000;
-      
+
     const formData = {
       title,
       description,
@@ -155,6 +171,7 @@ const NewEvent = (props) => {
       console.log(data[0]);
       console.log(data[1]);
     });
+    redirectToHome();
   };
 
   const addInvitee = (p) => {
@@ -224,22 +241,33 @@ const NewEvent = (props) => {
       <form className="row justify-content-center">
         <div className={`${classes.inputs} col`}>
           <label>Title:</label>
-          <input type="text" value={title} onChange={titleChange} />
+          <input type="text" value={title} onChange={titleChange} required />
           <label>Description:</label>
-          <input type="text" value={description} onChange={descriptionChange} />
-          <label>Address:</label>
+          <input
+            type="text"
+            value={description}
+            onChange={descriptionChange}
+            required
+          />
+          <label>Location:</label>
           <input
             type="text"
             value={address}
             onChange={addressChange}
             onBlur={getLocation}
             name="address"
+            required
           />
         </div>
         <div className="col">
           <div className="row">
-            <label>Start Date:</label>
-            <input type="date" value={dateStart} onChange={dateStartChange} />
+            <label>Date:</label>
+            <input
+              type="date"
+              value={dateStart}
+              onChange={dateStartChange}
+              required
+            />
           </div>
           <div className="row">
             <label>Start Time:</label>
@@ -296,11 +324,9 @@ const NewEvent = (props) => {
         </div>
         <hr />
         <div className={`${classes.center} row`}>
-          <Link to="/">
-            <button className={classes.btn} onClick={submitHandler}>
-              Create Event
-            </button>
-          </Link>
+          <button type="submit" className={classes.btn} onClick={submitHandler}>
+            Create Event
+          </button>
         </div>
       </form>
     </div>
