@@ -43,15 +43,13 @@
 .btn {
   max-width: fit-content;
   align-self: center;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
   font-size: 1rem;
   text-transform: uppercase;
   color: #000;
   background-color: aqua;
   border: none;
   border-radius: 25px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
   cursor: pointer;
   margin: 10px;
   white-space: nowrap;
@@ -59,9 +57,9 @@
 
 .btn:hover {
   background-color: blue;
-  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  box-shadow: 0px 0px 10px aqua;
+  transition: all 0.3s ease;
   color: #fff;
-  transform: translateY(-3px);
 }
 
 .btn:active {
