@@ -39,8 +39,8 @@ const UpcomingEvents = (props) => {
                 <h3 className={classes.title__event}>{props.title}</h3>
                 <p className={classes.description}>{props.description}</p>
                 <p>Location: {props.address}</p>
-                <p>Event Starting On:{timestampToTime(props.start_time)}</p>
-                <p>Event Ending On:{timestampToTime(props.end_time)}</p>
+                <p>Event Starting On: {timestampToTime(props.start_time)}</p>
+                <p>Event Ending On: {timestampToTime(props.end_time)}</p>
               </div>
               <div className={`${classes.open_event_btn} col`}>
                 <Link

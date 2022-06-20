@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PastEvent from "../components/PastEvent/PastEvent";
 import axios from "axios";
-
+import classes from "../pages/MainPage.module.css";
 
 const PastEvents = (props) => {
   const [events, setEvents] = useState([]);
-  const [showEvents, setShowEvents] = useState(false);
   const [eventChange, setEventChange] = useState(false);
   const userId = props.user ? props.user : false;
-
 
   useEffect(() => {
     if (userId) {
@@ -16,23 +14,14 @@ const PastEvents = (props) => {
         console.log(d);
         setEvents(d.data);
       });
-      setShowEvents(true);
       setEventChange(false);
     } else {
-      setShowEvents(false);
       setEventChange(false);
     }
   }, [userId, eventChange]);
-  console.log(props);
-  console.log(userId);
-  console.log(events);
-  console.log(Date.now()/1000);
 
   const pastEvents = events
-    .filter(
-      (event) =>
-        event.end_time - Date.now() / 1000 < 0
-    )
+    .filter((event) => event.end_time - Date.now() / 1000 < 0)
     .map((event) => (
       <PastEvent
         key={event.event_id}
@@ -43,15 +32,15 @@ const PastEvents = (props) => {
         lat={event.lat}
         long={event.long}
       />
-    )).reverse();
+    ))
+    .reverse();
 
   return (
     <>
-      <h2>Past Events</h2>
+      <h1 className={classes.invite_sections}>Past Events</h1>
       {pastEvents}
     </>
   );
 };
 
 export default PastEvents;
-
