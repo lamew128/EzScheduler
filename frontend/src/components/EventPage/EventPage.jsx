@@ -380,7 +380,13 @@ const EventPage = (props) => {
         </div>
         <hr />
         <div className={`${classes.map} row`}>
-          <Map className={classes.map} lat={props.lat} lng={props.long} height={"350px"} zoom={15} />
+          <Map
+            className={classes.map}
+            lat={props.lat}
+            lng={props.long}
+            height={"350px"}
+            zoom={15}
+          />
         </div>
       </main>
     </article>

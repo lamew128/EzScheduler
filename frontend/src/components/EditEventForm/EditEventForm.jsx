@@ -3,7 +3,7 @@ import classes from "./EditEventForm.module.css";
 import Map from "../Map";
 import axios from "axios";
 import TimePicker from "react-time-picker";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const EditEventForm = (props) => {
   const [coords, setCoords] = useState({});
@@ -14,17 +14,11 @@ const EditEventForm = (props) => {
   const [dateEnd, setDateEnd] = useState("");
   const [startTimestamp, setStartTime] = useState("");
   const [endTimestamp, setEndTime] = useState("");
-  const [invitee, setInvitee] = useState("");
-  const [newInvitee, setNewInvitee] = useState(false);
-  const [inviteesList, setInviteesList] = useState([]);
-  const [dynamicList, setDynamicList] = useState([]);
-  const [openDropDown, setOpenDropDown] = useState(false);
 
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition((e) => {
-  //     setCoords({ lng: e.coords.longitude, lat: e.coords.latitude });
-  //   });
-  // }, []);
+  let history = useHistory();
+  const redirectToHome = () => {
+    history.push("/my-events");
+  };
 
   const addressChange = (e) => {
     setAddress(e.target.value);
@@ -46,22 +40,6 @@ const EditEventForm = (props) => {
     setDescription(e.target.value);
   };
 
-  // const inviteeChange = (e) => {
-  //   setInvitee(e.target.value);
-  //   setOpenDropDown(true);
-  // };
-
-  // useEffect(() => {
-  //   axios.get(`/events/:`).then((e) => {
-  //     const list = e.data.filter(
-  //       (user) =>
-  //         user.email.toLowerCase().includes(invitee.toLowerCase()) ||
-  //         user.name.toLowerCase().includes(invitee.toLowerCase())
-  //     );
-  //     setDynamicList(list);
-  //   });
-  // }, [invitee]);
-
   const getLocation = () => {
     axios
       .get("https://maps.googleapis.com/maps/api/geocode/json", {
@@ -82,6 +60,19 @@ const EditEventForm = (props) => {
 
     const dateStartE = dateStart.split("-");
     const dateEndE = dateEnd.split("-");
+
+    if (
+      title.trim() === "" ||
+      description.trim() === "" ||
+      address.trim() === "" ||
+      dateStartE === "" ||
+      dateEndE === "" ||
+      startTimestamp === "" ||
+      endTimestamp === ""
+    ) {
+      alert("Please fill out the empty fields!");
+      return;
+    }
 
     const start = startTimestamp.split(":");
     const startTime =
@@ -112,15 +103,15 @@ const EditEventForm = (props) => {
       lat: coords.lat,
       long: coords.lng,
       creator: props.creator,
-      id: props.eventId
+      id: props.eventId,
     };
     console.log(formData);
-    axios.put(`/event`,formData).then((data) => {
+    axios.put(`/event`, formData).then((data) => {
       console.log(data.data);
     });
-  }
+    redirectToHome();
+  };
 
-  
   useEffect(() => {
     setTitle(props.title);
     setDescription(props.description);
@@ -129,49 +120,64 @@ const EditEventForm = (props) => {
     setDateEnd(humanEndDate);
     setStartTime(humanStartDayTime);
     setEndTime(humanEndDayTime);
-    setCoords({lat:props.lat, lng: props.long})
-  },[]);
+    setCoords({ lat: props.lat, lng: props.long });
+  }, []);
 
-console.log("user");
-console.log(props.user);
+  console.log("user");
+  console.log(props.user);
 
-//fixing time display
-const humanStartTime = new Date(props.start_time*1000);
-const humanEndTime = new Date(props.end_time*1000);
+  //fixing time display
+  const humanStartTime = new Date(props.start_time * 1000);
+  const humanEndTime = new Date(props.end_time * 1000);
 
-const humanStartYear  = humanStartTime.getFullYear();
-const humanStartMonth = (humanStartTime.getMonth() + 1).toString().padStart(2, "0");
-const humanStart = humanStartTime.getDate().toString().padStart(2, "0");
+  const humanStartYear = humanStartTime.getFullYear();
+  const humanStartMonth = (humanStartTime.getMonth() + 1)
+    .toString()
+    .padStart(2, "0");
+  const humanStart = humanStartTime.getDate().toString().padStart(2, "0");
 
-const humanEndYear  = humanEndTime.getFullYear();
-const humanEndMonth = (humanEndTime.getMonth() + 1).toString().padStart(2, "0");
-const humanEnd = humanEndTime.getDate().toString().padStart(2, "0");
+  const humanEndYear = humanEndTime.getFullYear();
+  const humanEndMonth = (humanEndTime.getMonth() + 1)
+    .toString()
+    .padStart(2, "0");
+  const humanEnd = humanEndTime.getDate().toString().padStart(2, "0");
 
-const humanStartDate = `${humanStartYear}-${humanStartMonth}-${humanStart}`;
-const humanEndDate = `${humanEndYear}-${humanEndMonth}-${humanEnd}`;
+  const humanStartDate = `${humanStartYear}-${humanStartMonth}-${humanStart}`;
+  const humanEndDate = `${humanEndYear}-${humanEndMonth}-${humanEnd}`;
 
-const humanStartHour = humanStartTime.getHours().toString().padStart(2,"0");
-const humanStartMinute = humanStartTime.getMinutes().toString().padStart(2,"0");
-const humanStartDayTime = `${humanStartHour}:${humanStartMinute}`;
+  const humanStartHour = humanStartTime.getHours().toString().padStart(2, "0");
+  const humanStartMinute = humanStartTime
+    .getMinutes()
+    .toString()
+    .padStart(2, "0");
+  const humanStartDayTime = `${humanStartHour}:${humanStartMinute}`;
 
-const humanEndHour = humanEndTime.getHours().toString().padStart(2,"0");
-const humanEndMinute = humanEndTime.getMinutes().toString().padStart(2,"0");
-const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
-
-
+  const humanEndHour = humanEndTime.getHours().toString().padStart(2, "0");
+  const humanEndMinute = humanEndTime.getMinutes().toString().padStart(2, "0");
+  const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
 
   return (
-  
-    <div className={classes.container}>
-      <h3 className="row">Edit Event</h3>
+    <article className={classes.container}>
+      <h1 className={`${classes.new_event_title} row`}>Edit Event</h1>
       <form className="row">
         <div className={`${classes.inputs} col`}>
           <label>Title:</label>
-          <input type="text" value={title} onChange={titleChange} />
+          <input
+            className={classes.input_form}
+            type="text"
+            value={title}
+            onChange={titleChange}
+          />
           <label>Description:</label>
-          <input type="text" value={description} onChange={descriptionChange} />
+          <input
+            className={classes.input_form}
+            type="text"
+            value={description}
+            onChange={descriptionChange}
+          />
           <label>Address:</label>
           <input
+            className={classes.input_form}
             type="text"
             value={address}
             onChange={addressChange}
@@ -179,54 +185,44 @@ const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
             name="address"
           />
         </div>
-        <div className="col">
+        <div className="col-3">
           <div className="row">
             <label>Start Date:</label>
-            <input type="date" value={dateStart} onChange={dateStartChange} />
+            <input
+              className={classes.input_form_date}
+              type="date"
+              value={dateStart}
+              onChange={dateStartChange}
+            />
           </div>
           <div className="row">
             <label>Start Time:</label>
-            <TimePicker onChange={setStartTime} value={startTimestamp} />
+            <TimePicker
+              className={classes.input_form_time}
+              onChange={setStartTime}
+              value={startTimestamp}
+            />
           </div>
           <div className="row">
             <label>End Date:</label>
-            <input type="date" value={dateEnd} onChange={dateEndChange} />
+            <input
+              className={classes.input_form_date}
+              type="date"
+              value={dateEnd}
+              onChange={dateEndChange}
+            />
           </div>
           <div className="row">
             <label>End Time:</label>
-            <TimePicker onChange={setEndTime} value={endTimestamp} />
+            <TimePicker
+              className={classes.input_form_time}
+              onChange={setEndTime}
+              value={endTimestamp}
+            />
           </div>
         </div>
         <hr className="mt-3" />
         <div className="row mb-3">
-          {/* <div className="col-4">
-            Invitees
-            <div className={classes.invitees}>
-              {list}
-              {newInvitee && (
-                <div className="row align-items-center justify-content-center">
-                  <input
-                    className={classes.invitee_form}
-                    value={invitee}
-                    onChange={inviteeChange}
-                    required
-                  />
-                  <button onClick={addButton} className={classes.btn_add}>
-                    ADD
-                  </button>
-                </div>
-              )}
-              {openDropDown && (
-                <div className={`${classes.dropdown} row`}>
-                  <div className={classes["dropdown-content"]}>{addList}</div>
-                </div>
-              )}
-              <i
-                onClick={() => setNewInvitee(true)}
-                className={`${classes.add} bi bi-plus-lg`}
-              ></i>
-            </div>
-          </div> */}
           <div className="col-12">
             MAP
             <div className={classes.map}>
@@ -241,14 +237,12 @@ const humanEndDayTime = `${humanEndHour}:${humanEndMinute}`;
         </div>
         <hr />
         <div className={`${classes.center} row`}>
-          <Link to="/">
-            <button className={classes.btn} onClick={submitHandler}>
-              Edit Event
-            </button>
-          </Link>
+          <button type="submit" className={classes.btn} onClick={submitHandler}>
+            Edit Event
+          </button>
         </div>
       </form>
-    </div>
+    </article>
   );
 };
 
