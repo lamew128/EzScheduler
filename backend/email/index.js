@@ -1,7 +1,11 @@
 const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const sendEmail = (email,title,description) => {
+  console.log(process.env.SENDGRID_API_KEY)
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  console.log(email)
+  console.log(title)
+  console.log(description)
   console.log("send email called")
     const msg = {
       to: `${email}`,
@@ -15,7 +19,7 @@ const sendEmail = (email,title,description) => {
         console.log('Email sent')
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error.response.body.errors)
       });
 }
 
