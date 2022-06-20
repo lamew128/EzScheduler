@@ -13,7 +13,7 @@ const TopNav = (props) => {
   const user = props.cookies.user ? props.cookies.user.name : "";
   const [name, setName] = useState(user);
 
-  const buttonClass = `${classes.btncls} btn btn-primary`;
+  // const buttonClass = `${classes.btncls} btn btn-primary`;
 
   const openLogin = () => {
     loginWindow ? setLoginWindow(false) : setLoginWindow(true);
@@ -59,6 +59,7 @@ const TopNav = (props) => {
                 to="/"
                 activeClassName={classes.active}
                 className={navitemClass}
+                style={{color: 'aqua'}}
               >
                 Home
               </NavLink>
@@ -70,6 +71,7 @@ const TopNav = (props) => {
                     to="/my-events"
                     activeClassName={classes.active}
                     className={navitemClass}
+                    style={{color: 'aqua'}}
                   >
                     My Events
                   </NavLink>
@@ -79,6 +81,7 @@ const TopNav = (props) => {
                     to="/events/past"
                     activeClassName={classes.active}
                     className={navitemClass}
+                    style={{color: 'aqua'}}
                   >
                     Past Events
                   </NavLink>
@@ -88,6 +91,7 @@ const TopNav = (props) => {
                     to="/new"
                     activeClassName={classes.active}
                     className={navitemClass}
+                    style={{color: 'aqua'}}
                   >
                     New Event
                   </NavLink>
@@ -97,10 +101,10 @@ const TopNav = (props) => {
           </ul>
           {!isLoggedIn && (
             <>
-              <button className={buttonClass} onClick={openLogin}>
+              <button className={classes.btn} onClick={openLogin}>
                 Login
               </button>
-              <button className={buttonClass} onClick={openRegister}>
+              <button className={classes.btn} onClick={openRegister}>
                 Register
               </button>
               {loginWindow && (
@@ -123,11 +127,11 @@ const TopNav = (props) => {
           )}
           {isLoggedIn && (
             <>
-              <span className="nav-item">
+              <span className={`${classes.logged_in} nav-item`}>
                 Logged in as <b>{name}</b>
               </span>
               <Link to="/">
-                <button onClick={logout} className={buttonClass}>
+                <button onClick={logout} className={classes.btn}>
                   Log out
                 </button>
               </Link>

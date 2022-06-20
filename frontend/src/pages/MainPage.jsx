@@ -166,12 +166,12 @@ const MainPage = (props) => {
             <Button>Create new event!</Button>
           </Link>
           {upcomingEvents}
-          <h3>My Events (Accepted)</h3>
+          <h3 className={classes_mainpage.invite_sections}>My Events (Accepted)</h3>
           {acceptedEventsList}
-          <h2>Open Invites</h2>
+          <h3 className={classes_mainpage.invite_sections}>Open Invites</h3>
           {notRespondedEventsList}
           {maybeEventsList}
-          <h2>Rejected Invites</h2>
+          <h3 className={classes_mainpage.invite_sections}>Rejected Invites</h3>
           {rejectedEventsList}
         </>
       )}
