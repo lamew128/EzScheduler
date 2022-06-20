@@ -1,9 +1,11 @@
 .container {
-  border: 2px solid black;
+  border: 2px solid aqua;
   border-radius: 25px;
   padding: 20px;
   margin: 20px;
-  width: 80%
+  width: 80%;
+  font-family: 'Varela Round', sans-serif;
+  color: aqua;
 }
 
 .inputs {
@@ -11,36 +13,66 @@
   flex-direction: column;
 }
 
+.input_form {
+  width: 90%;
+  border: 0;
+  background-color: blue;
+  border-right: 2px solid aqua;
+  border-bottom: 2px solid aqua;
+  margin: 10px;
+  color: white;
+  outline: 0;
+}
+
+.input_form_date {
+  border: 0;
+  width: 70%;
+  background-color: blue;
+  border-right: 2px solid aqua;
+  border-bottom: 2px solid aqua;
+  color: white;
+  outline: 0;
+}
+
+.input_form_time {
+  border: 0;
+  width: 80%;
+  background-color: white;
+  color: black;
+  outline: 0;
+}
+
 .invitees {
-  border: 2px solid black;
-  height: 402px;
+  height: 92%;
   text-align: center;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  overflow-y: auto;
+  padding: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px aqua;
+  border-radius: 15px;
 }
 
-.map {
-  border: 2px solid black;
-  height: 405px;
+.invitees:hover {
+  overflow-y: scroll;
+  overflow-y: overlay;
 }
 
 .add {
   font-size: x-large;
   color: blue;
-  background-color: rgba(0, 221, 255, 0.350);
+  background-color: rgba(0, 221, 255, 0.800);
   cursor: pointer;
-  border: 2px solid white;
   border-radius: 10px;
-  transition: all 0.3s;
+  transition: all 0.2s;
   align-self: center;
   margin: 10px;
   width: 50px;
 }
 
 .add:hover {
-  background-color: rgba(0, 221, 255, 0.800);
+  background-color: aqua;
+  box-shadow: 0px 0px 10px aqua;
 }
 
 .btn {
@@ -63,9 +95,7 @@
 
 .btn:hover {
   background-color: #23acc4;
-  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
   color: #fff;
-  transform: translateY(-3px);
 }
 
 .btn:active {
@@ -79,6 +109,14 @@
 .invitee_form {
   width: auto;
   height: fit-content;
+  width: 90%;
+  border: 0;
+  background-color: blue;
+  border-right: 2px solid aqua;
+  border-bottom: 2px solid aqua;
+  margin: 10px;
+  color: white;
+  outline: 0;
 }
 
 .btn_add {
@@ -113,13 +151,16 @@
 }
 
 .dropdown-content {
+  padding-top: 20px;
   display: block;
   position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
+  background-color: rgb(3, 0, 85);
+  min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   cursor: pointer;
+  overflow: hidden;
+  scroll-behavior: unset;
 }
 
 .list_name:hover {
@@ -128,9 +169,9 @@
 }
 
 .delete {
-  padding: 5px;
+  padding: 0;
   background-color: rgb(255, 160, 160);
-  width: 30px;
+  width: 25px;
 }
 
 .delete:hover {
@@ -145,4 +186,12 @@
 
 .p_fix {
   margin: 0;
+}
+
+.new_event_title {
+  margin: 10px;
+  color: aqua;
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 2px 2px 10px aqua;
+  justify-content: center;
 }
