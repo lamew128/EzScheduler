@@ -8,22 +8,68 @@
 }
 
 .navbar {
-  background-color: cadetblue;
+  background-color: black;
   font-family: 'Roboto', sans-serif;
+  position: fixed;
+  width: 100%;
+  box-shadow: 0px 1px 10px aqua;
+  z-index: 1;
+}
+
+.navitem {
+  color: aqua;
+  font-family: 'Varela Round', sans-serif;
 }
 
 .navitem:hover {
-  font-weight: bold;
-  text-shadow: 1px 1px #00000041;
+  color: aqua;
+  text-shadow: 2px 2px 5px aqua;
+  transition: text-shadow 0.3s;
 }
 
 .active {
+  color: white;
   font-weight: bold;
-  text-shadow: 1px 1px #00000041;
-  border-bottom: 2px solid black;
+  text-shadow: 2px 2px 10px aqua;
+  border-bottom: 2px solid aqua;
   width: fit-content;
 }
 
 .app_name {
   font-family: 'Dancing Script', cursive;
+  color: aqua;
+}
+
+.btn {
+  max-width: fit-content;
+  align-self: center;
+  padding: 5px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #000;
+  background-color: aqua;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin: 10px;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background-color: blue;
+  box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.logged_in {
+  text-shadow: 5px 5px 10px aqua;
+  color: aqua;
+  font-family: 'Varela Round', sans-serif;
 }

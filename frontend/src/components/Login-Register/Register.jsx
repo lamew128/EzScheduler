@@ -43,7 +43,6 @@ const Register = (props) => {
           setErrorMessage(user.data.message);
         }
       });
-    //console.log(userData);
   };
 
   const formClass = `${classes.center} row`;
@@ -57,7 +56,7 @@ const Register = (props) => {
           ></i>
         </div>
         <div className={`${classes.center} row`}>
-          <h3>Register</h3>
+          <h3 className={classes.title}>REGISTER</h3>
           <div className={formClass}>
             <label>Name:</label>
             <input

@@ -103,8 +103,10 @@ const EventPage = (props) => {
           <span className={classes.section_title}>INVITEES:</span>
           {showList}
         </div>
-        <div className={`${classes.comments} row`}>
-          <span className={`${classes.section_title} text-center`}>COMMENTS</span>
+        <div className={`${classes.comments}`}>
+          <span className={`${classes.section_title} text-center`}>
+            COMMENTS
+          </span>
           <CommentSection
             className={classes.comments}
             cookies={props.cookies}
@@ -145,6 +147,12 @@ const EventPage = (props) => {
             )}
             <p>
               Description: <strong>{props.description}</strong>
+            </p>
+            <p>
+              Start Time: <strong>{props.start_time}</strong>
+            </p>
+            <p>
+              End Time: <strong>{props.end_time}</strong>
             </p>
             <p>
               Address: <strong>{props.address}</strong>

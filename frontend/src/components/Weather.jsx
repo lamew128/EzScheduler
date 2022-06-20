@@ -12,13 +12,7 @@ const Weather = (props) => {
   const API_KEY = process.env.REACT_APP_API_KEY_WEATHER;
   const FULL_API_URL = `${API_URL}?lat=${LAT}&lon=${LONG}&appid=${API_KEY}`;
 
-  // const now = Math.round(new Date().getTime() / 1000);
-  // const weatherAvaiable = props.time - now < 421200 ? true : false;
-
   useEffect(() => {
-    // console.log("NOW = ", new Date(now * 1000));
-    // console.log("TIME = ", new Date(props.time * 1000));
-    // console.log("weatherAvaiable = ", weatherAvaiable);
     setLoading(true);
     axios
       .get(FULL_API_URL)
@@ -34,8 +28,6 @@ const Weather = (props) => {
       .catch((e) => console.log(e));
   }, [FULL_API_URL, props.date]);
 
-  //console.log({weather});
-
   return (
     <>
       {loading && (
@@ -45,32 +37,27 @@ const Weather = (props) => {
       )}
       {!loading && (
         <>
-        {weather &&
-          <>
-            <p>
-            {`${Math.round(weather.main.temp - 273.15)}°C`}
-          </p>
-          <img
-            src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-            alt="Weather Icon"
-          ></img>
-          <p>{weather.weather[0].description}</p>
+          {weather && (
+            <>
+              <h3>{`${Math.round(weather.main.temp - 273.15)}°C`}</h3>
+              <img
+                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                alt="Weather Icon"
+              ></img>
+              <p>{weather.weather[0].description}</p>
 
-          {weather.weather[0].main === "Clear" && 
-              <p>Enjoy!</p>
-          }
+              {weather.weather[0].main === "Clear" && <p>Enjoy your event!</p>}
 
-          {weather.weather[0].main === "Rain" && 
-              <p>Bring an umb.</p>
-          }
-          
-          </>
-        }
-        {!weather && 
-          <>
-            <p>No weather information yet, Please check later.</p>
-          </>
-        }
+              {weather.weather[0].main === "Rain" && (
+                <p>Bring an umbrella! ☂️</p>
+              )}
+            </>
+          )}
+          {!weather && (
+            <>
+              <p>No weather information yet, Please check later.</p>
+            </>
+          )}
         </>
       )}
     </>

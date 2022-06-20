@@ -19,27 +19,29 @@ const EventMainPage = (props) => {
     });
   }, [id, user, event.creator]);
 
+
   return (
     <>
       {!event.event_id && <>This event does not exist!</>}
-      {event.event_id && (event.start_time > (Date.now() / 1000)) && (
+      {event.event_id && event.start_time > Date.now() / 1000 && (
         <>
           <EventPage
             cookies={props.cookies}
             eventId={id}
             title={event.title}
             description={event.description}
-            //how to convert long and lat to full address?
             address={event.address}
             date={event.start_time}
             response={event.response}
             lat={event.lat}
             long={event.long}
             creator={event.creator}
+            startTime={event.start_time}
+            endTime={event.end_time}
           />
         </>
       )}
-      {event.event_id && (event.start_time < (Date.now() / 1000)) && (
+      {event.event_id && event.start_time < Date.now() / 1000 && (
         <>
           <PastEventPage
             cookies={props.cookies}

@@ -1,13 +1,17 @@
 .container {
-  border: 2px solid black;
-  border-radius: 25px;
+  border: 1px solid aqua;
+  border-right: 2px solid aqua;
+  border-bottom: 2px solid aqua;
+  border-top-left-radius: 25px;
   width: 80%;
   padding: 10px;
   margin: 10px;
+  color: aqua;
+  font-family: 'Varela Round', sans-serif;
 }
 
 .container:hover {
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 10px aqua;
   transition: all 0.3s ease-in-out;
   transform: translate(-3px, -3px);
 }
@@ -35,11 +39,6 @@
   white-space: nowrap;
 }
 
-.fit {
-  max-width: fit-content;
-  align-self: center;
-}
-
 .btn:hover {
   background-color: #23acc4;
   box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
@@ -49,6 +48,11 @@
 
 .btn:active {
   transform: translateY(-1px);
+}
+
+.fit {
+  max-width: fit-content;
+  align-self: center;
 }
 
 .location {

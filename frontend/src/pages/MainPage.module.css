@@ -1,0 +1,26 @@
+.title {
+  font-size: 5rem;
+}
+
+.welcome {
+  align-self: flex-start;
+  margin-top: 50px;
+  margin-left: 20px;
+  font-size: 70px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, aqua, blue);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.app_name {
+  font-family: 'Dancing Script', cursive;
+}
+
+.invite_sections {
+  margin: 10px;
+  color: aqua;
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 2px 2px 10px aqua;
+}

@@ -4,7 +4,7 @@
   width: 5.5rem;
   height: 5.5rem;
   border: 1px solid #ececec;
-  background-color: #2a2a2a;
+  background-color: blue;
   color: white;
   border-radius: 12px;
   align-items: center;
@@ -14,12 +14,12 @@
 }
 
 .date__month {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .date__year {
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 .date__day {

@@ -3,7 +3,8 @@ import Button from "../components/CreateEventButton";
 import UpcomingEvents from "../components/Upcoming/UpcomingEvents";
 import EventItem from "../components/EventItem/EventItem";
 import Notification from "../components/Notification/Notification";
-import classes from "../components/Notification/Notification.module.css";
+import classes_notification from "../components/Notification/Notification.module.css";
+import classes_mainpage from "./MainPage.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -37,6 +38,9 @@ const MainPage = (props) => {
       <UpcomingEvents
         key={event.event_id}
         eventId={event.event_id}
+        description={event.description}
+        start_time={event.start_time}
+        end_time={event.end_time}
         title={event.title}
         date={event.start_time}
         address={event.address}
@@ -44,8 +48,6 @@ const MainPage = (props) => {
         long={event.long}
       />
     ));
-  // console.log("events:");
-  // console.log(events);
 
   const acceptedEventsList = events
     .filter(
@@ -155,7 +157,7 @@ const MainPage = (props) => {
       {showEvents && (
         <>
           {notificationList.length !== 0 && (
-            <div className={classes.container}>
+            <div className={classes_notification.container}>
               <h3>Events You Have Not Responded</h3>
               {notificationList}
             </div>
@@ -163,17 +165,26 @@ const MainPage = (props) => {
           <Link to="/new">
             <Button>Create new event!</Button>
           </Link>
+          <h1 className={classes_mainpage.invite_sections}>Upcoming Events</h1>
           {upcomingEvents}
-          <h3>My Events (Accepted)</h3>
+          <h1 className={classes_mainpage.invite_sections}>My Accepted Events</h1>
           {acceptedEventsList}
-          <h2>Open Invites</h2>
+          <h1 className={classes_mainpage.invite_sections}>Open Invites</h1>
           {notRespondedEventsList}
           {maybeEventsList}
-          <h2>Rejected Invites</h2>
+          <h1 className={classes_mainpage.invite_sections}>Declined Invites</h1>
           {rejectedEventsList}
         </>
       )}
-      {!showEvents && <h3>Please Login to See Your Events</h3>}
+      {!showEvents && (
+        <div className={classes_mainpage.welcome}>
+          <h1 className={classes_mainpage.title}>
+            Welcome to{" "}
+            <span className={classes_mainpage.app_name}>E.Z Scheduler</span>
+          </h1>
+          <h3>Please Login on the navigation bar to see Your Events</h3>
+        </div>
+      )}
     </>
   );
 };
