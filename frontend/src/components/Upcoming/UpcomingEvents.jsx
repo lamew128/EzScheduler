@@ -15,6 +15,17 @@ const UpcomingEvents = (props) => {
     });
   }, [props.eventId]);
 
+  const timestampToTime = (time) => {
+    const date = new Date(time * 1000).toLocaleString("en-US", {
+      month:"long",
+      day:"numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+    });
+    return date;
+  };
+  
   const going = list.filter((invitee) => invitee.response === "yes").length;
 
   return (
@@ -25,6 +36,12 @@ const UpcomingEvents = (props) => {
             <header className={classes.title}>
               <h3>Upcoming Events</h3>
             </header>
+            <div className={`col`}>
+              <div>{props.description}</div>
+              <div>Location: {props.address}</div>
+              <div>Event Starting At:{timestampToTime(props.start_time)}</div>
+              <div>Event Ending At:{timestampToTime(props.end_time)}</div>
+            </div>
             <div className={`${classes.content} d-flex`}>
               <h3 className={classes.title__event}>{props.title}</h3>
               <section className={classes.weather}>

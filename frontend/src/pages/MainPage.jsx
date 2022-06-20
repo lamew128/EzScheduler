@@ -38,6 +38,9 @@ const MainPage = (props) => {
       <UpcomingEvents
         key={event.event_id}
         eventId={event.event_id}
+        description={event.description}
+        start_time={event.start_time}
+        end_time={event.end_time}
         title={event.title}
         date={event.start_time}
         address={event.address}
