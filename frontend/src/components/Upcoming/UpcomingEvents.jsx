@@ -4,6 +4,7 @@ import EventDate from "../EventDate";
 import Weather from "../Weather";
 
 import classes from "./UpcomingEvents.module.css";
+import { Link } from "react-router-dom";
 
 const UpcomingEvents = (props) => {
   const [list, setList] = useState([]);
@@ -17,15 +18,15 @@ const UpcomingEvents = (props) => {
 
   const timestampToTime = (time) => {
     const date = new Date(time * 1000).toLocaleString("en-US", {
-      month:"long",
-      day:"numeric",
+      month: "long",
+      day: "numeric",
       hour: "numeric",
       minute: "numeric",
       hour12: false,
     });
     return date;
   };
-  
+
   const going = list.filter((invitee) => invitee.response === "yes").length;
 
   return (
@@ -33,21 +34,34 @@ const UpcomingEvents = (props) => {
       <section>
         <div className="row">
           <div className="col">
-            <header className={classes.title}>
-              <h3>Upcoming Events</h3>
-            </header>
-            <div className={`col`}>
-              <div>{props.description}</div>
-              <div>Location: {props.address}</div>
-              <div>Event Starting At:{timestampToTime(props.start_time)}</div>
-              <div>Event Ending At:{timestampToTime(props.end_time)}</div>
-            </div>
-            <div className={`${classes.content} d-flex`}>
-              <h3 className={classes.title__event}>{props.title}</h3>
-              <section className={classes.weather}>
-                <h4>Weather</h4>
-                <Weather lat={props.lat} long={props.long} date={props.date} />
-              </section>
+            <div className={`${classes.content} row d-flex`}>
+              <div className="col">
+                <h3 className={classes.title__event}>{props.title}</h3>
+                <p className={classes.description}>{props.description}</p>
+                <p>Location: {props.address}</p>
+                <p>Event Starting On:{timestampToTime(props.start_time)}</p>
+                <p>Event Ending On:{timestampToTime(props.end_time)}</p>
+              </div>
+              <div className={`${classes.open_event_btn} col`}>
+                <Link
+                  className={`${classes.fit}`}
+                  to={`/events/${props.eventId}`}
+                >
+                  <button className={classes.btn}>OPEN EVENT</button>
+                </Link>
+              </div>
+              <div className={`${classes.weather_section} col`}>
+                <section className={classes.weather}>
+                  <h4>
+                    <strong>WEATHER</strong>
+                  </h4>
+                  <Weather
+                    lat={props.lat}
+                    long={props.long}
+                    date={props.date}
+                  />
+                </section>
+              </div>
             </div>
           </div>
           <div className={`${classes.date__invitees} col-2`}>

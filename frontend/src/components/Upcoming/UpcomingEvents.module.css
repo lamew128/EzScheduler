@@ -1,9 +1,11 @@
 .upcoming-events {
+  border: 1px solid aqua;
+  border-right: 2px solid aqua;
+  border-bottom: 2px solid aqua;
+  border-top-left-radius: 25px;
   width: 80%;
-  border-radius: 25px;
   margin: 2%;
-  padding: 10px;
-  border: 2px solid black;
+  padding: 20px;
   color: aqua;
   font-family: 'Varela Round', sans-serif;
 }
@@ -17,22 +19,32 @@
 }
 
 .upcoming-events:hover {
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 10px aqua;
   transition: all 0.3s ease-in-out;
   transform: translate(-3px, -3px);
 }
 
 .title__event {
   max-inline-size: fit-content;
+  font-style: italic;
+}
+
+.weather_section {
+  display: flex;
+  justify-content: right;
 }
 
 .weather {
-  border: 2px solid black;
+  color: white;
+  border: 2px solid aqua;
   border-radius: 25px;
   max-inline-size: fit-content;
   padding: 10px;
   height: 100px;
   height: fit-content;
+  text-transform: capitalize;
+  text-align: center;
+  margin: 0;
 }
 
 .date__invitees {
@@ -41,6 +53,43 @@
 }
 
 .date__invitees p {
-  margin:0;
+  margin: 0;
 }
 
+.btn {
+  max-width: fit-content;
+  align-self: center;
+  padding: 10px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  margin: 10px;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background-color: aqua;
+  box-shadow: 0px 5px 20px rgba(0, 255, 255, 0.400);
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.open_event_btn {
+  align-self: center;
+  text-align: center;
+}
+
+.description {
+  border-right: 1px solid aqua;
+  border-bottom: 1px solid aqua;
+  padding: 3px;
+}

@@ -39,11 +39,6 @@
   white-space: nowrap;
 }
 
-.fit {
-  max-width: fit-content;
-  align-self: center;
-}
-
 .btn:hover {
   background-color: #23acc4;
   box-shadow: 0px 15px 20px rgba(46, 134, 229, 0.4);
@@ -53,6 +48,11 @@
 
 .btn:active {
   transform: translateY(-1px);
+}
+
+.fit {
+  max-width: fit-content;
+  align-self: center;
 }
 
 .location {

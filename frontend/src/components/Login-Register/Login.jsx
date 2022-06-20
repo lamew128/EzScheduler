@@ -49,7 +49,7 @@ const Login = (props) => {
           ></i>
         </div>
         <div className={`${classes.center} row`}>
-          <h3>LOGIN</h3>
+          <h3 className={classes.title}>LOGIN</h3>
           <div className={formClass}>
             <label>Email Address:</label>
             <input
