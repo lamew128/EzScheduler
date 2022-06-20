@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const { sendEmail } = require('../email');
 router.use(bodyParser.urlencoded({ extended: false }));
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = (db) => {
 
@@ -134,12 +137,23 @@ module.exports = (db) => {
   //delete an event
   router.delete('/:id', (req, res) => {
     const eventId = req.params.id;
-    console.log(eventId);
     db.deleteEvent(eventId)
       .then((data) => {
         return res.json({ status: 200, data: data });
       })
   });
+
+  router.post('/email', (req,res) => {
+    console.log("posted");
+    console.log(req.body);
+    const toEmails = req.body.emailArray;
+    console.log({toEmails});
+    for(let email of toEmails) {
+      // sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+      
+      sendEmail(email, req.body.title, req.body.description);
+    }
+  })
 
   return router;
 };
