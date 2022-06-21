@@ -43,7 +43,8 @@ const EventPage = (props) => {
 
   // COMMENTS SECTION
   useEffect(() => {
-    axios.get(`/event/comments/${props.eventId}`).then((commentsData) => {
+    axios.get(`/event/comments/${props.eventId}`)
+    .then((commentsData) => {
       setComments(commentsData.data);
       setChange(false);
     });
