@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TimeAgo from "timeago-react";
 import classes from "./CommentSection.module.css";
 
@@ -38,12 +38,34 @@ const CommentSection = (props) => {
     });
   };
 
+  const openUrl = (url) => {
+    window.location = url;
+  };
+
   const renderComments = props.comments
     .map((item, index) => (
       <article key={index} className={classes.comments_container}>
         <span className={`${classes.username}`}>{item.name}: </span>
         <br />
         <span className={`${classes.comment}`}>{item.comment_text}</span>
+
+        {item.preview && 
+          <div className={classes.previewContainer} onClick={() => openUrl(item.preview.url)}>
+            <div className={classes.previewImageContainer}>
+              <img className={classes.previewImage} src={item.preview.images[0]}></img>
+            </div>
+            <div className={classes.previewSite}>
+            {item.preview.siteName}
+            </div>
+            <div className={classes.previewTitle}>
+            {item.preview.title}
+            </div>
+            <div className={classes.previewDescription}>
+            {item.preview.description}
+            </div>
+          </div>
+        }
+
         <br />
         <div className="row">
           <TimeAgo className={`${classes.time} col`} datetime={item.time * 1000} />
@@ -59,6 +81,20 @@ const CommentSection = (props) => {
       </article>
     ))
     .reverse();
+
+  // useEffect(() => {
+  //   const generatePreview = async () => {
+  //     return await getLinkPreview("https://imgur.com/a/CcjPUW2");
+  //   }
+
+  //   getLinkPreview("https://imgur.com/a/CcjPUW2")
+  //   .then((a) => {
+  //     setPreview(a);
+  //     console.log(a);
+  //   })
+  //   //setPreview(generatePreview());
+  //   //console.log(generatePreview());
+  // },[props.comments])
 
   return (
     <>
