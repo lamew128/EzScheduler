@@ -19,9 +19,8 @@
 }
 
 .upcoming-events:hover {
-  box-shadow: 5px 5px 10px aqua;
+  box-shadow: 0px 0px 15px aqua;
   transition: all 0.3s ease-in-out;
-  transform: translate(-3px, -3px);
 }
 
 .title__event {
@@ -93,4 +92,12 @@
   border-right: 1px solid aqua;
   border-bottom: 1px solid aqua;
   padding: 3px;
+}
+
+.main_text {
+  text-shadow: 2px 2px 5px aqua;
+}
+
+.p_fix {
+  margin: 0;
 }
