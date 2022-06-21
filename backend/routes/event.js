@@ -135,16 +135,26 @@ module.exports = (db) => {
         Promise.all([...data].map((pre) => {
           if(urlify(pre.comment_text)) 
           {
-            return getLinkPreview(pre.comment_text);
+            return getLinkPreview(pre.comment_text)
+            .then((a) => {
+              return a;
+            })
+            .catch((e) => {
+              return null;
+            });
           }
         }))
         .then((resp) => {
           for (let i = 0; i < resp.length; i++) {
-            data[i].preview = resp[i];
+            console.log("asdadas",resp[i]);
+            if(resp[i]) {
+              data[i].preview = resp[i];
+            }
           }
           console.log(data);
           return res.json(data);
         })
+        .catch((e) => console.log(e))
       })
   });
   
