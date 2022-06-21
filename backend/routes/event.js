@@ -1,3 +1,6 @@
+const { getLinkPreview, getPreviewFromContent } = require("link-preview-js");
+
+
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -116,15 +119,35 @@ module.exports = (db) => {
       })
   });
 
+  //check url existence
+  const urlify = (t) => {
+    var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    var regex = new RegExp(expression);
+
+    return t.match(regex);
+  }
+
   //get all comments given an event id
   router.get('/comments/:id', (req, res) => {
     const eventId = req.params.id;
     db.getComments(eventId)
       .then((data) => {
-        res.json(data);
+        Promise.all([...data].map((pre) => {
+          if(urlify(pre.comment_text)) 
+          {
+            return getLinkPreview(pre.comment_text);
+          }
+        }))
+        .then((resp) => {
+          for (let i = 0; i < resp.length; i++) {
+            data[i].preview = resp[i];
+          }
+          console.log(data);
+          return res.json(data);
+        })
       })
   });
-
+  
   //delete a comment
   router.delete('/comment/:id', (req, res) => {
     const commentId = req.params.id;
