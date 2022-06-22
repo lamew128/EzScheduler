@@ -51,13 +51,13 @@ const CommentSection = (props) => {
 
         {item.preview && (
           <>
-            {item.preview.mediaType === "website" && (
+            {item.preview.mediaType !== "image" && (
               <div
                 className={classes.previewContainer}
                 onClick={() => openUrl(item.preview.url)}
               >
                 <div className={classes.previewImageContainer}>
-                  {
+                  {item.preview.images &&
                     <img
                       className={classes.previewImage}
                       src={item.preview.images[0]}
