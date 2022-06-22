@@ -46,7 +46,6 @@
   padding: 5px 10px 5px 10px;
   font-size: 1rem;
   text-transform: uppercase;
-  color: #000;
   background-color: aqua;
   border: none;
   border-radius: 25px;
@@ -70,4 +69,13 @@
   text-shadow: 5px 5px 10px aqua;
   color: aqua;
   font-family: 'Varela Round', sans-serif;
+}
+
+.toggler {
+  background-color: rgba(0, 255, 255, 0.500);
+}
+
+.toggler:hover {
+  background-color: aqua;
+  transition: all 0.3s ease;
 }

@@ -374,14 +374,14 @@ const EventPage = (props) => {
               </p>
             )}
             <p>
-              Description: <strong>{props.description}</strong>
+              Description: <strong className={classes.main_text}>{props.description}</strong>
             </p>
             <p>
-              Address: <strong>{props.address}</strong>
+              Address: <strong className={classes.main_text}>{props.address}</strong>
             </p>
             <p>
               Event Time:{" "}
-              <strong>
+              <strong className={classes.main_text}>
                 {timestampToTime(props.startTime)} -{" "}
                 {timestampToTime(props.endTime)}
               </strong>

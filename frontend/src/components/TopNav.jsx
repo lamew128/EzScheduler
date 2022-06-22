@@ -13,8 +13,6 @@ const TopNav = (props) => {
   const user = props.cookies.user ? props.cookies.user.name : "";
   const [name, setName] = useState(user);
 
-  // const buttonClass = `${classes.btncls} btn btn-primary`;
-
   const openLogin = () => {
     loginWindow ? setLoginWindow(false) : setLoginWindow(true);
   };
@@ -41,7 +39,7 @@ const TopNav = (props) => {
           E.Z Scheduler
         </a>
         <button
-          className="navbar-toggler"
+          className={`${classes.toggler} navbar-toggler`}
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -59,7 +57,7 @@ const TopNav = (props) => {
                 to="/"
                 activeClassName={classes.active}
                 className={navitemClass}
-                style={{color: 'aqua'}}
+                style={{ color: "aqua" }}
               >
                 Home
               </NavLink>
@@ -71,7 +69,7 @@ const TopNav = (props) => {
                     to="/my-events"
                     activeClassName={classes.active}
                     className={navitemClass}
-                    style={{color: 'aqua'}}
+                    style={{ color: "aqua" }}
                   >
                     My Events
                   </NavLink>
@@ -81,7 +79,7 @@ const TopNav = (props) => {
                     to="/events/past"
                     activeClassName={classes.active}
                     className={navitemClass}
-                    style={{color: 'aqua'}}
+                    style={{ color: "aqua" }}
                   >
                     Past Events
                   </NavLink>
@@ -91,7 +89,7 @@ const TopNav = (props) => {
                     to="/new"
                     activeClassName={classes.active}
                     className={navitemClass}
-                    style={{color: 'aqua'}}
+                    style={{ color: "aqua" }}
                   >
                     New Event
                   </NavLink>
