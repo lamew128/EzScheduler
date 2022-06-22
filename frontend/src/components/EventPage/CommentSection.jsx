@@ -39,7 +39,7 @@ const CommentSection = (props) => {
   };
 
   const openUrl = (url) => {
-    window.location = url;
+    window.open(url, '_blank').focus();
   };
 
   const renderComments = props.comments
