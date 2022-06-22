@@ -49,55 +49,49 @@ const CommentSection = (props) => {
         <br />
         <span className={`${classes.comment}`}>{item.comment_text}</span>
 
-<<<<<<< HEAD
         {item.preview && (
-          <div
-            className={classes.previewContainer}
-            onClick={() => openUrl(item.preview.url)}
-          >
-            <div className={classes.previewImageContainer}>
-              <img
-                className={classes.previewImage}
-                src={item.preview.images[0]}
-                alt={"Img"}
-              ></img>
-            </div>
-            <div className={classes.previewSite}>{item.preview.siteName}</div>
-            <div className={classes.previewTitle}>{item.preview.title}</div>
-            <div className={classes.previewDescription}>
-              {item.preview.description}
-            </div>
-          </div>
-        )}
-=======
-        {item.preview && 
           <>
-            {item.preview.mediaType === "website" && 
-            <div className={classes.previewContainer} onClick={() => openUrl(item.preview.url)}>
-              <div className={classes.previewImageContainer}>
-                {<img className={classes.previewImage} src={item.preview.images[0]}></img>}
+            {item.preview.mediaType === "website" && (
+              <div
+                className={classes.previewContainer}
+                onClick={() => openUrl(item.preview.url)}
+              >
+                <div className={classes.previewImageContainer}>
+                  {
+                    <img
+                      className={classes.previewImage}
+                      src={item.preview.images[0]}
+                      alt={"Img"}
+                    ></img>
+                  }
+                </div>
+                <div className={classes.previewSite}>
+                  {item.preview.siteName}
+                </div>
+                <div className={classes.previewTitle}>{item.preview.title}</div>
+                <div className={classes.previewDescription}>
+                  {item.preview.description}
+                </div>
               </div>
-              <div className={classes.previewSite}>
-              {item.preview.siteName}
+            )}
+            {item.preview.mediaType === "image" && (
+              <div
+                className={classes.previewContainer}
+                onClick={() => openUrl(item.preview.url)}
+              >
+                <div className={classes.previewImageContainer}>
+                  {
+                    <img
+                      className={classes.previewImage}
+                      src={item.preview.url}
+                      alt={"Img"}
+                    ></img>
+                  }
+                </div>
               </div>
-              <div className={classes.previewTitle}>
-              {item.preview.title}
-              </div>
-              <div className={classes.previewDescription}>
-              {item.preview.description}
-              </div>
-            </div>
-            }
-            {item.preview.mediaType === "image" && 
-            <div className={classes.previewContainer} onClick={() => openUrl(item.preview.url)}>
-              <div className={classes.previewImageContainer}>
-                {<img className={classes.previewImage} src={item.preview.url}></img>}
-              </div>
-            </div>
-            }
+            )}
           </>
-        }
->>>>>>> d9481f5d936ff7426ad5382b38a155ff1c6cf5e0
+        )}
 
         <br />
         <div className="row">
