@@ -63,6 +63,7 @@ const UpcomingEvents = (props) => {
                     lat={props.lat}
                     long={props.long}
                     date={props.date}
+                    col={true}
                   />
                 </section>
               </div>

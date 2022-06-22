@@ -71,3 +71,12 @@
   color: aqua;
   font-family: 'Varela Round', sans-serif;
 }
+
+.toggler {
+  background-color: rgba(0, 255, 255, 0.500);
+}
+
+.toggler:hover {
+  background-color: aqua;
+  transition: all 0.3s ease;
+}

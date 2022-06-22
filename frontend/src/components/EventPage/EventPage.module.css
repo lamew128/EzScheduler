@@ -155,6 +155,8 @@
 .section_title {
   font-size: x-large;
   font-weight: bold;
+  border-bottom: 2px solid aqua;
+  margin-bottom: 10px;
 }
 
 .invitees input {
@@ -230,7 +232,7 @@
 .dropdown-content {
   display: block;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: rgb(12, 0, 140);
   min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -246,6 +248,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.5rem;
 }
 
 .p_fix {
@@ -272,4 +275,8 @@
 
 .adjust_height {
   height: 100%;
+}
+
+.main_text {
+  text-shadow: 2px 2px 5px aqua;
 }

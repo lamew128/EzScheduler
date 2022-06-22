@@ -8,16 +8,15 @@
 
 .event_text {
   text-decoration: inherit;
-  color: inherit;
-  cursor: auto;
   cursor: pointer;
   color: aqua;
   margin: 10px;
+  width: fit-content;
+  transition: all 0.3s ease 0s;
 }
 
 .event_text:hover {
   color: aqua;
   font-weight: 500;
   text-shadow: 5px 5px 10px aqua;
-  transition: all 0.3s ease 0s;
 }

@@ -49,26 +49,32 @@ const CommentSection = (props) => {
         <br />
         <span className={`${classes.comment}`}>{item.comment_text}</span>
 
-        {item.preview && 
-          <div className={classes.previewContainer} onClick={() => openUrl(item.preview.url)}>
+        {item.preview && (
+          <div
+            className={classes.previewContainer}
+            onClick={() => openUrl(item.preview.url)}
+          >
             <div className={classes.previewImageContainer}>
-              <img className={classes.previewImage} src={item.preview.images[0]}></img>
+              <img
+                className={classes.previewImage}
+                src={item.preview.images[0]}
+                alt={"Img"}
+              ></img>
             </div>
-            <div className={classes.previewSite}>
-            {item.preview.siteName}
-            </div>
-            <div className={classes.previewTitle}>
-            {item.preview.title}
-            </div>
+            <div className={classes.previewSite}>{item.preview.siteName}</div>
+            <div className={classes.previewTitle}>{item.preview.title}</div>
             <div className={classes.previewDescription}>
-            {item.preview.description}
+              {item.preview.description}
             </div>
           </div>
-        }
+        )}
 
         <br />
         <div className="row">
-          <TimeAgo className={`${classes.time} col`} datetime={item.time * 1000} />
+          <TimeAgo
+            className={`${classes.time} col`}
+            datetime={item.time * 1000}
+          />
           {item.user_id === props.cookies.user.id && (
             <button
               className={`${classes.btn} ${classes.delete_comment}`}
@@ -81,20 +87,6 @@ const CommentSection = (props) => {
       </article>
     ))
     .reverse();
-
-  // useEffect(() => {
-  //   const generatePreview = async () => {
-  //     return await getLinkPreview("https://imgur.com/a/CcjPUW2");
-  //   }
-
-  //   getLinkPreview("https://imgur.com/a/CcjPUW2")
-  //   .then((a) => {
-  //     setPreview(a);
-  //     console.log(a);
-  //   })
-  //   //setPreview(generatePreview());
-  //   //console.log(generatePreview());
-  // },[props.comments])
 
   return (
     <>

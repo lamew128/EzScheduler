@@ -13,6 +13,10 @@ const Weather = (props) => {
   const API_KEY = process.env.REACT_APP_API_KEY_WEATHER;
   const FULL_API_URL = `${API_URL}?lat=${LAT}&lon=${LONG}&appid=${API_KEY}`;
 
+  const containerClass = props.col
+    ? `${classes.container} ${classes.col_direction}`
+    : classes.container;
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -39,7 +43,7 @@ const Weather = (props) => {
       {!loading && (
         <>
           {weather && (
-            <main className={classes.container}>
+            <main className={containerClass}>
               <h3>{`${Math.round(weather.main.temp - 273.15)}°C`}</h3>
               <img
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
