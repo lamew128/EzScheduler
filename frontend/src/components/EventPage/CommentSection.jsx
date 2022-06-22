@@ -50,20 +50,31 @@ const CommentSection = (props) => {
         <span className={`${classes.comment}`}>{item.comment_text}</span>
 
         {item.preview && 
-          <div className={classes.previewContainer} onClick={() => openUrl(item.preview.url)}>
-            <div className={classes.previewImageContainer}>
-              <img className={classes.previewImage} src={item.preview.images[0]}></img>
+          <>
+            {item.preview.mediaType === "website" && 
+            <div className={classes.previewContainer} onClick={() => openUrl(item.preview.url)}>
+              <div className={classes.previewImageContainer}>
+                {<img className={classes.previewImage} src={item.preview.images[0]}></img>}
+              </div>
+              <div className={classes.previewSite}>
+              {item.preview.siteName}
+              </div>
+              <div className={classes.previewTitle}>
+              {item.preview.title}
+              </div>
+              <div className={classes.previewDescription}>
+              {item.preview.description}
+              </div>
             </div>
-            <div className={classes.previewSite}>
-            {item.preview.siteName}
+            }
+            {item.preview.mediaType === "image" && 
+            <div className={classes.previewContainer} onClick={() => openUrl(item.preview.url)}>
+              <div className={classes.previewImageContainer}>
+                {<img className={classes.previewImage} src={item.preview.url}></img>}
+              </div>
             </div>
-            <div className={classes.previewTitle}>
-            {item.preview.title}
-            </div>
-            <div className={classes.previewDescription}>
-            {item.preview.description}
-            </div>
-          </div>
+            }
+          </>
         }
 
         <br />
