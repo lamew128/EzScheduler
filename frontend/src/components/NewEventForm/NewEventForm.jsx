@@ -177,7 +177,7 @@ const NewEvent = (props) => {
       console.log(data[0]);
       console.log(data[1]);
     });
-    // redirectToHome();
+    redirectToHome();
   };
 
   const addInvitee = (p) => {
