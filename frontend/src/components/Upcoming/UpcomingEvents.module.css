@@ -35,7 +35,7 @@
 
 .weather {
   color: white;
-  border: 2px solid aqua;
+  box-shadow: 0px 0px 10px aqua;
   border-radius: 25px;
   max-inline-size: fit-content;
   padding: 10px;
