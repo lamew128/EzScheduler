@@ -46,7 +46,7 @@ For this final project, we created an app called Ez Scheduler that allows users 
   - Bootstrap
 - Back-end
   - Express
-  - PostreSQL
+  - PostgreSQL
 - APIs
   - OpenWeatherMap API
   - Google Maps API
