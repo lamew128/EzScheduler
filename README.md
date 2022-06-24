@@ -18,7 +18,7 @@ For this final project, we created an app called Ez Scheduler that allows users 
 
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command in both "frontend" and "backend" folder.
-3. Create a database by psql.
+3. Create a database in the "backend" folder by psql. Then use the `\i db/schema.sql` command to setup the tables.
 4. Create .env file in the "backend folder" with the following information.
   - DB_HOST=localhost
   - DB_USER=
