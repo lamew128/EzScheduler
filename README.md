@@ -3,7 +3,7 @@
 
 ## Overview
 
-
+For this final project, we created an app called Ez Scheduler that allows users to organize events with friends. Users can create events with time and location(shows on map). User who created an event can invite other users to join the event. Users being invited can see the event information and response to the event. If the event is within 5 days, simple weather information is avaiable for users to confirm the situation of the event.
 
 ## Final Product
 
