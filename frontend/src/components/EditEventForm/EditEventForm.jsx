@@ -105,9 +105,8 @@ const EditEventForm = (props) => {
       creator: props.creator,
       id: props.eventId,
     };
-    console.log(formData);
     axios.put(`/event`, formData).then((data) => {
-      console.log(data.data);
+
     });
     redirectToHome();
   };
@@ -122,9 +121,6 @@ const EditEventForm = (props) => {
     setEndTime(humanEndDayTime);
     setCoords({ lat: props.lat, lng: props.long });
   }, []);
-
-  console.log("user");
-  console.log(props.user);
 
   //fixing time display
   const humanStartTime = new Date(props.start_time * 1000);

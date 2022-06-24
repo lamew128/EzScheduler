@@ -9,7 +9,6 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     db.getAllUsers()
       .then((data) => {
-        console.log("dataaaaaaa" + data);
         res.json(data);
       });
   }
@@ -32,7 +31,6 @@ module.exports = (db) => {
     return db.getUserWithEmail(email)
       .then((user) => {
         if (!user) {
-          console.log("email not found");
           return;//no email
         }
         if (password === user.password) {
@@ -45,16 +43,13 @@ module.exports = (db) => {
 
   //login
   router.post("/login", (req, res) => {
-    console.log("123");
     const email = req.body.email;
     const password = req.body.password;
     login(email, password)
       .then(user => {
         if (!user) {
-          console.log("no user!");
           return res.json({ status: 401, message: "Invalid login information."});
         }
-        console.log("login success!");
         return res.json({ status: 200, id: user.id, name: user.name });
       })
       .catch(e => {
@@ -68,7 +63,6 @@ module.exports = (db) => {
     db.getUserWithEmail(user.email)
       .then((email) => {
         if (email) {
-          console.log("EXIST");
           return res.json({ status: 401, message: "Email already existed!" });
         }
         db.addUser(user)
@@ -77,7 +71,6 @@ module.exports = (db) => {
               res.send({ error: "error" });
               return;
             }
-            console.log("REG SUCCESs");
             return res.json({ status: 200, id: user.id, name: user.name });
           })
           .catch(e => {

@@ -25,14 +25,12 @@ const Login = (props) => {
       .post("/users/login", { email: user, password: password })
       .then((user) => {
         if (user.data.status === 200) {
-          console.log("USER ID = ", user.data.id);
           cookieSetter({ id: user.data.id, name: user.data.name });
           props.setName(user.data.name);
           props.setIsLoggedIn(true);
           props.close();
         }
         if (user.data.status === 401) {
-          console.log("WRONG", user.data.message);
           setError(true);
         }
       });

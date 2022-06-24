@@ -173,9 +173,7 @@ const NewEvent = (props) => {
       description: formData.description
     });
     Promise.all(axiosCalls).then((data) => {
-      //  console.log("promise all succeeded!");
-      console.log(data[0]);
-      console.log(data[1]);
+      
     });
     redirectToHome();
   };
@@ -213,7 +211,6 @@ const NewEvent = (props) => {
     const deleteInvitee = (e, inv) => {
       e.preventDefault();
       const newList1 = inviteesList.filter((elem) => elem.name !== inv.name);
-      console.log(inviteesList);
       setInviteesList(newList1);
     };
 

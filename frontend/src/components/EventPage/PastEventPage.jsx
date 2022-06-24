@@ -71,14 +71,6 @@ const EventPage = (props) => {
                 <i className={`${classes.question} bi bi-question-lg col`}></i>
               )}
               <p className={classes.p_fix}>{invitee.data.name}</p>
-              {/* {isCreator && (
-                <button
-                  onClick={() => deleteInvitee(invitee)}
-                  className={`${classes.btn} ${classes.delete}`}
-                >
-                  <i className={`bi bi-x-lg col`}></i>
-                </button>
-              )} */}
             </>
           )}
         </div>

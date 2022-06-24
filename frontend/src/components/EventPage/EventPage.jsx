@@ -95,10 +95,9 @@ const EventPage = (props) => {
       alert("You cannot add the same user!");
       return;
     }
-    console.log(inviteesList);
     axios
       .post("/event/invite", { userId: p.id, eventId: props.eventId })
-      .then((res) => console.log(res));
+      .then((res) => {});
     const user = { userId: p.id, data: p };
     setNameList((prev) => [...prev, user]);
     setNewInvitee(false);

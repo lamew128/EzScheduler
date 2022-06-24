@@ -7,14 +7,11 @@ const CommentSection = (props) => {
   const [comment, setComment] = useState("");
 
   const commentChange = (e) => {
-    //e.preventDefault();
     setComment(e.target.value);
   };
 
   const deleteComment = (commentId) => {
-    console.log("Comment id: ", commentId);
     axios.delete(`/event/comment/${commentId}`).then((res) => {
-      console.log(res.data);
       props.setChange(true);
     });
   };
@@ -32,7 +29,6 @@ const CommentSection = (props) => {
       text: comment,
     };
     axios.post("/event/comment", formData).then((res) => {
-      console.log(res.data);
       setComment("");
       props.setChange(true);
     });
@@ -132,26 +128,3 @@ const CommentSection = (props) => {
 };
 
 export default CommentSection;
-
-{
-  /* <article class = "tweet">
-<header>
-  <span class="profile-name">
-    <img class="tweetpfp" src = ${tweet.user.avatars}>
-    <span>${tweet.user.name}</span>
-  </span>
-  <span class="handler">${tweet.user.handle}</span>
-</header>
-<div>
-  ${escapee(tweet.content.text)}
-</div>
-<footer>
-  <span>${timeago.format(tweet.created_at, Date())}</span>
-  <span>
-    <i class="fa-solid fa-flag"></i>
-    <i class="fa-solid fa-heart"></i>
-    <i class="fa-solid fa-retweet"></i>
-  </span>
-</footer>
-</article>`; */
-}
