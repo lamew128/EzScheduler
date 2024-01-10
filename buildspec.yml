@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+  pre_build:
+    commands:
+      - cd backend
+      - npm install
+      - cd ../frontend
+      - npm install
+  build:
+    commands:
+      - echo Building frontend...
+      - cd frontend
+      - npm run build
+      - echo Building backend...
+      - cd ../backend
+      - # add commands to build backend if necessary
+artifacts:
+  files:
+    - frontend/build/**/*
+    - backend/**/* # adjust this based on what you need from your backend
+  base-directory: 'frontend/build' # adjust if necessary

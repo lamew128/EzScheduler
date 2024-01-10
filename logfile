@@ -1,0 +1,35 @@
+2024-01-10 15:24:18.750 EST [81334] LOG:  starting PostgreSQL 14.6 (Homebrew) on x86_64-apple-darwin21.6.0, compiled by Apple clang version 14.0.0 (clang-1400.0.29.202), 64-bit
+2024-01-10 15:24:18.753 EST [81334] LOG:  listening on IPv6 address "::1", port 5432
+2024-01-10 15:24:18.753 EST [81334] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-01-10 15:24:18.755 EST [81334] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2024-01-10 15:24:18.774 EST [81335] LOG:  database system was shut down at 2024-01-10 15:24:10 EST
+2024-01-10 15:24:18.788 EST [81334] LOG:  database system is ready to accept connections
+2024-01-10 15:25:02.927 EST [81376] FATAL:  database "diwuj" does not exist
+2024-01-10 15:25:13.446 EST [81380] FATAL:  database "diwuj" does not exist
+2024-01-10 15:25:38.796 EST [81536] FATAL:  database "diwuj" does not exist
+2024-01-10 15:26:22.502 EST [81552] FATAL:  role "development" does not exist
+2024-01-10 15:26:28.217 EST [81557] FATAL:  role "labber" does not exist
+2024-01-10 15:26:33.271 EST [81561] FATAL:  database "diwuj" does not exist
+2024-01-10 15:27:02.502 EST [81576] FATAL:  role "labber" does not exist
+2024-01-10 15:27:37.568 EST [81590] FATAL:  role "postgres" does not exist
+2024-01-10 15:38:28.399 EST [81859] FATAL:  role "postgres" does not exist
+2024-01-10 15:38:50.387 EST [81868] FATAL:  database "diwuj" does not exist
+2024-01-10 15:48:54.078 EST [82111] FATAL:  database "diwuj" does not exist
+2024-01-10 15:50:43.107 EST [82130] ERROR:  syntax error at or near "CREATE" at character 16
+2024-01-10 15:50:43.107 EST [82130] STATEMENT:  CREATE ROLE ez
+	CREATE ROLE ez;
+2024-01-10 15:56:40.647 EST [83049] FATAL:  role "ez" is not permitted to log in
+2024-01-10 15:56:49.141 EST [83056] FATAL:  database "diwuj" does not exist
+2024-01-10 15:56:58.210 EST [83060] FATAL:  role "postgres" does not exist
+2024-01-10 15:57:43.468 EST [83091] FATAL:  role "postgres" does not exist
+2024-01-10 16:00:38.705 EST [83272] FATAL:  database "ez" does not exist
+2024-01-10 16:06:51.251 EST [83439] FATAL:  database "diwuj" does not exist
+2024-01-10 16:06:55.181 EST [83441] FATAL:  database "diwuj" does not exist
+2024-01-10 16:06:56.490 EST [83442] FATAL:  database "diwuj" does not exist
+2024-01-10 16:06:57.536 EST [83443] FATAL:  database "diwuj" does not exist
+2024-01-10 16:06:57.654 EST [83445] FATAL:  database "diwuj" does not exist
+2024-01-10 16:06:58.386 EST [83447] FATAL:  database "diwuj" does not exist
+2024-01-10 16:07:05.997 EST [83450] FATAL:  database "diwuj" does not exist
+2024-01-10 16:07:42.299 EST [83475] FATAL:  database "diwuj" does not exist
+2024-01-10 16:08:33.402 EST [83501] FATAL:  database "diwuj" does not exist
+2024-01-10 16:08:34.768 EST [83503] FATAL:  database "diwuj" does not exist
