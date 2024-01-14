@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14 # specify the Node.js version
+    commands:
+      - echo Installing source NPM dependencies...
+      - cd frontend # navigate to your frontend directory
+      - npm install
+
+  pre_build:
+    commands:
+      - echo Pre-build phase...
+
+  build:
+    commands:
+      - echo Building the frontend...
+      - npm run build # build your frontend
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'frontend/build' # change this to your build output directory
+
+cache:
+  paths:
+    - 'frontend/node_modules/**/*'
