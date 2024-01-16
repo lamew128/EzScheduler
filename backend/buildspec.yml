@@ -4,16 +4,18 @@ phases:
   install:
     commands:
       - echo Installing NPM dependencies...
+      - cd backend # Navigate into the backend directory
       - npm install
   build:
     commands:
       - echo Build started on `date`
       - echo Compiling the Node.js application...
       # Add any build commands your application needs
+      # Make sure these commands are executed in the context of the backend directory
 
 artifacts:
   files:
     - '**/*'
-  base-directory: 'build' # Adjust based on your build output directory
+  base-directory: 'backend/build' # Adjust based on your build output directory
   discard-paths: yes
   zip: true
