@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing NPM dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the Node.js application...
+      # Add any build commands your application needs
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'build' # Adjust based on your build output directory
+  discard-paths: yes
+  zip: true
