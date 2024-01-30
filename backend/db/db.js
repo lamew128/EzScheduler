@@ -1,13 +1,20 @@
-const dbParams = {
-  host: process.env.RDS_HOSTNAME || process.env.DB_HOST,
-  user: process.env.RDS_USERNAME || process.env.DB_USER,
-  password: process.env.RDS_PASSWORD || process.env.DB_PASSWORD,
-  database: process.env.RDS_DB_NAME || process.env.DB_NAME,
-  port: process.env.RDS_PORT || process.env.DB_PORT
-};
+let dbParams = {};
+if (process.env.DATABASE_URL) {
+  dbParams.connectionString = process.env.DATABASE_URL;
+} else {
+  dbParams = {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+  };
+}
 
-
+const { count, Console } = require("console");
+const { create } = require("domain");
 const { Pool } = require("pg");
+const { resourceLimits } = require("worker_threads");
 const pool = new Pool(dbParams);
 
 /**
